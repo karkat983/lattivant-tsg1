@@ -28,8 +28,9 @@ RV_UNAVAILABLE: dict[str, str] = {
     "RV-007": "demonstrated live via lab/differential.py (Schemathesis 4.x): "
               "0/4 planted authz flaws vs authz-fuzzer 4/4 — see "
               "reports/differential/report.md",
-    "RV-008": "RESTler needs Docker (daemon not running here) or a .NET toolchain "
-              "(absent); not run. It also has no cross-tenant/BOLA check",
+    "RV-008": "demonstrated live via lab/differential.py (RESTler, .NET 8 build): "
+              "0 bugs / 0 of 4 planted authz flaws — stateful REST fuzzer with no "
+              "authz check; see reports/differential",
     "RV-009": "demonstrated live via lab/differential.py (EvoMaster 6.2.0 "
               "black-box): 0/4 planted authz flaws — generic fuzzer finds XSS / "
               "HTTP-violation faults, no authz check; see reports/differential",

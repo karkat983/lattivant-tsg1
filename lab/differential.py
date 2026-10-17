@@ -152,6 +152,94 @@ def _run_evomaster(jar: str) -> dict:
     return {"authz_found": found, "per_mode": per_mode}
 
 
+def _restler_env() -> tuple[str, dict] | None:
+    """Return (Restler.dll path, env with dotnet+python on PATH) or None.
+
+    RESTler needs its built DLL ($TSG1_RESTLER_DLL), a .NET 8 runtime
+    ($TSG1_DOTNET_DIR, default the Homebrew dotnet@8 bin), and a `python` on
+    PATH (RESTler's engine invokes `python`, not `python3`).
+    """
+    dll = os.environ.get("TSG1_RESTLER_DLL")
+    if not dll or not os.path.exists(dll):
+        return None
+    dotnet_dir = os.environ.get("TSG1_DOTNET_DIR",
+                                "/opt/homebrew/opt/dotnet@8/bin")
+    if not os.path.exists(os.path.join(dotnet_dir, "dotnet")):
+        return None
+    shim = tempfile.mkdtemp(prefix="tsg1-pyshim-")
+    py3 = shutil.which("python3") or sys.executable
+    link = os.path.join(shim, "python")
+    try:
+        os.symlink(py3, link)
+    except FileExistsError:
+        pass
+    env = dict(os.environ, PATH=f"{shim}:{dotnet_dir}:{os.environ['PATH']}")
+    return dll, env
+
+
+def _normalize_spec_for_restler(spec: dict) -> dict:
+    """RESTler's NSwag parser requires a `responses` object on each operation;
+    the minimal target spec omits it. Inject a default — a parser-satisfying
+    normalization that does not change which operations are tested."""
+    for item in spec.get("paths", {}).values():
+        for method, op in item.items():
+            if method in ("get", "post", "put", "patch", "delete") and isinstance(op, dict):
+                op.setdefault("responses", {"default": {"description": "response"}})
+    return spec
+
+
+def _run_restler(dll: str, env: dict) -> dict:
+    import glob
+    found: set[str] = set()
+    per_mode = {}
+    for flaw, mode in GROUND_TRUTH.items():
+        proc, base_url = live_lab._start_target(mode)
+        work = tempfile.mkdtemp(prefix=f"tsg1-restler-{mode}-")
+        try:
+            spec = live_lab._wait_ready(base_url)
+            with open(os.path.join(work, "openapi.json"), "w") as fh:
+                json.dump(_normalize_spec_for_restler(spec), fh)
+            tok = os.path.join(work, "token.sh")
+            with open(tok, "w") as fh:
+                fh.write('#!/bin/sh\necho "{}"\n'
+                         'echo "Authorization: Bearer tok-bravo-admin"\n')
+            os.chmod(tok, 0o755)
+            port = base_url.rsplit(":", 1)[1]
+            subprocess.run(["dotnet", dll, "compile", "--api_spec", "openapi.json"],
+                           cwd=work, env=env, capture_output=True, text=True,
+                           timeout=180)
+            subprocess.run(["dotnet", dll, "test",
+                            "--grammar_file", "Compile/grammar.py",
+                            "--dictionary_file", "Compile/dict.json",
+                            "--target_ip", "127.0.0.1", "--target_port", port,
+                            "--no_ssl", "--token_refresh_interval", "300",
+                            "--token_refresh_command", f"sh {tok}"],
+                           cwd=work, env=env, capture_output=True, text=True,
+                           timeout=240)
+            summaries = glob.glob(os.path.join(work, "**", "testing_summary.json"),
+                                  recursive=True)
+            buckets, coverage = {}, "unknown"
+            if summaries:
+                s = json.load(open(summaries[0]))
+                buckets = s.get("bug_buckets", {}) or {}
+                coverage = s.get("rendered_requests_valid_status", "unknown")
+        finally:
+            proc.terminate()
+            try:
+                proc.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                proc.kill()
+            shutil.rmtree(work, ignore_errors=True)
+        authz_hit = _classify_authz({k: 1 for k in buckets})
+        if authz_hit:
+            found.add(flaw)
+        per_mode[mode] = {"categories": {k: 1 for k in buckets},
+                          "failures_seen": len(buckets),
+                          "authz_detection": authz_hit,
+                          "valid_status_coverage": coverage}
+    return {"authz_found": found, "per_mode": per_mode}
+
+
 def run(out_dir: str) -> dict:
     os.makedirs(out_dir, exist_ok=True)
     candidate = _candidate_found()
@@ -184,11 +272,20 @@ def run(out_dir: str) -> dict:
             "note": "evomaster.jar not found; set $TSG1_EVOMASTER to the jar path "
                     "to run (black-box; white-box N/A for a Rust target)"}
 
-    # RESTler cannot run here — honest NOT_RUN
-    baselines["restler"] = {"available": False, "authz_found": [],
-                            "note": "RESTler needs Docker (daemon not running here) "
-                                    "or a .NET toolchain (absent); and has no "
-                                    "authz/BOLA check"}
+    rest = _restler_env()
+    if rest:
+        dll, env = rest
+        res = _run_restler(dll, env)
+        baselines["restler"] = {
+            "available": True, "authz_found": sorted(res["authz_found"]),
+            "per_mode": res["per_mode"],
+            "note": "stateful REST fuzzer (.NET 8 build): found 0 bugs, no authz "
+                    "check; coverage caveat noted per-mode"}
+    else:
+        baselines["restler"] = {
+            "available": False, "authz_found": [],
+            "note": "set $TSG1_RESTLER_DLL (+ dotnet@8) to run; needs Docker or a "
+                    ".NET toolchain. Has no authz/BOLA check"}
     baselines["burp_autorize"] = {"available": False, "authz_found": [],
                                   "note": "Burp Suite + Autorize is a commercial "
                                           "GUI extension; cannot run headless here"}

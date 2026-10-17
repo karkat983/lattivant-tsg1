@@ -3,19 +3,19 @@
   "method": "PATCH",
   "path_template": "/orders/{id}",
   "fingerprint": "a0e3271c",
-  "case_id": "abQTXN",
-  "code_sample": "curl -X PATCH -H 'Content-Type: application/json' -d '{\"status\": \"\"}' http://127.0.0.1:54334/orders/0",
+  "case_id": "2MVi7W",
+  "code_sample": "curl -X PATCH -H 'Content-Type: application/json' -d '{\"status\": \"\"}' http://127.0.0.1:54789/orders/0",
   "sequence": [
     {
       "method": "PATCH",
-      "url": "http://127.0.0.1:54334/orders/0",
-      "url_template": "http://127.0.0.1:54334/orders/{id}",
+      "url": "http://127.0.0.1:54789/orders/0",
+      "url_template": "http://127.0.0.1:54789/orders/{id}",
       "headers": {
         "User-Agent": "schemathesis/4.31.1",
         "Accept-Encoding": "gzip, deflate, zstd",
         "Accept": "*/*",
         "Connection": "keep-alive",
-        "X-Schemathesis-TestCaseId": "abQTXN",
+        "X-Schemathesis-TestCaseId": "2MVi7W",
         "Content-Type": "application/json",
         "Content-Length": "14"
       },
@@ -24,7 +24,7 @@
         "headers": {
           "content-type": "application/json",
           "content-length": "21",
-          "date": "Sat, 17 Oct 2026 08:53:13 GMT"
+          "date": "Sat, 17 Oct 2026 09:03:22 GMT"
         },
         "body": "{\"error\":\"not found\"}"
       },
@@ -38,7 +38,7 @@
       ],
       "meta": {
         "generation": {
-          "time": 1.1166965123265982e-05,
+          "time": 1.0165967978537083e-05,
           "mode": "negative"
         },
         "components": {

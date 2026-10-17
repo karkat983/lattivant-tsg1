@@ -60,10 +60,9 @@
       "per_mode": {
         "bola-read": {
           "categories": {
-            "Fault301": 1,
             "Fault109": 1
           },
-          "failures_seen": 2,
+          "failures_seen": 1,
           "authz_detection": false
         },
         "bola-write": {
@@ -75,26 +74,52 @@
         },
         "missing-auth": {
           "categories": {
-            "Fault109": 1
-          },
-          "failures_seen": 1,
-          "authz_detection": false
-        },
-        "shared-write": {
-          "categories": {
             "Fault301": 1,
             "Fault109": 1
           },
           "failures_seen": 2,
           "authz_detection": false
+        },
+        "shared-write": {
+          "categories": {
+            "Fault109": 1
+          },
+          "failures_seen": 1,
+          "authz_detection": false
         }
       }
     },
     "restler": {
-      "available": false,
+      "available": true,
       "authz_found": [],
       "recall": 0.0,
-      "note": "RESTler needs Docker (daemon not running here) or a .NET toolchain (absent); and has no authz/BOLA check"
+      "note": "stateful REST fuzzer (.NET 8 build): found 0 bugs, no authz check; coverage caveat noted per-mode",
+      "per_mode": {
+        "bola-read": {
+          "categories": {},
+          "failures_seen": 0,
+          "authz_detection": false,
+          "valid_status_coverage": "0 / 4"
+        },
+        "bola-write": {
+          "categories": {},
+          "failures_seen": 0,
+          "authz_detection": false,
+          "valid_status_coverage": "0 / 4"
+        },
+        "missing-auth": {
+          "categories": {},
+          "failures_seen": 0,
+          "authz_detection": false,
+          "valid_status_coverage": "0 / 4"
+        },
+        "shared-write": {
+          "categories": {},
+          "failures_seen": 0,
+          "authz_detection": false,
+          "valid_status_coverage": "0 / 4"
+        }
+      }
     },
     "burp_autorize": {
       "available": false,

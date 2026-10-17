@@ -5,7 +5,8 @@ correctly, without running Schemathesis or any server.
 """
 import unittest
 
-from lab.differential import GROUND_TRUTH, _classify_authz
+from lab.differential import (GROUND_TRUTH, _classify_authz,
+                              _normalize_spec_for_restler)
 from tsg1.model import Manifest
 from tsg1.oracles import ORACLES
 
@@ -22,6 +23,19 @@ class ClassifyTests(unittest.TestCase):
     def test_evomaster_fault_codes_are_not_authz(self):
         # Fault301 (XSS) and Fault109 (HTTP violation) are robustness, not authz
         self.assertFalse(_classify_authz({"Fault301": 1, "Fault109": 1}))
+
+
+class RestlerSpecNormalizationTests(unittest.TestCase):
+    def test_injects_missing_responses_per_operation(self):
+        spec = {"paths": {"/orders/{id}": {
+            "get": {"operationId": "getOrder"},
+            "delete": {"operationId": "deleteOrder", "responses": {"204": {}}},
+        }}}
+        out = _normalize_spec_for_restler(spec)
+        self.assertIn("responses", out["paths"]["/orders/{id}"]["get"])
+        # an existing responses block is left untouched
+        self.assertEqual(out["paths"]["/orders/{id}"]["delete"]["responses"],
+                         {"204": {}})
 
 
 class DifferentialOracleTests(unittest.TestCase):
