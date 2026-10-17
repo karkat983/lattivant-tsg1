@@ -11,8 +11,9 @@ found (or, for the hardened mode, nothing was)".
 The fixture mirrors the scanner's own canonical integration test
 (`authz-cli/tests/scan_live_target.rs`): two identities (the alpha owner and a
 cross-tenant bravo caller) and a per-mode mutation scope, so read-only probes
-never emit write findings. The seeded order is shared with no tenant, so the
-shared-write vuln is not exercised (noted, not faked).
+never emit write findings. The seed carries an alpha-private order, an order
+shared read-only with bravo, a public order, and a bravo-private order, so the
+shared-write / delegated-access / public-object traps are all exercised live.
 
 Entirely local: the target binds 127.0.0.1 on an OS-chosen port. Nothing is
 fabricated — an unreachable target or missing binary is an error, not a pass.
@@ -61,6 +62,34 @@ MODES: dict[str, dict] = {
         "server": "bola-write", "mutation": "read_only",
         "scenario": "AZ-030", "oracle": "invariant", "label": "benign",
         "expect_rule": "", "expect": "read-only scope emits NO write finding"},
+    "delegated-read": {
+        "server": "none", "mutation": "read_only", "resources": "shared",
+        "scenario": "AZ-005", "oracle": "manifest", "label": "benign",
+        "expect_rule": "", "expect": "delegated (shared) read NOT flagged"},
+    "public-read": {
+        "server": "none", "mutation": "read_only", "resources": "public",
+        "scenario": "AZ-004", "oracle": "manifest", "label": "benign",
+        "expect_rule": "", "expect": "public read NOT flagged"},
+    "shared-write": {
+        "server": "shared-write", "mutation": "test_owned_only",
+        "resources": "shared", "scenario": "AZ-005", "oracle": "manifest",
+        "label": "achieved", "expect_rule": "shared_resource_write",
+        "expect": "grantee write of a shared order flagged"},
+}
+
+# Named resource fixtures (which seeded order a mode probes, and how it is
+# declared to the scanner). Keys match MODES[*]["resources"]; default is order-1.
+RESOURCES: dict[str, list[dict]] = {
+    "order-1": [{"instance_id": "order-1", "path_param": "id",
+                 "resource_class": "order", "owner": "alpha-admin",
+                 "write_body": {"status": "cancelled"}}],
+    "shared": [{"instance_id": "order-shared", "path_param": "id",
+                "resource_class": "order", "owner": "alpha-admin",
+                "shared_with": ["bravo-admin"],
+                "write_body": {"status": "cancelled"}}],
+    "public": [{"instance_id": "order-public", "path_param": "id",
+                "resource_class": "order", "owner": "alpha-admin",
+                "public": True}],
 }
 
 TOKENS = {"ALPHA_ADMIN": "tok-alpha-admin", "BRAVO_ADMIN": "tok-bravo-admin"}
@@ -104,7 +133,8 @@ def _wait_ready(base_url: str, timeout_s: float = 5.0) -> dict:
     raise RuntimeError(f"openapi not ready at {base_url}: {last}")
 
 
-def _write_manifest(workdir: str, base_url: str, mutation: str) -> str:
+def _write_manifest(workdir: str, base_url: str, mutation: str,
+                    resources: list[dict]) -> str:
     manifest = {
         "target": {"name": "orders", "base_url": base_url},
         "spec": "openapi.json",
@@ -121,11 +151,7 @@ def _write_manifest(workdir: str, base_url: str, mutation: str) -> str:
             {"id": "bravo-admin", "tenant": "bravo", "role": "admin",
              "credential_ref": "env:BRAVO_ADMIN", "is_public": False},
         ],
-        "resources": [
-            {"instance_id": "order-1", "path_param": "id",
-             "resource_class": "order", "owner": "alpha-admin",
-             "write_body": {"status": "cancelled"}},
-        ],
+        "resources": resources,
         "gate": {"min_confidence": "verified", "min_severity": "high"},
     }
     path = os.path.join(workdir, "manifest.json")
@@ -193,7 +219,9 @@ def run_all(out_dir: str) -> list[dict]:
             openapi = _wait_ready(base_url)
             with open(os.path.join(workdir, "openapi.json"), "w") as fh:
                 json.dump(openapi, fh, indent=2)
-            manifest_path = _write_manifest(workdir, base_url, cfg["mutation"])
+            resources = RESOURCES[cfg.get("resources", "order-1")]
+            manifest_path = _write_manifest(workdir, base_url, cfg["mutation"],
+                                            resources)
             scan = _scan(workdir, manifest_path)
         finally:
             proc.terminate()
@@ -241,9 +269,10 @@ def write_report(results: list[dict], out_dir: str) -> str:
             f"{','.join(m['violations']) or '—'} | {r['gate_exit']} | "
             f"{r['reason']} |")
     lines.append("")
-    lines.append("_Note: the seeded order is shared with no tenant, so the "
-                 "`shared-write` vuln is not exercised and is omitted rather "
-                 "than reported as a pass/fail._")
+    lines.append("_Seed: `order-1` (alpha private), `order-shared` (alpha, "
+                 "shared read-only with bravo), `order-public` (public), "
+                 "`order-bravo` (bravo private). Each mode probes the resource "
+                 "relevant to its trap._")
     lines.append("")
     md = "\n".join(lines) + "\n"
     with open(os.path.join(out_dir, "report.md"), "w") as fh:

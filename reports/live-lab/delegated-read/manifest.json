@@ -1,0 +1,60 @@
+{
+  "target": {
+    "name": "orders",
+    "base_url": "http://127.0.0.1:53559"
+  },
+  "spec": "openapi.json",
+  "host_allowlist": [
+    "127.0.0.1"
+  ],
+  "mutation": "read_only",
+  "permitted_methods": [
+    "PATCH",
+    "DELETE"
+  ],
+  "limits": {
+    "max_requests": 1000,
+    "time_budget_secs": 60,
+    "max_concurrency": 2,
+    "rate_limit_rps": 1000
+  },
+  "reproductions": {
+    "read_repeats": 2,
+    "required": 2
+  },
+  "request_timeout_ms": 5000,
+  "identities": [
+    {
+      "id": "alpha-admin",
+      "tenant": "alpha",
+      "role": "admin",
+      "credential_ref": "env:ALPHA_ADMIN",
+      "is_public": false
+    },
+    {
+      "id": "bravo-admin",
+      "tenant": "bravo",
+      "role": "admin",
+      "credential_ref": "env:BRAVO_ADMIN",
+      "is_public": false
+    }
+  ],
+  "resources": [
+    {
+      "instance_id": "order-shared",
+      "path_param": "id",
+      "resource_class": "order",
+      "owner": "alpha-admin",
+      "shared_with": [
+        "bravo-admin"
+      ],
+      "write_body": {
+        "status": "cancelled"
+      }
+    }
+  ],
+  "gate": {
+    "min_confidence": "verified",
+    "min_severity": "high"
+  }
+}

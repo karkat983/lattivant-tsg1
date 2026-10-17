@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "level": "error",
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DELETE /orders/{}",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "message": {
+            "text": "owner-visible state changed after a write that policy forbids (relation: Shared)"
+          },
+          "partialFingerprints": {
+            "authzFindingId/v1": "fnd-be27afe7a6ecfb64"
+          },
+          "properties": {
+            "confidence": "verified",
+            "evidence": [
+              "evidence://sha256/9587710be88ec8b606fb4a6238278642c5d0dac275f4ce04746cfa61f5dae861",
+              "evidence://sha256/73daee053a1a1513dec3c0e4eb72d72f5495fc3c96de15a85d059e7ac2bbb137"
+            ],
+            "isWrite": true,
+            "oracle": "write_oracle",
+            "replayCount": 1,
+            "severity": "high",
+            "tenant": "alpha"
+          },
+          "rank": 100,
+          "ruleId": "shared_resource_write",
+          "ruleIndex": 0
+        },
+        {
+          "level": "error",
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "PATCH /orders/{}",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "message": {
+            "text": "owner-visible state changed after a write that policy forbids (relation: Shared)"
+          },
+          "partialFingerprints": {
+            "authzFindingId/v1": "fnd-e9ec2f398110cb8c"
+          },
+          "properties": {
+            "confidence": "verified",
+            "evidence": [
+              "evidence://sha256/34c4c978ca2acfab7dad42763ffbdabae17be88f2ed4c25bac1726747c823d49",
+              "evidence://sha256/8a6921f38e2cc2f6fa527f9a0bb2e3fcedd3971a0a30dbec2966a75337a700b5"
+            ],
+            "isWrite": true,
+            "oracle": "write_oracle",
+            "replayCount": 1,
+            "severity": "high",
+            "tenant": "alpha"
+          },
+          "rank": 100,
+          "ruleId": "shared_resource_write",
+          "ruleIndex": 0
+        }
+      ],
+      "tool": {
+        "driver": {
+          "informationUri": "https://github.com/karkat983/authz-fuzzer",
+          "name": "authz-fuzzer",
+          "rules": [
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/",
+              "id": "shared_resource_write",
+              "name": "SharedResourceWrite",
+              "shortDescription": {
+                "text": "A read-only shared resource was writable by the grantee."
+              }
+            }
+          ],
+          "version": "0.1.0"
+        }
+      }
+    }
+  ],
+  "version": "2.1.0"
+}

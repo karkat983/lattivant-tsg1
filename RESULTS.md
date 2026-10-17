@@ -29,21 +29,25 @@ socket in each vulnerability mode, scans it with the built Rust `authz` binary,
 and scores the live SARIF/JSON findings against per-mode ground truth with the
 TSG-1 oracles. Report: [`reports/live-lab/report.md`](reports/live-lab/report.md).
 
-**5/5 modes scored as expected:**
+**8/8 modes scored as expected:**
 
 | Mode | Server | Scope | Verified findings | Violation | Result |
 |------|--------|-------|-------------------|-----------|--------|
 | none (hardened) | none | test_owned_only | 0 | — | ✅ zero findings (FP budget) |
 | bola-read | bola-read | read_only | 1 read | `cross_tenant_access` | ✅ caught |
 | bola-write | bola-write | test_owned_only | 2 write | `cross_tenant_access` | ✅ caught |
-| missing-auth | missing-auth | read_only | 2 read | `missing_authentication` (+`cross_tenant_access`) | ✅ caught |
+| missing-auth | missing-auth | read_only | 2 read | `missing_authentication` | ✅ caught |
 | read-only scope vs write-vuln | bola-write | read_only | 0 | — | ✅ scope emitted no write |
+| delegated-read (AZ-005 trap) | none | read_only | 0 | — | ✅ shared read not flagged |
+| public-read (AZ-004 trap) | none | read_only | 0 | — | ✅ public read not flagged |
+| shared-write | shared-write | test_owned_only | 2 write | `shared_resource_write` | ✅ caught |
 
 This upgrades **AZ-002** (cross-tenant BOLA), **AZ-047** (hardened twin → zero
-findings), **AZ-003** (missing-auth), and **AZ-030** (scope safety) from
-conformance-test-backed to **live end-to-end** evidence. The seeded order is
-shared with no tenant, so the `shared-write` vuln is not exercised (omitted, not
-faked).
+findings), **AZ-003** (missing-auth), **AZ-004** (public-object FP trap),
+**AZ-005** (delegated access + shared-write), and **AZ-030** (scope safety) from
+conformance-test-backed to **live end-to-end** evidence. The seed now carries an
+alpha-private order, an order shared read-only with bravo, a public order, and a
+bravo-private order, so the FP traps and the shared-write vuln are all exercised.
 
 ## What was measured (conformance-test-backed; all 22 passed)
 

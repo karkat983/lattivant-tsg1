@@ -24,8 +24,8 @@
           "properties": {
             "confidence": "verified",
             "evidence": [
-              "evidence://sha256/4f4a887a2f0523ec42b4b94d46296238a3ef4f0d406a19ccc8f9ae476c49c4f8",
-              "evidence://sha256/914300cc463ca0f923a9aef203a9fbed99d60c32fdeb7019b43289d05268b643"
+              "evidence://sha256/4caa9980b6cb0635a78aece757a4022bcca526607d2896f85583b495d152f781",
+              "evidence://sha256/004f379af4b8a1ea8708a02e3401d6980ef32d3ae231e3b19f2d1ee121ba67db"
             ],
             "isWrite": false,
             "oracle": "read_oracle",
@@ -58,8 +58,8 @@
           "properties": {
             "confidence": "verified",
             "evidence": [
-              "evidence://sha256/8c532ca237d7d732294e4857bd29336d8edc1b0a2406f94faa2ae45f3034a963",
-              "evidence://sha256/914300cc463ca0f923a9aef203a9fbed99d60c32fdeb7019b43289d05268b643"
+              "evidence://sha256/8d168578fd20366a0308b6e8eed00478705973c0e055e227479ea90b54ef6ccc",
+              "evidence://sha256/004f379af4b8a1ea8708a02e3401d6980ef32d3ae231e3b19f2d1ee121ba67db"
             ],
             "isWrite": false,
             "oracle": "read_oracle",

@@ -34,8 +34,8 @@
       "summary": "owner-visible state changed after a write that policy forbids",
       "replay_count": 1,
       "evidence": [
-        "evidence://sha256/e1e13133b62818b7ec353b7acbd1ac0f800a58c0e73b613e38d2c2351bfc1546",
-        "evidence://sha256/bbea0ed6bd7f5dbd227c17b385bf548702a1e12c658f7fc6699b06f428811191"
+        "evidence://sha256/bc2c3d86494b878dd6a0aad11f913e3617b8a7a20a1dcf7e433806fee4649f99",
+        "evidence://sha256/983db6a7b80afae51f9a77d19342dcb0c805f25f2c71780b45ac9e74aab4fc4d"
       ]
     },
     {
@@ -56,8 +56,8 @@
       "summary": "owner-visible state changed after a write that policy forbids",
       "replay_count": 1,
       "evidence": [
-        "evidence://sha256/157c84a0edbbdb55f35ea5891187671eb9507fb9f90ba01aa6ca34f52e79e4cb",
-        "evidence://sha256/aef01cd739bf4b1d00ab6bb218948a3833e13d341287fcb823d1ee2cf3f92183"
+        "evidence://sha256/a110e96946be113020b11a088febea7ef0b834ab139e4874c318aec26ed81278",
+        "evidence://sha256/7d1ae624a8aa5d0952e0798fe7f6b33fab6c40e39fffe3ad79257aadf3d1e091"
       ]
     }
   ]

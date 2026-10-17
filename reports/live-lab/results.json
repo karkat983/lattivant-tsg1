@@ -41,7 +41,7 @@
     "gate_exit": 2,
     "command": "authz scan --manifest manifest.json --sarif out.sarif --json out.json",
     "stdout_tail": "); 1 verified\n  [High/Verified] GET /orders/{} \u2014 violation observed in 2/2 replays (required 2 for verified)\nwrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/bola-read/out.sarif\nwrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/bola-read/out.json\ngate: FAIL (1 of 1 finding(s) above threshold)",
-    "replay_ref": "sha256:ed808e753d76dcaa39510ba1701ba62860c427b8c23e1e0c152f12aa21614f9c"
+    "replay_ref": "sha256:0d4dcaabdf09d9822f4dcff128d5a0c0955206ff6abfe11812167e44f8ff7f01"
   },
   {
     "mode": "bola-write",
@@ -64,7 +64,7 @@
     "gate_exit": 2,
     "command": "authz scan --manifest manifest.json --sarif out.sarif --json out.json",
     "stdout_tail": "isible state changed after a write that policy forbids\nnotes:\n  - owner reference not readable for order-1\nwrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/bola-write/out.sarif\nwrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/bola-write/out.json\ngate: FAIL (2 of 2 finding(s) above threshold)",
-    "replay_ref": "sha256:b9764378d3ff38adb35bdb89858ab636965e80add67b9a6cf9a6878d4ee11ec1"
+    "replay_ref": "sha256:f28dce031e4566c35dc5a16a44d069c433710d994490db70fc0639393f238170"
   },
   {
     "mode": "missing-auth",
@@ -88,7 +88,7 @@
     "gate_exit": 2,
     "command": "authz scan --manifest manifest.json --sarif out.sarif --json out.json",
     "stdout_tail": "rified)\n  [High/Verified] GET /orders/{} \u2014 violation observed in 2/2 replays (required 2 for verified)\nwrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/missing-auth/out.sarif\nwrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/missing-auth/out.json\ngate: FAIL (2 of 2 finding(s) above threshold)",
-    "replay_ref": "sha256:8fe190b43723b2434a4e49eeb446eec85c4d2b4e2cefd8d2ddc8c970b306538b"
+    "replay_ref": "sha256:30c70e72045964d80d3fa20e1cf4bebfac032197cc5c3ac4395dbc3d8661dff9"
   },
   {
     "mode": "readonly-scope-vs-write-vuln",
@@ -110,5 +110,70 @@
     "command": "authz scan --manifest manifest.json --sarif out.sarif --json out.json",
     "stdout_tail": "no findings\nwrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/readonly-scope-vs-write-vuln/out.sarif\nwrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/readonly-scope-vs-write-vuln/out.json\ngate: pass (0 of 0 finding(s) above threshold)",
     "replay_ref": "sha256:42d2ca4af0d4c31ef81eae64646525d9e6baa3430b5f6075af08ab53c30dece8"
+  },
+  {
+    "mode": "delegated-read",
+    "server_vuln": "none",
+    "mutation": "read_only",
+    "scenario": "AZ-005",
+    "oracle": "manifest",
+    "expect": "delegated (shared) read NOT flagged",
+    "passed": true,
+    "reason": "correctly silent on benign case",
+    "metrics": {
+      "findings_total": 0,
+      "verified": 0,
+      "verified_reads": 0,
+      "verified_writes": 0,
+      "violations": []
+    },
+    "gate_exit": 0,
+    "command": "authz scan --manifest manifest.json --sarif out.sarif --json out.json",
+    "stdout_tail": "no findings\nwrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/delegated-read/out.sarif\nwrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/delegated-read/out.json\ngate: pass (0 of 0 finding(s) above threshold)",
+    "replay_ref": "sha256:42d2ca4af0d4c31ef81eae64646525d9e6baa3430b5f6075af08ab53c30dece8"
+  },
+  {
+    "mode": "public-read",
+    "server_vuln": "none",
+    "mutation": "read_only",
+    "scenario": "AZ-004",
+    "oracle": "manifest",
+    "expect": "public read NOT flagged",
+    "passed": true,
+    "reason": "correctly silent on benign case",
+    "metrics": {
+      "findings_total": 0,
+      "verified": 0,
+      "verified_reads": 0,
+      "verified_writes": 0,
+      "violations": []
+    },
+    "gate_exit": 0,
+    "command": "authz scan --manifest manifest.json --sarif out.sarif --json out.json",
+    "stdout_tail": "no findings\nwrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/public-read/out.sarif\nwrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/public-read/out.json\ngate: pass (0 of 0 finding(s) above threshold)",
+    "replay_ref": "sha256:42d2ca4af0d4c31ef81eae64646525d9e6baa3430b5f6075af08ab53c30dece8"
+  },
+  {
+    "mode": "shared-write",
+    "server_vuln": "shared-write",
+    "mutation": "test_owned_only",
+    "scenario": "AZ-005",
+    "oracle": "manifest",
+    "expect": "grantee write of a shared order flagged",
+    "passed": true,
+    "reason": "correct finding with correct label",
+    "metrics": {
+      "findings_total": 2,
+      "verified": 2,
+      "verified_reads": 0,
+      "verified_writes": 2,
+      "violations": [
+        "shared_resource_write"
+      ]
+    },
+    "gate_exit": 2,
+    "command": "authz scan --manifest manifest.json --sarif out.sarif --json out.json",
+    "stdout_tail": "ate changed after a write that policy forbids\nnotes:\n  - owner reference not readable for order-shared\nwrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/shared-write/out.sarif\nwrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/shared-write/out.json\ngate: FAIL (2 of 2 finding(s) above threshold)",
+    "replay_ref": "sha256:db46544d7b3d164bdf14f2b4e974a1f5833f9cdcf8497f43be26e9146eea4903"
   }
 ]

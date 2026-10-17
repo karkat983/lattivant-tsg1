@@ -63,6 +63,28 @@ class LiveLabScoring(unittest.TestCase):
         v, _ = _score("readonly-scope-vs-write-vuln", {"findings": []})
         self.assertTrue(v.passed)
 
+    def test_delegated_read_no_finding_passes(self):
+        v, _ = _score("delegated-read", {"findings": []})
+        self.assertTrue(v.passed)  # a legitimate shared read must not be flagged
+
+    def test_delegated_read_false_finding_fails(self):
+        v, _ = _score("delegated-read",
+                      {"findings": [_f("GET", "cross_tenant_access", False)]})
+        self.assertFalse(v.passed)
+
+    def test_public_read_no_finding_passes(self):
+        v, _ = _score("public-read", {"findings": []})
+        self.assertTrue(v.passed)
+
+    def test_shared_write_flagged_passes(self):
+        v, _ = _score("shared-write",
+                      {"findings": [_f("PATCH", "shared_resource_write", True)]})
+        self.assertTrue(v.passed)
+
+    def test_shared_write_missed_fails(self):
+        v, _ = _score("shared-write", {"findings": []})
+        self.assertFalse(v.passed)
+
 
 if __name__ == "__main__":
     unittest.main()

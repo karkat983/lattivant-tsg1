@@ -24,8 +24,8 @@
           "properties": {
             "confidence": "verified",
             "evidence": [
-              "evidence://sha256/fa0425c1b8abf393e5998a6b89a853f74e149ce2a8b0363a6835bf9d4f931f9c",
-              "evidence://sha256/d64054591c5b42a56d79e1f239f7e756bb9d1cb6f30b191544d55939c5a82373"
+              "evidence://sha256/32c5f3d03d59734c8b96bc5189039cb8582f58d8d39ab45f991aed6d97764b74",
+              "evidence://sha256/bb65c22b90acd06f0706cd429d05aa178204d409394d6bce260355ae4660b8cd"
             ],
             "isWrite": false,
             "oracle": "read_oracle",

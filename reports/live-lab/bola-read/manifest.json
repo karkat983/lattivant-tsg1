@@ -1,7 +1,7 @@
 {
   "target": {
     "name": "orders",
-    "base_url": "http://127.0.0.1:53473"
+    "base_url": "http://127.0.0.1:53547"
   },
   "spec": "openapi.json",
   "host_allowlist": [
