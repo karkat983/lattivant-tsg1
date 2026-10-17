@@ -1,23 +1,28 @@
 {
   "summary": {
-    "generated_utc": "2026-10-17T07:53:17.845635+00:00",
+    "generated_utc": "2026-10-17T09:36:12.545048+00:00",
     "total_scenarios": 326,
     "results_count": 326,
     "outcome_counts": {
-      "pass": 22,
-      "not_run": 120,
-      "skipped": 184
+      "pass": 79,
+      "not_run": 241,
+      "skipped": 6
     },
-    "measured": 22,
-    "pass": 22,
+    "measured": 79,
+    "pass": 79,
     "fail": 0,
     "pass_rate_of_measured": 1.0,
     "s0_failures": [],
     "release_gate_s0_clean": true,
     "ran_by_component": {
       "authz-fuzzer": 16,
-      "lattivant-platform": 2,
-      "research-validity": 4
+      "agenttrace": 10,
+      "eastwest": 7,
+      "evidence-graph": 13,
+      "investigator": 13,
+      "lattivant-platform": 14,
+      "scale-chaos": 1,
+      "research-validity": 5
     },
     "catalog_by_build": {
       "built": 142,
@@ -95,18 +100,19 @@
       "reason": "no cross-tenant disclosure",
       "metrics": {
         "isolation_escape_count": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 2,
         "backing_tests_passed": 2
       },
       "evidence": {
         "isolation_escapes": 0,
         "detail": [],
-        "stdout_tail": "evidence: owner-diff isolation oracle verifies a planted cross-identity read | backing=2 passed=2 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: owner-diff isolation oracle verifies a planted cross-identity read | backing=2 passed=2 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=cross_tenant_identical_body_is_verified_disclosure,cross_tenant_relation",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=cross_tenant_identical_body_is_verified_disclosure,cross_tenant_relation",
       "exit_status": 0,
       "replay_ref": "sha256:72fc0eeccb38f6e511460dea87388b92cc42d18854f04c9ef3078329682000a6",
-      "duration_s": 1.0859
+      "duration_s": 0.0005
     },
     {
       "id": "AZ-002",
@@ -116,18 +122,19 @@
       "reason": "no cross-tenant disclosure",
       "metrics": {
         "isolation_escape_count": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 3,
         "backing_tests_passed": 3
       },
       "evidence": {
         "isolation_escapes": 0,
         "detail": [],
-        "stdout_tail": "evidence: cross-tenant BOLA detection in read and write modes | backing=3 passed=3 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: cross-tenant BOLA detection in read and write modes | backing=3 passed=3 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=bola_read_mode_leaks_to_any_authenticated,bola_write_mode_lets_cross_tenant_write,cross_tenant_write_that_changes_state_is_verified_even_on_403",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=bola_read_mode_leaks_to_any_authenticated,bola_write_mode_lets_cross_tenant_write,cross_tenant_write_that_changes_state_is_verified_even_on_403",
       "exit_status": 0,
       "replay_ref": "sha256:a6973baed7d12bcc19b60fc2ecd2d093128c53f73024944343ff6e977920ad4f",
-      "duration_s": 0.0001
+      "duration_s": 0.0
     },
     {
       "id": "AZ-003",
@@ -150,14 +157,15 @@
       "reason": "correctly silent on benign case",
       "metrics": {
         "false_findings": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 1,
         "backing_tests_passed": 1
       },
       "evidence": {
         "matched_findings": [],
-        "stdout_tail": "evidence: public ACL treated as non-leak (FP trap) | backing=1 passed=1 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: public ACL treated as non-leak (FP trap) | backing=1 passed=1 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=declared_public_read_is_allowed_even_cross_tenant",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=declared_public_read_is_allowed_even_cross_tenant",
       "exit_status": 0,
       "replay_ref": "sha256:8448baa115630f79b48060618969c62ee7255f5f87a3b2b5fe792fb851771ba6",
       "duration_s": 0.0
@@ -183,14 +191,15 @@
       "reason": "correctly silent on benign case",
       "metrics": {
         "false_findings": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 2,
         "backing_tests_passed": 2
       },
       "evidence": {
         "matched_findings": [],
-        "stdout_tail": "evidence: 404 distinguished from a 404 that leaks owner content | backing=2 passed=2 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: 404 distinguished from a 404 that leaks owner content | backing=2 passed=2 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=four_oh_four_camouflage_is_correct,four_oh_four_that_leaks_owner_content_is_a_finding",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=four_oh_four_camouflage_is_correct,four_oh_four_that_leaks_owner_content_is_a_finding",
       "exit_status": 0,
       "replay_ref": "sha256:b5e54d4ae30a9037334b00084cb43e1dea7c6fad7376c36d2421dc459b819acd",
       "duration_s": 0.0
@@ -203,14 +212,15 @@
       "reason": "correctly silent on benign case",
       "metrics": {
         "false_findings": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 2,
         "backing_tests_passed": 2
       },
       "evidence": {
         "matched_findings": [],
-        "stdout_tail": "evidence: body-content predicate, not status code | backing=2 passed=2 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: body-content predicate, not status code | backing=2 passed=2 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=empty_body_detection,different_2xx_data_is_probable_not_verified",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=empty_body_detection,different_2xx_data_is_probable_not_verified",
       "exit_status": 0,
       "replay_ref": "sha256:6be94538e6bf3a10939fb1e57abdfefa58a18cfd82c93a5e414bd31a351ac01c",
       "duration_s": 0.0
@@ -340,15 +350,16 @@
       "reason": "no cross-tenant disclosure",
       "metrics": {
         "isolation_escape_count": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 1,
         "backing_tests_passed": 1
       },
       "evidence": {
         "isolation_escapes": 0,
         "detail": [],
-        "stdout_tail": "evidence: mass-assignment: ownership field in request body is detected | backing=1 passed=1 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: mass-assignment: ownership field in request body is detected | backing=1 passed=1 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=body_ownership_field_is_detected",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=body_ownership_field_is_detected",
       "exit_status": 0,
       "replay_ref": "sha256:604c57d90734e8a2bf22b41f877a16c810173690fd179b381382ab2b032364fc",
       "duration_s": 0.0
@@ -504,14 +515,15 @@
       "reason": "invariant held",
       "metrics": {
         "invariant_violations": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 3,
         "backing_tests_passed": 3
       },
       "evidence": {
         "violations": [],
-        "stdout_tail": "evidence: scope guard: out-of-scope host refused, in-scope admitted | backing=3 passed=3 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: scope guard: out-of-scope host refused, in-scope admitted | backing=3 passed=3 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=host_must_be_exactly_allowlisted,empty_host_allowlist_fails_scope,admits_in_scope_safe_request",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=host_must_be_exactly_allowlisted,empty_host_allowlist_fails_scope,admits_in_scope_safe_request",
       "exit_status": 0,
       "replay_ref": "sha256:06baa63ec04d74c74ead549e82d7c9a2984ffc1d14c2f638106757c55cb194bb",
       "duration_s": 0.0
@@ -524,14 +536,15 @@
       "reason": "invariant held",
       "metrics": {
         "invariant_violations": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 2,
         "backing_tests_passed": 2
       },
       "evidence": {
         "violations": [],
-        "stdout_tail": "evidence: method/mutation policy enforcement | backing=2 passed=2 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: method/mutation policy enforcement | backing=2 passed=2 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=bad_method_is_rejected,declared_allowed_write_is_not_a_finding",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=bad_method_is_rejected,declared_allowed_write_is_not_a_finding",
       "exit_status": 0,
       "replay_ref": "sha256:775bffcbd2d0259d66ef9fc670e45846a1f9f47fae01fac0d8a92695597d0936",
       "duration_s": 0.0
@@ -544,14 +557,15 @@
       "reason": "invariant held",
       "metrics": {
         "invariant_violations": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 1,
         "backing_tests_passed": 1
       },
       "evidence": {
         "violations": [],
-        "stdout_tail": "evidence: kill-switch halts all work once tripped | backing=1 passed=1 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: kill-switch halts all work once tripped | backing=1 passed=1 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=cancellation_blocks_everything",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=cancellation_blocks_everything",
       "exit_status": 0,
       "replay_ref": "sha256:201c33380536d2b72c24e74e77ac56d788221a3e8715815482ed55eea5031864",
       "duration_s": 0.0
@@ -577,14 +591,15 @@
       "reason": "invariant held",
       "metrics": {
         "invariant_violations": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 4,
         "backing_tests_passed": 4
       },
       "evidence": {
         "violations": [],
-        "stdout_tail": "evidence: rate-limit / request-budget honoring | backing=4 passed=4 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: rate-limit / request-budget honoring | backing=4 passed=4 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=budget_is_enforced,budget_exhaustion_is_reported,burst_is_consumed_then_refills_over_time,concurrent_reservations_do_not_exceed_max",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=budget_is_enforced,budget_exhaustion_is_reported,burst_is_consumed_then_refills_over_time,concurrent_reservations_do_not_exceed_max",
       "exit_status": 0,
       "replay_ref": "sha256:1d91868510ddeb4a2bd6867c699d211b270c10094d744dfc09050daba5945417",
       "duration_s": 0.0
@@ -623,14 +638,15 @@
       "reason": "invariant held",
       "metrics": {
         "invariant_violations": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 1,
         "backing_tests_passed": 1
       },
       "evidence": {
         "violations": [],
-        "stdout_tail": "evidence: SSRF: server URL outside allowlist is blocked | backing=1 passed=1 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: SSRF: server URL outside allowlist is blocked | backing=1 passed=1 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=host_must_be_exactly_allowlisted",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=host_must_be_exactly_allowlisted",
       "exit_status": 0,
       "replay_ref": "sha256:fbca9215c0308c2a3ab9223533a3c78285c8bca2fa5d41d96bf819288eaa5728",
       "duration_s": 0.0
@@ -721,14 +737,15 @@
       "reason": "invariant held",
       "metrics": {
         "invariant_violations": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 4,
         "backing_tests_passed": 4
       },
       "evidence": {
         "violations": [],
-        "stdout_tail": "evidence: SARIF conformance + CI gate fires only on verified/probable | backing=4 passed=4 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: SARIF conformance + CI gate fires only on verified/probable | backing=4 passed=4 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=empty_set_still_valid_sarif,ci_gate_respects_min_confidence,default_gate_fails_only_on_verified_high,gate_policy_parsed",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=empty_set_still_valid_sarif,ci_gate_respects_min_confidence,default_gate_fails_only_on_verified_high,gate_policy_parsed",
       "exit_status": 0,
       "replay_ref": "sha256:fe1a4c4addf81916930508c66363ae336c9136b141983462c135a9911a3b44e4",
       "duration_s": 0.0
@@ -741,14 +758,15 @@
       "reason": "correctly silent on benign case",
       "metrics": {
         "false_findings": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 5,
         "backing_tests_passed": 5
       },
       "evidence": {
         "matched_findings": [],
-        "stdout_tail": "evidence: verified/probable/speculative tier calibration | backing=5 passed=5 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: verified/probable/speculative tier calibration | backing=5 passed=5 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=different_2xx_data_is_probable_not_verified,consistent_verified_reproductions_stay_verified,all_probable_reproductions_cap_at_probable,flaky_violation_is_downgraded_to_probable,a_stricter_policy_can_fail_on_probable",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=different_2xx_data_is_probable_not_verified,consistent_verified_reproductions_stay_verified,all_probable_reproductions_cap_at_probable,flaky_violation_is_downgraded_to_probable,a_stricter_policy_can_fail_on_probable",
       "exit_status": 0,
       "replay_ref": "sha256:d337f5afb59dc07f261626831a6cf3ebad26a2ec00179427f14f1556d4a3035b",
       "duration_s": 0.0
@@ -761,6 +779,7 @@
       "reason": "verdict invariant across all transforms",
       "metrics": {
         "verdict_changes": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 2,
         "backing_tests_passed": 2
       },
@@ -776,9 +795,9 @@
         "distinct_verdicts": [
           "stable"
         ],
-        "stdout_tail": "evidence: replay/evidence determinism (content-addressed, stable) | backing=2 passed=2 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: replay/evidence determinism (content-addressed, stable) | backing=2 passed=2 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=evidence_uri_is_content_addressed_and_stable,canonical_body_is_key_order_independent",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=evidence_uri_is_content_addressed_and_stable,canonical_body_is_key_order_independent",
       "exit_status": 0,
       "replay_ref": "sha256:add1a2fecf94868ef37dc396179efc2fd9fd1fc811c64941229520256d100c57",
       "duration_s": 0.0
@@ -788,7 +807,7 @@
       "outcome": "not_run",
       "severity": "S1",
       "oracle": "differential",
-      "reason": "requires external baselines (Burp Autorize / Schemathesis / RESTler) for a differential — not installed; offline",
+      "reason": "demonstrated live via lab/differential.py (Schemathesis 4.x): authz-fuzzer 4/4 planted flaws vs 0/4 — see reports/differential. Burp Autorize / RESTler remain GUI/.NET-only, not run here",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -804,14 +823,15 @@
       "reason": "correctly silent on benign case",
       "metrics": {
         "false_findings": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 3,
         "backing_tests_passed": 3
       },
       "evidence": {
         "matched_findings": [],
-        "stdout_tail": "evidence: hardened twin yields zero verified findings (FP budget) | backing=3 passed=3 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: hardened twin yields zero verified findings (FP budget) | backing=3 passed=3 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=hardened_read_authorization,hardened_write_is_owner_only,clean_set_passes",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=hardened_read_authorization,hardened_write_is_owner_only,clean_set_passes",
       "exit_status": 0,
       "replay_ref": "sha256:cd61b3745da65b3756b67bcd11924e7bd97a6a6b646b244104cb2b5e6cfa302b",
       "duration_s": 0.0
@@ -824,25 +844,26 @@
       "reason": "no cross-tenant disclosure",
       "metrics": {
         "isolation_escape_count": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 1,
         "backing_tests_passed": 1
       },
       "evidence": {
         "isolation_escapes": 0,
         "detail": [],
-        "stdout_tail": "evidence: confused-deputy: cross-tenant access denied for read and write | backing=1 passed=1 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: confused-deputy: cross-tenant access denied for read and write | backing=1 passed=1 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=cross_tenant_denied_for_read_and_write",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=cross_tenant_denied_for_read_and_write",
       "exit_status": 0,
       "replay_ref": "sha256:77d098e1bacbbdf6a8058d49678767ab0d8a27263db4186ba362920e48d08b1d",
       "duration_s": 0.0
     },
     {
       "id": "AT-001",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['side_effect_tap', 'R2']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -852,10 +873,10 @@
     },
     {
       "id": "AT-002",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['R4_taint']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -865,10 +886,10 @@
     },
     {
       "id": "AT-003",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['R-rules']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -878,10 +899,10 @@
     },
     {
       "id": "AT-004",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['R4_taint']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -891,10 +912,10 @@
     },
     {
       "id": "AT-005",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['R4_taint']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -904,10 +925,10 @@
     },
     {
       "id": "AT-006",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['R-rules']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -930,36 +951,52 @@
     },
     {
       "id": "AT-008",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['span_side_effect_join']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "agenttrace",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[agenttrace]: span<->side-effect join: forged/weak links never reach verified | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/agenttrace.log  ::  tests=deterministic_match_requires_span_link_and_operation,fallback_join_never_reaches_verified,each_observation_is_joined_at_most_once",
+      "exit_status": 0,
+      "replay_ref": "sha256:667f0c057859a6e6419ee5d8a4c87f5d70b9ecfd02c3e299bb73920ca02e39f7",
       "duration_s": 0.0
     },
     {
       "id": "AT-009",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['side_effect_tap']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "agenttrace",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[agenttrace]: a claim with no observed side effect is flagged (span dropping) | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/agenttrace.log  ::  tests=claim_without_observation_is_a_mismatch,fallback_join_never_reaches_verified",
+      "exit_status": 0,
+      "replay_ref": "sha256:06a158bf954e8a7c5ade83a01df23be665d586783ebcae4e8fae00ac8e8689f0",
       "duration_s": 0.0
     },
     {
       "id": "AT-010",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['span_side_effect_join']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -969,36 +1006,52 @@
     },
     {
       "id": "AT-011",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S0",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['span_side_effect_join']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "agenttrace",
+        "backing_tests_total": 1,
+        "backing_tests_passed": 1
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[agenttrace]: join never attributes across tenants (traceparent spoofing) | backing=1 passed=1 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/agenttrace.log  ::  tests=fallback_excludes_out_of_window_and_other_tenants",
+      "exit_status": 0,
+      "replay_ref": "sha256:0dcb144870eeeebde140bd84d6cdd6c753c671af483a8164c01a86886b55d1b3",
       "duration_s": 0.0
     },
     {
       "id": "AT-012",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['R1']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "correctly silent on benign case",
+      "metrics": {
+        "false_findings": 0,
+        "component": "agenttrace",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "matched_findings": [],
+        "stdout_tail": "evidence[agenttrace]: R1 cross-tenant access detected and verified | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/agenttrace.log  ::  tests=cross_tenant_claim_is_detected,cross_tenant_read_with_body_and_trace_link_is_verified,cross_tenant_write_with_confirmed_state_change_is_verified",
+      "exit_status": 0,
+      "replay_ref": "sha256:76e2ad996271e7b761e00f4a1c2e1d0255e273a7e0d14417cf9910c0a7f22a4d",
       "duration_s": 0.0
     },
     {
       "id": "AT-013",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['R1']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1008,10 +1061,10 @@
     },
     {
       "id": "AT-014",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['R2']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1021,10 +1074,10 @@
     },
     {
       "id": "AT-015",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['R2']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1034,23 +1087,31 @@
     },
     {
       "id": "AT-016",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['R3']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "agenttrace",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[agenttrace]: R3: post-approval tool-description change flagged as rug-pull | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/agenttrace.log  ::  tests=content_change_on_approved_tool_is_flagged_as_rug_pull,changed_description_changes_the_hash,approved_change_does_not_realert",
+      "exit_status": 0,
+      "replay_ref": "sha256:423c725e46b1db04edd38b015549905f3e9d1cd7b65c946441cdf1a2df8abeed",
       "duration_s": 0.0
     },
     {
       "id": "AT-017",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['R3']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1060,10 +1121,10 @@
     },
     {
       "id": "AT-018",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['R4_taint']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1073,10 +1134,10 @@
     },
     {
       "id": "AT-019",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['mcp_scanner']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1086,10 +1147,10 @@
     },
     {
       "id": "AT-020",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['mcp_scanner']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1099,10 +1160,10 @@
     },
     {
       "id": "AT-021",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S0",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['mcp_scanner']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1112,10 +1173,10 @@
     },
     {
       "id": "AT-022",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['mcp_scanner']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1125,10 +1186,10 @@
     },
     {
       "id": "AT-023",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S0",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['side_effect_tap']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1138,10 +1199,10 @@
     },
     {
       "id": "AT-024",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['R4_taint']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1151,10 +1212,10 @@
     },
     {
       "id": "AT-025",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['side_effect_tap']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1164,36 +1225,52 @@
     },
     {
       "id": "AT-026",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['labeling']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "correctly silent on benign case",
+      "metrics": {
+        "false_findings": 0,
+        "component": "agenttrace",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "matched_findings": [],
+        "stdout_tail": "evidence[agenttrace]: attempted-vs-achieved: only a confirmed state change is verified | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/agenttrace.log  ::  tests=cross_tenant_write_with_confirmed_state_change_is_verified,cross_tenant_write_unknown_state_is_probable_not_verified,cross_tenant_write_without_state_change_is_not_verified",
+      "exit_status": 0,
+      "replay_ref": "sha256:ca38683a2214a87e4df0e6ad0f65ea080b805b363aae1136028ed5320f19df46",
       "duration_s": 0.0
     },
     {
       "id": "AT-027",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S2",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['labeling']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
-      "duration_s": 0.0
+      "reason": "correctly silent on benign case",
+      "metrics": {
+        "false_findings": 0,
+        "component": "lattivant-lab",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "matched_findings": [],
+        "stdout_tail": "evidence[lattivant-lab]: an injection that succeeds with null effect stays 'attempted' | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/lattivant-lab.log  ::  tests=attempted_variant_is_distinct_from_achieved,attempted_and_achieved_are_distinct_labels",
+      "exit_status": 0,
+      "replay_ref": "sha256:de159a065430e57cbb3df074ace887b5940a4e9f0b836b553fe9e880e1c4d825",
+      "duration_s": 0.0001
     },
     {
       "id": "AT-028",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['R-rules']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1203,10 +1280,10 @@
     },
     {
       "id": "AT-029",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['R-rules']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1242,10 +1319,10 @@
     },
     {
       "id": "AT-032",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['R-rules']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1255,10 +1332,10 @@
     },
     {
       "id": "AT-033",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['R-rules']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1268,23 +1345,31 @@
     },
     {
       "id": "AT-034",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S2",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['R-rules']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
-      "duration_s": 0.0
+      "reason": "correctly silent on benign case",
+      "metrics": {
+        "false_findings": 0,
+        "component": "agenttrace",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "matched_findings": [],
+        "stdout_tail": "evidence[agenttrace]: over-defense guard: benign/approved actions are not flagged | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/agenttrace.log  ::  tests=admin_access_is_not_a_violation,approved_change_does_not_realert",
+      "exit_status": 0,
+      "replay_ref": "sha256:a32fa28ee29a0b77f97ab8ce138179ae9c3f4d6f32bb89f0410381f8be12e4c2",
+      "duration_s": 0.0025
     },
     {
       "id": "AT-035",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['side_effect_tap']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1294,10 +1379,10 @@
     },
     {
       "id": "AT-036",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['side_effect_tap']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1307,23 +1392,31 @@
     },
     {
       "id": "AT-037",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['side_effect_tap']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "agenttrace",
+        "backing_tests_total": 1,
+        "backing_tests_passed": 1
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[agenttrace]: duplicate side-effect observations are joined at most once | backing=1 passed=1 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/agenttrace.log  ::  tests=each_observation_is_joined_at_most_once",
+      "exit_status": 0,
+      "replay_ref": "sha256:ea5b9fb04b63b76719518fd9f591c0266f3aac12354b08c8c728641468663d71",
       "duration_s": 0.0
     },
     {
       "id": "AT-038",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['R4_taint']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1333,23 +1426,31 @@
     },
     {
       "id": "AT-039",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['post_checker']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "agenttrace",
+        "backing_tests_total": 1,
+        "backing_tests_passed": 1
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[agenttrace]: grounding: a tool claim unsupported by an observation is a mismatch | backing=1 passed=1 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/agenttrace.log  ::  tests=claim_without_observation_is_a_mismatch",
+      "exit_status": 0,
+      "replay_ref": "sha256:1644891c0d9bab878821c19f5a6aa977608bf3821f4d6be78ca775df9f7bbd49",
       "duration_s": 0.0
     },
     {
       "id": "AT-040",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "differential",
-      "reason": "spec-blocked: needs ['R-rules']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1359,10 +1460,10 @@
     },
     {
       "id": "AT-041",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['R-rules']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1372,10 +1473,10 @@
     },
     {
       "id": "AT-042",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['R4_taint']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1385,10 +1486,10 @@
     },
     {
       "id": "AT-043",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['side_effect_tap']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1398,10 +1499,10 @@
     },
     {
       "id": "AT-044",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['side_effect_tap']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1411,10 +1512,10 @@
     },
     {
       "id": "AT-045",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['R3']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1424,10 +1525,10 @@
     },
     {
       "id": "AT-046",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['R-rules']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1437,10 +1538,10 @@
     },
     {
       "id": "AT-047",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['side_effect_tap']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1450,10 +1551,10 @@
     },
     {
       "id": "AT-048",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['labeling']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1463,10 +1564,10 @@
     },
     {
       "id": "AT-049",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['R-rules']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1476,10 +1577,10 @@
     },
     {
       "id": "AT-050",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['R-rules']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1489,10 +1590,10 @@
     },
     {
       "id": "AT-051",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S0",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['span_side_effect_join']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1502,10 +1603,10 @@
     },
     {
       "id": "AT-052",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['span_side_effect_join']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1515,10 +1616,10 @@
     },
     {
       "id": "AT-053",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['mcp_scanner']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1528,10 +1629,10 @@
     },
     {
       "id": "AT-054",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['mcp_scanner']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1541,10 +1642,10 @@
     },
     {
       "id": "AT-055",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['R-rules']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1554,28 +1655,44 @@
     },
     {
       "id": "EW-001",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S2",
       "oracle": "manifest",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
-      "duration_s": 0.0
+      "reason": "correctly silent on benign case",
+      "metrics": {
+        "false_findings": 0,
+        "component": "eastwest",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "matched_findings": [],
+        "stdout_tail": "evidence[eastwest]: edge-novelty raises candidates; baseline traffic does not | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/eastwest.log  ::  tests=a_new_feature_on_the_same_edge_is_fresh,new_peer_and_rare_port_are_flagged,baseline_normal_traffic_has_no_anomalies",
+      "exit_status": 0,
+      "replay_ref": "sha256:badedfc13032a656c18b0d9f50f4232f2e641e81ad6e3bec0adf43485d10bcfa",
+      "duration_s": 0.0002
     },
     {
       "id": "EW-002",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "eastwest",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[eastwest]: anomalous-not-malicious: assessment is context-only with evidence | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/eastwest.log  ::  tests=the_exfil_assessment_is_context_only_with_evidence,normal_db_traffic_is_not_flagged_but_the_exfil_edge_is",
+      "exit_status": 0,
+      "replay_ref": "sha256:b486b5fd5cb0d1f24cc8b6a6952618d130aefd040dc8176698ae6586f467b1f7",
       "duration_s": 0.0
     },
     {
@@ -1619,10 +1736,10 @@
     },
     {
       "id": "EW-006",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S0",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1749,36 +1866,52 @@
     },
     {
       "id": "EW-016",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "eastwest",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[eastwest]: asymmetric/reversed flows share a conversation key (no phantom edge) | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/eastwest.log  ::  tests=reversed_flow_shares_conversation_key,reversed_interval_is_rejected",
+      "exit_status": 0,
+      "replay_ref": "sha256:ddf5c3ee5cbe6b1367e24fa24a6d37848d759d686ea1b65cb78f72dd6b243372",
       "duration_s": 0.0
     },
     {
       "id": "EW-017",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "eastwest",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[eastwest]: NAT-shared address is ambiguous, not silently merged | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/eastwest.log  ::  tests=nat_shared_address_is_ambiguous,reused_ip_resolves_by_time",
+      "exit_status": 0,
+      "replay_ref": "sha256:838ee2b7e94b08841b2925e56693a6a1d03e5f2efa2624842cdfc2d71ba3b335",
       "duration_s": 0.0
     },
     {
       "id": "EW-018",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph_join']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1827,49 +1960,73 @@
     },
     {
       "id": "EW-022",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "eastwest",
+        "backing_tests_total": 1,
+        "backing_tests_passed": 1
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[eastwest]: per-tenant scoping of the asset/flow mapping | backing=1 passed=1 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/eastwest.log  ::  tests=mapping_is_tenant_scoped",
+      "exit_status": 0,
+      "replay_ref": "sha256:804b44da26449836f743329969311f5bfc4633c59b331cad9fdafec36d242609",
       "duration_s": 0.0
     },
     {
       "id": "EW-023",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "eastwest",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[eastwest]: temporal consistency under skew/late arrival | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/eastwest.log  ::  tests=reversed_interval_is_rejected,duration_is_never_negative,different_windows_are_separate_even_if_late",
+      "exit_status": 0,
+      "replay_ref": "sha256:b03e825594d3debbfb11b39de79dc300d5959fe5c6e8d507479ef6b2553a8106",
       "duration_s": 0.0
     },
     {
       "id": "EW-024",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S2",
       "oracle": "manifest",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "correctly silent on benign case",
+      "metrics": {
+        "false_findings": 0,
+        "component": "eastwest",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "matched_findings": [],
+        "stdout_tail": "evidence[eastwest]: cold-start is labelled, not suppressed; warm baseline is clean | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/eastwest.log  ::  tests=cold_start_is_labelled_not_suppressed,baseline_normal_traffic_has_no_anomalies",
+      "exit_status": 0,
+      "replay_ref": "sha256:b8d5605f086ebd713c42f2e4e3a4d026da5a0d266f250e6074a07cbea050ddad",
       "duration_s": 0.0
     },
     {
       "id": "EW-025",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "differential",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1892,23 +2049,31 @@
     },
     {
       "id": "EG-001",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "evidence-graph",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[evidence-graph]: inferred/correlation edges never sit on a causal path unbacked | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/evidence-graph.log  ::  tests=correlated_with_is_never_causal,inferred_edge_needs_rule,observed_edge_needs_evidence",
+      "exit_status": 0,
+      "replay_ref": "sha256:e2fc5578142bf4a9b255fb4083dd8e7e588e196a311d6aeeeed47f53f195ae9f",
       "duration_s": 0.0
     },
     {
       "id": "EG-002",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1918,10 +2083,10 @@
     },
     {
       "id": "EG-003",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1931,23 +2096,31 @@
     },
     {
       "id": "EG-004",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "evidence-graph",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[evidence-graph]: CORRELATED_WITH is never rendered or used as causal | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/evidence-graph.log  ::  tests=correlated_with_is_never_causal,correlated_with_cannot_be_observed,does_not_invent_a_causal_chain_for_the_correlation_hop",
+      "exit_status": 0,
+      "replay_ref": "sha256:76fd1a58ef090891b2b9e48126d61a6afa34396bc06521b83d013713e5708318",
       "duration_s": 0.0
     },
     {
       "id": "EG-005",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1957,36 +2130,52 @@
     },
     {
       "id": "EG-006",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "evidence-graph",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[evidence-graph]: a causal/observed edge requires evidence or a cited rule | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/evidence-graph.log  ::  tests=inferred_edge_without_evidence_is_missing_context,inferred_edge_needs_rule,observed_edge_needs_evidence",
+      "exit_status": 0,
+      "replay_ref": "sha256:61e1e0ff3f951b80e31171c72d5ad80ef52afdd9bc2591494eb53ddbe394559e",
       "duration_s": 0.0
     },
     {
       "id": "EG-007",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S0",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "evidence-graph",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[evidence-graph]: entity resolution: no silent wrong merge; conflicts stay ambiguous | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/evidence-graph.log  ::  tests=deterministic_alias_resolves_cleanly,merge_repoints_aliases_and_audits,conflicting_deterministic_claims_are_ambiguous",
+      "exit_status": 0,
+      "replay_ref": "sha256:dc2e35ea39fa6deb1e08853ec8bb6c5ab2c301fd89f84f92ff3b24cbaad965bc",
       "duration_s": 0.0
     },
     {
       "id": "EG-008",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -1996,49 +2185,73 @@
     },
     {
       "id": "EG-009",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S0",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "evidence-graph",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[evidence-graph]: entity resolution never merges across tenants | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/evidence-graph.log  ::  tests=alias_cannot_cross_tenant,tenant_collision_does_not_resolve_across_tenants",
+      "exit_status": 0,
+      "replay_ref": "sha256:d07ecfae217a58b8779a4327378fcc98d553d11df220bb223d2a6db446a4efeb",
       "duration_s": 0.0
     },
     {
       "id": "EG-010",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S0",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "evidence-graph",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[evidence-graph]: low-confidence probabilistic aliases are not silently merged | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/evidence-graph.log  ::  tests=near_equal_probabilistic_candidates_stay_ambiguous,probabilistic_confidence_is_clamped,bad_confidence_is_rejected",
+      "exit_status": 0,
+      "replay_ref": "sha256:561053e78becbfc910d1d42895ee519c9a64b79c0c3c0b7a532c1651ac48128d",
       "duration_s": 0.0
     },
     {
       "id": "EG-011",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "evidence-graph",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[evidence-graph]: temporal validity windows are enforced (no backdating) | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/evidence-graph.log  ::  tests=alias_validity_is_half_open,stale_alias_outside_window_is_unknown",
+      "exit_status": 0,
+      "replay_ref": "sha256:10897e210ba78e698514f1b0dd89a3e3f4e03aaa75e221e71de67fbfb9b58f70",
       "duration_s": 0.0
     },
     {
       "id": "EG-012",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2048,10 +2261,10 @@
     },
     {
       "id": "EG-013",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2061,10 +2274,10 @@
     },
     {
       "id": "EG-014",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2074,10 +2287,10 @@
     },
     {
       "id": "EG-015",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2087,10 +2300,10 @@
     },
     {
       "id": "EG-016",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S0",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['content_store']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2100,10 +2313,10 @@
     },
     {
       "id": "EG-017",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['content_store']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2113,23 +2326,31 @@
     },
     {
       "id": "EG-018",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['correlator']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "evidence-graph",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[evidence-graph]: bounded, time-scoped traversal (no fan-out runaway) | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/evidence-graph.log  ::  tests=traversal_handles_cycles_without_runaway,traversal_respects_edge_time_windows",
+      "exit_status": 0,
+      "replay_ref": "sha256:8fcb0ca02cb58c5ff08ef046dce84fc572011017f2aadf02faffbd9a53fb3372",
       "duration_s": 0.0
     },
     {
       "id": "EG-019",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['correlator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2139,23 +2360,31 @@
     },
     {
       "id": "EG-020",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "evidence-graph",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[evidence-graph]: supporting evidence ids are present and resolvable | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/evidence-graph.log  ::  tests=reconstructs_incident_with_all_supporting_evidence,provenance_lookup_returns_event_ids",
+      "exit_status": 0,
+      "replay_ref": "sha256:98d75887c8748191216b9a3837feabfa59d6d1d56dfb447e60edb714e075f1f8",
       "duration_s": 0.0
     },
     {
       "id": "EG-021",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2165,10 +2394,10 @@
     },
     {
       "id": "EG-022",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2178,10 +2407,10 @@
     },
     {
       "id": "EG-023",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2191,10 +2420,10 @@
     },
     {
       "id": "EG-024",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2204,10 +2433,10 @@
     },
     {
       "id": "EG-025",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2217,23 +2446,31 @@
     },
     {
       "id": "EG-026",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['correlator']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "correctly silent on benign case",
+      "metrics": {
+        "false_findings": 0,
+        "component": "evidence-graph",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "matched_findings": [],
+        "stdout_tail": "evidence[evidence-graph]: cross-layer incident reconstruction with weakest-link scoring | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/evidence-graph.log  ::  tests=reconstructs_incident_with_all_supporting_evidence,candidate_gathers_evidence_and_scores_weakest_link",
+      "exit_status": 0,
+      "replay_ref": "sha256:1cb748f28657f4bc7c094bb05eff720892dd7938ea3aa5b2e17c2f75d331a67c",
       "duration_s": 0.0
     },
     {
       "id": "EG-027",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2243,10 +2480,10 @@
     },
     {
       "id": "EG-028",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2256,10 +2493,10 @@
     },
     {
       "id": "EG-029",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2269,10 +2506,10 @@
     },
     {
       "id": "EG-030",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2295,10 +2532,10 @@
     },
     {
       "id": "EG-032",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2308,36 +2545,52 @@
     },
     {
       "id": "EG-033",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "evidence-graph",
+        "backing_tests_total": 1,
+        "backing_tests_passed": 1
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[evidence-graph]: idempotent/deduplicated incident evidence | backing=1 passed=1 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/evidence-graph.log  ::  tests=candidates_with_same_evidence_are_deduped",
+      "exit_status": 0,
+      "replay_ref": "sha256:afa6fa162f7658b0673a588f9aed82087774f3ef3709ec475d357f38a7e08c06",
       "duration_s": 0.0
     },
     {
       "id": "EG-034",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "evidence-graph",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[evidence-graph]: analyst feedback is audited; dismissed edges drop (no laundering) | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/evidence-graph.log  ::  tests=feedback_drops_dismissed_and_promotes_accepted,manual_correction_overrides_and_audits",
+      "exit_status": 0,
+      "replay_ref": "sha256:311d99ebb5a3894293cefe452cc4f970c3352ac186ad0e3f519ab5fe88cf789c",
       "duration_s": 0.0
     },
     {
       "id": "EG-035",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2347,10 +2600,10 @@
     },
     {
       "id": "EG-036",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "statistical",
-      "reason": "spec-blocked: needs ['correlator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2360,10 +2613,10 @@
     },
     {
       "id": "EG-037",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2373,10 +2626,10 @@
     },
     {
       "id": "EG-038",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['content_store']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2386,23 +2639,32 @@
     },
     {
       "id": "EG-039",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S0",
       "oracle": "isolation",
-      "reason": "spec-blocked: needs ['evidence_graph']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "no cross-tenant disclosure",
+      "metrics": {
+        "isolation_escape_count": 0,
+        "component": "evidence-graph",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "isolation_escapes": 0,
+        "detail": [],
+        "stdout_tail": "evidence[evidence-graph]: 3-hop graph traversal stays within the tenant | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/evidence-graph.log  ::  tests=traversal_stays_within_tenant,three_hop_traversal_is_time_scoped_and_returns_evidence",
+      "exit_status": 0,
+      "replay_ref": "sha256:5c49c20affa5307dcdfbdf66f33588c0648cf19ebcf2974864eb87b173287c72",
       "duration_s": 0.0
     },
     {
       "id": "EG-040",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2412,10 +2674,10 @@
     },
     {
       "id": "EG-041",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2425,10 +2687,10 @@
     },
     {
       "id": "EG-042",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2438,10 +2700,10 @@
     },
     {
       "id": "EG-043",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2451,10 +2713,10 @@
     },
     {
       "id": "EG-044",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['correlator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2464,10 +2726,10 @@
     },
     {
       "id": "EG-045",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2477,114 +2739,181 @@
     },
     {
       "id": "AI-001",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['investigator', 'post_checker']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "investigator",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[investigator]: prompt injection in evidence cannot fabricate a supported claim | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/investigator.log  ::  tests=prompt_injection_cannot_fabricate_support,respond_answers_with_surviving_claims",
+      "exit_status": 0,
+      "replay_ref": "sha256:26d894beb35368ea86beb737f43dce272150b9d73464cd869b9f68cd3ab9b58e",
       "duration_s": 0.0
     },
     {
       "id": "AI-002",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S0",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['post_checker']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "investigator",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[investigator]: a citation to a non-existent event is rejected | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/investigator.log  ::  tests=nonexistent_citation_is_rejected,fact_with_no_citation_is_rejected",
+      "exit_status": 0,
+      "replay_ref": "sha256:2fee27d7522f2f86ecd679f0928cb42359b622e612e1e78d5597d6238be8bfa7",
       "duration_s": 0.0
     },
     {
       "id": "AI-003",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['post_checker']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "correctly silent on benign case",
+      "metrics": {
+        "false_findings": 0,
+        "component": "investigator",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "matched_findings": [],
+        "stdout_tail": "evidence[investigator]: citation laundering: a real-but-unsupporting citation is rejected | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/investigator.log  ::  tests=causal_claim_on_correlation_only_is_rejected,finding_cannot_support_a_causal_claim,well_cited_fact_passes",
+      "exit_status": 0,
+      "replay_ref": "sha256:968ed3b3115ef3c6c5309de34b4ccbd78eb7f4dda2ff966ae01ab1eb81a60435",
       "duration_s": 0.0
     },
     {
       "id": "AI-004",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S0",
       "oracle": "isolation",
-      "reason": "spec-blocked: needs ['post_checker']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "no cross-tenant disclosure",
+      "metrics": {
+        "isolation_escape_count": 0,
+        "component": "investigator",
+        "backing_tests_total": 1,
+        "backing_tests_passed": 1
+      },
+      "evidence": {
+        "isolation_escapes": 0,
+        "detail": [],
+        "stdout_tail": "evidence[investigator]: a citation to another tenant's event is invisible and rejected | backing=1 passed=1 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/investigator.log  ::  tests=cross_tenant_citation_is_invisible_and_rejected",
+      "exit_status": 0,
+      "replay_ref": "sha256:793d23ec8ec29d8f08c9023d674d8e37efdfac08ab249922d007993ca61c9718",
       "duration_s": 0.0
     },
     {
       "id": "AI-005",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['post_checker']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "investigator",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[investigator]: type-mismatch citation (finding where an event is required) rejected | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/investigator.log  ::  tests=finding_cannot_support_a_causal_claim,causal_claim_on_observed_causal_edge_passes",
+      "exit_status": 0,
+      "replay_ref": "sha256:1605d3d0516dcebd449714b11cba313fa68b3749928d9f95ce386966728748e7",
       "duration_s": 0.0
     },
     {
       "id": "AI-006",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['investigator']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "investigator",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[investigator]: hallucinated/overreaching claims are dropped by the post-checker | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/investigator.log  ::  tests=grounded_claims_survive_and_the_overreach_is_dropped,respond_refuses_when_nothing_survives",
+      "exit_status": 0,
+      "replay_ref": "sha256:73fe4de84cac310614312db29b0544af8631ff0bfca26e9e0eb039ae6577a447",
       "duration_s": 0.0
     },
     {
       "id": "AI-007",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S0",
       "oracle": "isolation",
-      "reason": "spec-blocked: needs ['investigator']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "no cross-tenant disclosure",
+      "metrics": {
+        "isolation_escape_count": 0,
+        "component": "investigator",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "isolation_escapes": 0,
+        "detail": [],
+        "stdout_tail": "evidence[investigator]: get_event tool is tenant-scoped (no enumeration jailbreak) | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/investigator.log  ::  tests=get_is_tenant_scoped,retrieval_is_tenant_scoped_and_audited,a_different_tenant_session_sees_nothing",
+      "exit_status": 0,
+      "replay_ref": "sha256:24d8a7433af119dfb93740a52368f35068d96c4372db6eb8c7037eb47317011f",
       "duration_s": 0.0
     },
     {
       "id": "AI-008",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S0",
       "oracle": "isolation",
-      "reason": "spec-blocked: needs ['investigator']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "no cross-tenant disclosure",
+      "metrics": {
+        "isolation_escape_count": 0,
+        "component": "investigator",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "isolation_escapes": 0,
+        "detail": [],
+        "stdout_tail": "evidence[investigator]: graph retrieval cannot traverse into another tenant | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/investigator.log  ::  tests=retrieval_is_tenant_scoped_and_audited,a_different_tenant_session_sees_nothing",
+      "exit_status": 0,
+      "replay_ref": "sha256:9c6e684eb53ec4b3964cc5f3fedf80f5d6da0a6cc9cbdbf8020a002aab65b2b6",
       "duration_s": 0.0
     },
     {
       "id": "AI-009",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['post_checker']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2594,10 +2923,10 @@
     },
     {
       "id": "AI-010",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2607,36 +2936,52 @@
     },
     {
       "id": "AI-011",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['post_checker']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "investigator",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[investigator]: cannot assert 'attack occurred' with fabricated support | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/investigator.log  ::  tests=prompt_injection_cannot_fabricate_support,respond_refuses_when_nothing_survives",
+      "exit_status": 0,
+      "replay_ref": "sha256:3c5bbd0b9b54dc87b8c7e3046f208beacc44bb89fe758d366853f66a482d9949",
       "duration_s": 0.0
     },
     {
       "id": "AI-012",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S0",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['investigator']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "investigator",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[investigator]: no autonomous response: confirmation/dismissal need a person | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/investigator.log  ::  tests=confirmation_and_dismissal_need_a_person,transition_requires_a_reason",
+      "exit_status": 0,
+      "replay_ref": "sha256:96919f2bc78907cad95c80a142b9c5d015d3b05f629857aeb67ba631bdd4e68e",
       "duration_s": 0.0
     },
     {
       "id": "AI-013",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S0",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2646,10 +2991,10 @@
     },
     {
       "id": "AI-014",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['post_checker']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2659,10 +3004,10 @@
     },
     {
       "id": "AI-015",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2672,23 +3017,31 @@
     },
     {
       "id": "AI-016",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['investigator']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "investigator",
+        "backing_tests_total": 1,
+        "backing_tests_passed": 1
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[investigator]: tool allowlist: only the three permitted tools are recognized | backing=1 passed=1 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/investigator.log  ::  tests=allowlist_only_recognizes_three_tools",
+      "exit_status": 0,
+      "replay_ref": "sha256:04535ae529fdf16291c3701a3ef662c27b9ff67d228bc1cb1baf218af0740940",
       "duration_s": 0.0
     },
     {
       "id": "AI-017",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S0",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2698,10 +3051,10 @@
     },
     {
       "id": "AI-018",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['post_checker']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2711,10 +3064,10 @@
     },
     {
       "id": "AI-019",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2724,10 +3077,10 @@
     },
     {
       "id": "AI-020",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2737,10 +3090,10 @@
     },
     {
       "id": "AI-021",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2750,10 +3103,10 @@
     },
     {
       "id": "AI-022",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "differential",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2763,10 +3116,10 @@
     },
     {
       "id": "AI-023",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['post_checker']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2776,10 +3129,10 @@
     },
     {
       "id": "AI-024",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2789,36 +3142,62 @@
     },
     {
       "id": "AI-025",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['investigator']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "investigator",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[investigator]: cite-or-say-hypothesis: uncited facts drop, hypotheses labelled | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/investigator.log  ::  tests=hypothesis_always_passes,well_cited_fact_passes,fact_with_no_citation_is_rejected",
+      "exit_status": 0,
+      "replay_ref": "sha256:e56509f02f48accc4233eae38e717a2fa2c47fca511bf4180ce3447f70a2e542",
       "duration_s": 0.0
     },
     {
       "id": "AI-026",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['investigator']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "verdict invariant across all transforms",
+      "metrics": {
+        "verdict_changes": 0,
+        "component": "investigator",
+        "backing_tests_total": 1,
+        "backing_tests_passed": 1
+      },
+      "evidence": {
+        "variants": [
+          {
+            "verdict": "stable"
+          },
+          {
+            "verdict": "stable"
+          }
+        ],
+        "distinct_verdicts": [
+          "stable"
+        ],
+        "stdout_tail": "evidence[investigator]: investigator answer is reproducible (deterministic render) | backing=1 passed=1 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/investigator.log  ::  tests=markdown_is_deterministic",
+      "exit_status": 0,
+      "replay_ref": "sha256:fa0c4bbddf296a3830e010edd7109b0273557c6ab6b6b6a25e1b75237217600c",
       "duration_s": 0.0
     },
     {
       "id": "AI-027",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2828,10 +3207,10 @@
     },
     {
       "id": "AI-028",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "differential",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2841,10 +3220,10 @@
     },
     {
       "id": "AI-029",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "differential",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2854,10 +3233,10 @@
     },
     {
       "id": "AI-030",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "statistical",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2867,10 +3246,10 @@
     },
     {
       "id": "AI-031",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2880,10 +3259,10 @@
     },
     {
       "id": "AI-032",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -2997,93 +3376,149 @@
     },
     {
       "id": "PL-009",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
-      "duration_s": 0.0
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "lattivant-platform",
+        "backing_tests_total": 1,
+        "backing_tests_passed": 1
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[lattivant-platform]: oversized event is quarantined before parse | backing=1 passed=1 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/lattivant-platform.log  ::  tests=oversized_payload_is_quarantined_before_parse",
+      "exit_status": 0,
+      "replay_ref": "sha256:2a1280f6eeb6ed9a63cdfaeb00bcecce6e3a4738c791b8ff64227d429a10d462",
+      "duration_s": 0.0002
     },
     {
       "id": "PL-010",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "lattivant-platform",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[lattivant-platform]: malformed/deeply-nested JSON is rejected, not crashed on | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/lattivant-platform.log  ::  tests=parse_rejects_bad_input,missing_fields_are_all_reported",
+      "exit_status": 0,
+      "replay_ref": "sha256:afd71e765461562a64a424af8ab8df57159fb7bc732dd3ab6798940fc4a3216b",
       "duration_s": 0.0
     },
     {
       "id": "PL-011",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "lattivant-platform",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[lattivant-platform]: invalid envelopes fail the structural validator | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/lattivant-platform.log  ::  tests=bad_assertion_is_reported,built_events_pass_the_structural_validator,missing_actor_or_outcome_fails",
+      "exit_status": 0,
+      "replay_ref": "sha256:c0d3cf306baec938da6bf61867ac15d57357a6f143ea6500dfac2a4a90b5c5c0",
       "duration_s": 0.0
     },
     {
       "id": "PL-012",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "lattivant-platform",
+        "backing_tests_total": 1,
+        "backing_tests_passed": 1
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[lattivant-platform]: empty/invalid tenant id is rejected (canonicalization) | backing=1 passed=1 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/lattivant-platform.log  ::  tests=empty_tenant_is_rejected",
+      "exit_status": 0,
+      "replay_ref": "sha256:208c91ab37cc6f179ec6345ed5e4c66b5e86f29cfe0d16f26a30616396900257",
       "duration_s": 0.0
     },
     {
       "id": "PL-013",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "lattivant-platform",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[lattivant-platform]: type-confused events are rejected/quarantined | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/lattivant-platform.log  ::  tests=parse_rejects_bad_input,invalid_event_is_quarantined_under_its_tenant",
+      "exit_status": 0,
+      "replay_ref": "sha256:473d878ce172ac9d55f5409d5ff0527e5a0a06500ff80ec6a7184c9808ea6617",
       "duration_s": 0.0
     },
     {
       "id": "PL-014",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "lattivant-platform",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[lattivant-platform]: a re-used event id does not overwrite (idempotent per tenant) | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/lattivant-platform.log  ::  tests=first_sight_is_fresh_then_duplicate_by_id,insert_is_idempotent_per_tenant",
+      "exit_status": 0,
+      "replay_ref": "sha256:51e6e0ec754caa7e4a1a0c149a1840e58d2d398375a3e06297437982efd21f1c",
       "duration_s": 0.0
     },
     {
       "id": "PL-015",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S0",
       "oracle": "invariant",
-      "reason": "requires the lattivant-platform event-envelope idempotency harness with a cross-tenant replay path (not wired)",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "lattivant-platform",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[lattivant-platform]: idempotency/dedup is tenant-scoped (no cross-tenant dedup) | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/lattivant-platform.log  ::  tests=dedup_is_tenant_scoped,same_id_different_tenant_is_distinct",
+      "exit_status": 0,
+      "replay_ref": "sha256:248d9f99cb5a5293332a21cc4e8c757f27d2d4cb0eda39455867d4fbab46a8b5",
       "duration_s": 0.0
     },
     {
@@ -3114,23 +3549,31 @@
     },
     {
       "id": "PL-018",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "lattivant-platform",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[lattivant-platform]: duplicate delivery is processed idempotently | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/lattivant-platform.log  ::  tests=insert_is_idempotent_per_tenant,re_sent_event_is_a_duplicate_not_a_second_store",
+      "exit_status": 0,
+      "replay_ref": "sha256:b0094275a2b9d208d621cc439f3085b64b1589b4c31e42c2fb16da7b0685c7a7",
       "duration_s": 0.0
     },
     {
       "id": "PL-019",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3192,28 +3635,44 @@
     },
     {
       "id": "PL-024",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S0",
       "oracle": "invariant",
-      "reason": "requires the content-addressed evidence store collision harness",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "lattivant-platform",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[lattivant-platform]: content-addressed store: dedup by hash, corruption detected | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/lattivant-platform.log  ::  tests=reference_is_content_addressed,identical_content_dedups_to_one_blob,corruption_is_detected",
+      "exit_status": 0,
+      "replay_ref": "sha256:9d18028763b835c2e1bfc9b4eb7b0d09fea33f8ff598eecedfd8221585c2478e",
       "duration_s": 0.0
     },
     {
       "id": "PL-025",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "lattivant-platform",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[lattivant-platform]: store delete/GC semantics are well-defined | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/lattivant-platform.log  ::  tests=delete_removes_the_file,missing_and_delete",
+      "exit_status": 0,
+      "replay_ref": "sha256:98574634d70a28dae02eda0844f2b584d3eac887f7fd37011e61a5c3fbf62544",
       "duration_s": 0.0
     },
     {
@@ -3237,15 +3696,16 @@
       "reason": "no cross-tenant disclosure",
       "metrics": {
         "isolation_escape_count": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 2,
         "backing_tests_passed": 2
       },
       "evidence": {
         "isolation_escapes": 0,
         "detail": [],
-        "stdout_tail": "evidence: scanner's own oracle denies cross-tenant access (dogfood) | backing=2 passed=2 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: scanner's own oracle denies cross-tenant access (dogfood) | backing=2 passed=2 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=cross_tenant_denied_for_read_and_write,clean_set_passes",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=cross_tenant_denied_for_read_and_write,clean_set_passes",
       "exit_status": 0,
       "replay_ref": "sha256:56bdb7f4f0e5d4c3c97cafd572f2c04551adf5ed8e965a91badddccaa2780eb7",
       "duration_s": 0.0
@@ -3271,14 +3731,15 @@
       "reason": "invariant held",
       "metrics": {
         "invariant_violations": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 2,
         "backing_tests_passed": 2
       },
       "evidence": {
         "violations": [],
-        "stdout_tail": "evidence: secret redaction in captured request/response evidence | backing=2 passed=2 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: secret redaction in captured request/response evidence | backing=2 passed=2 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=capture_redacts_request_and_response_headers,env_store_only_resolves_env_scheme",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=capture_redacts_request_and_response_headers,env_store_only_resolves_env_scheme",
       "exit_status": 0,
       "replay_ref": "sha256:935f8dc8e0297c3c1084225f7e0eda2c202c7668f7f63942ddc47e5208d31a60",
       "duration_s": 0.0
@@ -3311,10 +3772,10 @@
     },
     {
       "id": "PL-032",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['mcp_scanner']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3337,10 +3798,10 @@
     },
     {
       "id": "PL-034",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3363,10 +3824,10 @@
     },
     {
       "id": "PL-036",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S0",
       "oracle": "isolation",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3389,15 +3850,23 @@
     },
     {
       "id": "PL-038",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "lattivant-platform",
+        "backing_tests_total": 3,
+        "backing_tests_passed": 3
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[lattivant-platform]: permission matrix is enforced (authz on operations) | backing=3 passed=3 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/lattivant-platform.log  ::  tests=permission_matrix,require_on_checks_permission_then_tenant,role_ordering",
+      "exit_status": 0,
+      "replay_ref": "sha256:d346f6a7fdf08aa43faa2adfa1ee098ac07a8d0006af323c1ea913f022014fb2",
       "duration_s": 0.0
     },
     {
@@ -3415,15 +3884,23 @@
     },
     {
       "id": "PL-040",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "lattivant-platform",
+        "backing_tests_total": 2,
+        "backing_tests_passed": 2
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[lattivant-platform]: exactly-once effect under at-least-once delivery | backing=2 passed=2 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/lattivant-platform.log  ::  tests=insert_is_idempotent_per_tenant,identical_content_under_new_id_is_duplicate_content",
+      "exit_status": 0,
+      "replay_ref": "sha256:62f809dd4f0576b0c5b190b9a793483e6b0358b9a1a4b640b6b67a4ed528aa80",
       "duration_s": 0.0
     },
     {
@@ -3441,10 +3918,10 @@
     },
     {
       "id": "SC-002",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['detectors']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3454,10 +3931,10 @@
     },
     {
       "id": "SC-003",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3506,10 +3983,10 @@
     },
     {
       "id": "SC-007",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3519,10 +3996,10 @@
     },
     {
       "id": "SC-008",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3532,10 +4009,10 @@
     },
     {
       "id": "SC-009",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3623,10 +4100,10 @@
     },
     {
       "id": "SC-016",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3675,10 +4152,10 @@
     },
     {
       "id": "SC-020",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3714,10 +4191,10 @@
     },
     {
       "id": "SC-023",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3740,10 +4217,10 @@
     },
     {
       "id": "SC-025",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3766,10 +4243,10 @@
     },
     {
       "id": "SC-027",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3779,10 +4256,10 @@
     },
     {
       "id": "SC-028",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S2",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3792,15 +4269,23 @@
     },
     {
       "id": "SC-029",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "no adapter wired yet",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "invariant held",
+      "metrics": {
+        "invariant_violations": 0,
+        "component": "lattivant-platform",
+        "backing_tests_total": 1,
+        "backing_tests_passed": 1
+      },
+      "evidence": {
+        "violations": [],
+        "stdout_tail": "evidence[lattivant-platform]: corrupted stored content is detected (integrity) | backing=1 passed=1 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/lattivant-platform.log  ::  tests=corruption_is_detected",
+      "exit_status": 0,
+      "replay_ref": "sha256:a81ba8853e0b088ba5063468103b23ee5ab3b8f2af16030eda82d9bdc8d73137",
       "duration_s": 0.0
     },
     {
@@ -3818,10 +4303,10 @@
     },
     {
       "id": "RV-001",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['detectors']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3831,10 +4316,10 @@
     },
     {
       "id": "RV-002",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3844,10 +4329,10 @@
     },
     {
       "id": "RV-003",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3857,10 +4342,10 @@
     },
     {
       "id": "RV-004",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['detectors']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3876,6 +4361,7 @@
       "reason": "verdict invariant across all transforms",
       "metrics": {
         "verdict_changes": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 1,
         "backing_tests_passed": 1
       },
@@ -3891,9 +4377,9 @@
         "distinct_verdicts": [
           "stable"
         ],
-        "stdout_tail": "evidence: rename of non-semantic fields leaves the authz verdict unbroken | backing=1 passed=1 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: rename of non-semantic fields leaves the authz verdict unbroken | backing=1 passed=1 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=differently_named_params_normalize_equal",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=differently_named_params_normalize_equal",
       "exit_status": 0,
       "replay_ref": "sha256:ef5ec3cca77cb0a2eef568cdc5d9fdd09838fd6e64ff9d3267330374a007cde0",
       "duration_s": 0.0
@@ -3906,6 +4392,7 @@
       "reason": "verdict invariant across all transforms",
       "metrics": {
         "verdict_changes": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 1,
         "backing_tests_passed": 1
       },
@@ -3921,9 +4408,9 @@
         "distinct_verdicts": [
           "stable"
         ],
-        "stdout_tail": "evidence: permuting object IDs preserves the BOLA verdict (metamorphic) | backing=1 passed=1 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: permuting object IDs preserves the BOLA verdict (metamorphic) | backing=1 passed=1 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=fingerprint_ignores_resource_id_but_splits_on_violation",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=fingerprint_ignores_resource_id_but_splits_on_violation",
       "exit_status": 0,
       "replay_ref": "sha256:236aff536e6e38c6720357c217571253009757792c03d95798eddac945551908",
       "duration_s": 0.0
@@ -3933,7 +4420,7 @@
       "outcome": "not_run",
       "severity": "S1",
       "oracle": "differential",
-      "reason": "requires external baseline Schemathesis (not installed; offline)",
+      "reason": "demonstrated live via lab/differential.py (Schemathesis 4.x): 0/4 planted authz flaws vs authz-fuzzer 4/4 — see reports/differential/report.md",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3946,7 +4433,7 @@
       "outcome": "not_run",
       "severity": "S2",
       "oracle": "differential",
-      "reason": "requires external baseline RESTler (not installed; offline)",
+      "reason": "demonstrated live via lab/differential.py (RESTler, .NET 8 build): 0 bugs / 0 of 4 planted authz flaws — stateful REST fuzzer with no authz check; see reports/differential",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3959,7 +4446,7 @@
       "outcome": "not_run",
       "severity": "S2",
       "oracle": "differential",
-      "reason": "requires external baseline EvoMaster (not installed; offline)",
+      "reason": "demonstrated live via lab/differential.py (EvoMaster 6.2.0 black-box): 0/4 planted authz flaws — generic fuzzer finds XSS / HTTP-violation faults, no authz check; see reports/differential",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3982,10 +4469,10 @@
     },
     {
       "id": "RV-011",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "differential",
-      "reason": "spec-blocked: needs ['agenttrace']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -3995,10 +4482,10 @@
     },
     {
       "id": "RV-012",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "differential",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4008,10 +4495,10 @@
     },
     {
       "id": "RV-013",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "differential",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4021,10 +4508,10 @@
     },
     {
       "id": "RV-014",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['detectors']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4034,10 +4521,10 @@
     },
     {
       "id": "RV-015",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['detectors']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4047,10 +4534,10 @@
     },
     {
       "id": "RV-016",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['detectors']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4060,10 +4547,10 @@
     },
     {
       "id": "RV-017",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['detectors']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4092,6 +4579,7 @@
       "reason": "verdict invariant across all transforms",
       "metrics": {
         "verdict_changes": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 2,
         "backing_tests_passed": 2
       },
@@ -4107,9 +4595,9 @@
         "distinct_verdicts": [
           "stable"
         ],
-        "stdout_tail": "evidence: verdict invariant across input orderings (seed-stability proxy) | backing=2 passed=2 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: verdict invariant across input orderings (seed-stability proxy) | backing=2 passed=2 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=evidence_uri_is_content_addressed_and_stable,canonical_body_is_key_order_independent",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=evidence_uri_is_content_addressed_and_stable,canonical_body_is_key_order_independent",
       "exit_status": 0,
       "replay_ref": "sha256:8eb46e74bf00f29ca4f0c024fe78e00957e2a1509cf3697330738d8351310831",
       "duration_s": 0.0
@@ -4119,7 +4607,7 @@
       "outcome": "not_run",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "requires an attempted-vs-achieved relabeled corpus scored over detector outputs (detectors not built)",
+      "reason": "the lab distinguishes attempted/achieved labels, but RV-020 as specified needs a >=20-seed statistical comparison over detector outputs (statistical oracle; not a conformance-test result)",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4155,10 +4643,10 @@
     },
     {
       "id": "RV-023",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "differential",
-      "reason": "spec-blocked: needs ['agenttrace']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4168,15 +4656,33 @@
     },
     {
       "id": "RV-024",
-      "outcome": "skipped",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['detectors']",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
-      "exit_status": null,
-      "replay_ref": "",
+      "reason": "verdict invariant across all transforms",
+      "metrics": {
+        "verdict_changes": 0,
+        "component": "lattivant-lab",
+        "backing_tests_total": 1,
+        "backing_tests_passed": 1
+      },
+      "evidence": {
+        "variants": [
+          {
+            "verdict": "stable"
+          },
+          {
+            "verdict": "stable"
+          }
+        ],
+        "distinct_verdicts": [
+          "stable"
+        ],
+        "stdout_tail": "evidence[lattivant-lab]: reproducibility-as-test: clean reset reproduces ground truth | backing=1 passed=1 failed=none"
+      },
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/lattivant-lab.log  ::  tests=clean_reset_reproduces_ground_truth",
+      "exit_status": 0,
+      "replay_ref": "sha256:1013c1dcbbaa9ea0a27557d06904a3a96063baa62f1ed7b73b8fd4f83b363896",
       "duration_s": 0.0
     },
     {
@@ -4187,6 +4693,7 @@
       "reason": "verdict invariant across all transforms",
       "metrics": {
         "verdict_changes": 0,
+        "component": "authz-fuzzer",
         "backing_tests_total": 2,
         "backing_tests_passed": 2
       },
@@ -4202,19 +4709,19 @@
         "distinct_verdicts": [
           "stable"
         ],
-        "stdout_tail": "evidence: oracle-free authz via metamorphic relations (rename + permute) | backing=2 passed=2 failed=none"
+        "stdout_tail": "evidence[authz-fuzzer]: oracle-free authz via metamorphic relations (rename + permute) | backing=2 passed=2 failed=none"
       },
-      "command": "cargo test --workspace  (cwd=/Users/karthikkt/Documents/SOP_Projects/Lattivant/authz-fuzzer/scanner)  ::  tests=differently_named_params_normalize_equal,fingerprint_ignores_resource_id_but_splits_on_violation",
+      "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/scanner_test.log  ::  tests=differently_named_params_normalize_equal,fingerprint_ignores_resource_id_but_splits_on_violation",
       "exit_status": 0,
       "replay_ref": "sha256:2ee1c357792f9ac8b3aea61274daefd4921f4ced9f47c20a79614ac98fc2eacf",
       "duration_s": 0.0
     },
     {
       "id": "GC-001",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "spec-blocked: needs ['agenttrace']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4224,10 +4731,10 @@
     },
     {
       "id": "GC-002",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4250,10 +4757,10 @@
     },
     {
       "id": "GC-004",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4263,10 +4770,10 @@
     },
     {
       "id": "GC-005",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "spec-blocked: needs ['agenttrace']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4276,10 +4783,10 @@
     },
     {
       "id": "GC-006",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['agenttrace', 'labeling']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4289,10 +4796,10 @@
     },
     {
       "id": "GC-007",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "invariant",
-      "reason": "spec-blocked: needs ['mcp_scanner']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4315,10 +4822,10 @@
     },
     {
       "id": "GC-009",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "differential",
-      "reason": "spec-blocked: needs ['agenttrace']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4328,10 +4835,10 @@
     },
     {
       "id": "GC-010",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4354,10 +4861,10 @@
     },
     {
       "id": "GC-012",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4380,10 +4887,10 @@
     },
     {
       "id": "GC-014",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4393,10 +4900,10 @@
     },
     {
       "id": "GC-015",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "metamorphic",
-      "reason": "spec-blocked: needs ['detectors']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4406,10 +4913,10 @@
     },
     {
       "id": "GC-016",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "spec-blocked: needs ['agenttrace']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4419,10 +4926,10 @@
     },
     {
       "id": "GC-017",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "spec-blocked: needs ['investigator']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4445,10 +4952,10 @@
     },
     {
       "id": "GC-019",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "spec-blocked: needs ['side_effect_tap']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4458,10 +4965,10 @@
     },
     {
       "id": "GC-020",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4484,10 +4991,10 @@
     },
     {
       "id": "GC-022",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "spec-blocked: needs ['evidence_graph']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4497,10 +5004,10 @@
     },
     {
       "id": "GC-023",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['agenttrace']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4510,10 +5017,10 @@
     },
     {
       "id": "GC-024",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "manifest",
-      "reason": "spec-blocked: needs ['agenttrace']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",
@@ -4523,10 +5030,10 @@
     },
     {
       "id": "GC-025",
-      "outcome": "skipped",
+      "outcome": "not_run",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "spec-blocked: needs ['agenttrace']",
+      "reason": "runnable but no adapter wired yet",
       "metrics": {},
       "evidence": {},
       "command": "",

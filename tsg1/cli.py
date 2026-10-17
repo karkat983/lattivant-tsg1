@@ -18,16 +18,38 @@ from .model import Outcome
 from .report import to_markdown, write_reports
 
 
-def _detect_capabilities() -> set[str]:
-    """Which spec components exist today. Detected, never assumed.
+#: capability (a catalog spec_blocker) -> component whose passing cargo suite
+#: provides it. A capability is enabled only when that component is present and
+#: its tests pass. Capabilities with no built component (long-horizon memory,
+#: gRPC/WebSocket adapters) are intentionally absent, so those scenarios skip.
+_CAP_PROVIDERS: dict[str, str] = {
+    "R1": "agenttrace", "R2": "agenttrace", "R3": "agenttrace",
+    "R4": "agenttrace", "R-rules": "agenttrace", "R4_taint": "agenttrace",
+    "side_effect_tap": "agenttrace", "span_side_effect_join": "agenttrace",
+    "mcp_scanner": "agenttrace", "labeling": "agenttrace",
+    "evidence_graph": "evidence-graph", "evidence_graph_join": "evidence-graph",
+    "correlator": "evidence-graph", "content_store": "evidence-graph",
+    "investigator": "investigator", "post_checker": "investigator",
+    "detectors": "agenttrace", "agenttrace": "agenttrace",
+}
 
-    Adapters that probe real built components also set capabilities; by default
-    nothing spec-level (R1-R4, evidence_graph, investigator, mcp_scanner, ...)
-    is available, so those scenarios skip honestly.
+
+def _detect_capabilities() -> set[str]:
+    """Enable each capability whose backing component is built and green.
+
+    Detected by actually running (or parsing a captured run of) the component's
+    cargo tests — never assumed. Absent/failing component -> capability stays
+    off, so its scenarios skip honestly.
     """
+    from .adapters._cargo import component_results
     caps: set[str] = set()
-    # Extension point: adapters/environment detection can add capabilities as
-    # the corresponding components get built. Intentionally empty by default.
+    ok_components: dict[str, bool] = {}
+    for cap, comp in _CAP_PROVIDERS.items():
+        if comp not in ok_components:
+            run = component_results(comp)
+            ok_components[comp] = run.available and (run.exit_status == 0)
+        if ok_components[comp]:
+            caps.add(cap)
     return caps
 
 

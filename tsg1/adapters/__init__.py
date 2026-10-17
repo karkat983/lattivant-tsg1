@@ -36,3 +36,6 @@ from . import authz_fuzzer      # noqa: E402,F401
 from . import platform_rls      # noqa: E402,F401
 from . import research_validity  # noqa: E402,F401
 from . import scale_chaos       # noqa: E402,F401
+# component mappings last so genuine test-backed adapters win over any
+# earlier make_unavailable registration for the same scenario id
+from . import _mappings         # noqa: E402,F401

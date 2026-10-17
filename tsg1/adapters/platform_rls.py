@@ -25,13 +25,10 @@ PL_UNAVAILABLE: dict[str, str] = {
     "PL-007": "requires live PostgreSQL RLS (stale policy after role change)",
     "PL-008": "requires a PostgreSQL RLS differential-fuzzing harness vs an "
               "independent isolation oracle (not built)",
-    "PL-015": "requires the lattivant-platform event-envelope idempotency "
-              "harness with a cross-tenant replay path (not wired)",
     "PL-020": "requires the PII-redaction pipeline + a labeled split-field "
               "corpus (not wired)",
     "PL-021": "requires the PII-redaction pipeline + encoded-PII corpus (not wired)",
     "PL-023": "requires a labeled PII corpus to measure redaction precision/recall",
-    "PL-024": "requires the content-addressed evidence store collision harness",
     "PL-037": "requires a collector egress-allowlist harness against an internal "
               "endpoint (not wired)",
 }

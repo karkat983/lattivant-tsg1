@@ -23,7 +23,10 @@ tsg1/              harness package
   runner.py        honest runner (SPEC->SKIPPED, no-backing->NOT_RUN)
   report.py        JSON + Markdown report with an honesty header
   cli.py           `python -m tsg1 {list,run,report}`
-  adapters/        bridges scenarios to the real components (cargo-test-backed)
+  adapters/        bridges scenarios to all seven components (cargo-test-backed);
+                   _cargo.py runs each component's suite, _mappings.py wires
+                   scenario -> named conformance tests, capabilities are enabled
+                   only for components that are built and green
 catalog/
   build_catalog.py source of truth for all 326 scenarios
   scenarios.jsonl  generated registry
@@ -40,7 +43,7 @@ python3 -m tsg1 list --run-first                 # the TSG-1 Section H run-first
 python3 -m tsg1 run  --run-first --out runs/x    # run them, write a report
 python3 -m tsg1 run  --all       --out reports/full
 python3 lab/live_lab.py                          # integrated live lab (end-to-end scans)
-python3 -m unittest discover -s tests            # harness self-tests (22)
+python3 -m unittest discover -s tests            # harness self-tests (33)
 python3 catalog/build_catalog.py                 # regenerate the registry
 ```
 

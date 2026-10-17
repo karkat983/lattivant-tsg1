@@ -8,19 +8,39 @@ output: [`reports/full/results.json`](reports/full/results.json); rendered:
 
 | Metric | Value |
 |--------|-------|
-| Catalog scenarios | **326** (built 142 / partial 11 / spec 173) |
-| Actually **measured** (PASS/FAIL on real evidence) | **22** |
-| **PASS** | **22** |
+| Catalog scenarios | **326** |
+| Actually **measured** (PASS/FAIL on real evidence) | **79** |
+| **PASS** | **79** |
 | **FAIL** | **0** |
-| SKIPPED (spec component not built) | 184 |
-| NOT_RUN (backing test / baseline tool / live stack absent) | 120 |
+| SKIPPED (component genuinely not built) | 6 |
+| NOT_RUN (no adapter / needs external harness) | 241 |
 | ERROR | 0 |
 | **S0 isolation/safety release gate** | **CLEAN** (0 S0 failures) |
 
-Evidence source for every PASS: the Rust scanner's own `cargo test` suite
-(**202 passed, 0 failed, exit 0**, `cargo test --workspace` in
-`authz-fuzzer/scanner`). Each scenario cites the named conformance tests that
-back it.
+Every PASS is backed by a built component's own `cargo test` conformance cases;
+each result records the component, the exact command, and the named tests. The
+evaluation exercises **all seven components** (477 passing component tests in
+total):
+
+| Component | Measured scenarios | Component tests |
+|-----------|--------------------|-----------------|
+| authz-fuzzer | 22 | 202 |
+| evidence-graph | 13 | 35 |
+| investigator | 13 | 41 |
+| lattivant-platform | 13 | 60 |
+| agenttrace | 9 | 91 |
+| eastwest | 7 | 36 |
+| lattivant-lab | 2 | 12 |
+
+**Build-status reconciliation (important):** the TSG-1 guide labelled most
+AgentTrace / Evidence Graph / Investigator scenarios "SPEC-only". In this repo
+those detectors are in fact **built and green** — the R1/R3 detectors and the
+span↔side-effect join (AgentTrace), the correlator + entity resolution +
+`correlated_with`-never-causal invariant (Evidence Graph), and the grounding
+post-checker + tenant isolation + 3-tool allowlist (Investigator) — so their
+scenarios are measured here, not skipped. Only genuinely-absent pieces remain
+SKIPPED: long-horizon memory poisoning (AT-007/030/031, GC-008), the gRPC
+adapter (AZ-011) and the WebSocket adapter (AZ-012).
 
 ## Integrated live lab (end-to-end, not unit tests)
 
@@ -72,7 +92,9 @@ and each scored 0/4. Only Burp Autorize (RV-010) could not be provisioned
 (commercial GUI); it is documented, not faked. EvoMaster *white-box* is N/A — it
 instruments JVM/Node/.NET bytecode, not a Rust binary.
 
-## What was measured (conformance-test-backed; all 22 passed)
+## What was measured on the AuthZ-Fuzzer (conformance-test-backed)
+
+Beyond the all-component total above, the AuthZ-Fuzzer scenarios break down as:
 
 All measured scenarios are on the one substantially-built detection component,
 the **AuthZ-Fuzzer** (plus two platform controls it implements and four
