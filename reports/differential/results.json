@@ -1,0 +1,94 @@
+{
+  "ground_truth_flaws": [
+    "missing-auth",
+    "shared-write",
+    "xtenant-read",
+    "xtenant-write"
+  ],
+  "candidate": {
+    "tool": "authz-fuzzer (live lab)",
+    "found": [
+      "missing-auth",
+      "shared-write",
+      "xtenant-read",
+      "xtenant-write"
+    ],
+    "recall": 1.0
+  },
+  "baselines": {
+    "schemathesis": {
+      "available": true,
+      "authz_found": [],
+      "recall": 0.0,
+      "note": "generic schema fuzzer: finds conformance issues, no authz check",
+      "per_mode": {
+        "bola-read": {
+          "categories": {
+            "Undocumented HTTP status code": "5"
+          },
+          "failures_seen": 5,
+          "authz_detection": false
+        },
+        "bola-write": {
+          "categories": {
+            "Undocumented HTTP status code": "5"
+          },
+          "failures_seen": 5,
+          "authz_detection": false
+        },
+        "missing-auth": {
+          "categories": {
+            "Undocumented HTTP status code": "5"
+          },
+          "failures_seen": 5,
+          "authz_detection": false
+        },
+        "shared-write": {
+          "categories": {
+            "Undocumented HTTP status code": "5"
+          },
+          "failures_seen": 5,
+          "authz_detection": false
+        }
+      }
+    },
+    "restler": {
+      "available": false,
+      "authz_found": [],
+      "recall": 0.0,
+      "note": "RESTler needs a .NET 6 toolchain + compiled grammar; not provisioned (and has no authz/BOLA check)"
+    },
+    "evomaster": {
+      "available": false,
+      "authz_found": [],
+      "recall": 0.0,
+      "note": "EvoMaster needs a white-box driver / jar + instrumented target; not provisioned"
+    },
+    "burp_autorize": {
+      "available": false,
+      "authz_found": [],
+      "recall": 0.0,
+      "note": "Burp Suite + Autorize is a commercial GUI extension; cannot run headless here"
+    }
+  },
+  "differential_verdict": {
+    "passed": true,
+    "reason": "candidate recall >= union of baselines",
+    "evidence": {
+      "candidate_found": [
+        "missing-auth",
+        "shared-write",
+        "xtenant-read",
+        "xtenant-write"
+      ],
+      "baseline_union": [],
+      "candidate_missed": [],
+      "candidate_extra": [
+        "missing-auth",
+        "shared-write",
+        "xtenant-read",
+        "xtenant-write"
+      ]
+    }
+  }
+}

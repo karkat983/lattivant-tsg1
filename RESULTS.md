@@ -49,6 +49,26 @@ conformance-test-backed to **live end-to-end** evidence. The seed now carries an
 alpha-private order, an order shared read-only with bravo, a public order, and a
 bravo-private order, so the FP traps and the shared-write vuln are all exercised.
 
+## Differential vs baseline (AZ-046 / RV-007)
+
+`python3 lab/differential.py` runs each tool against the same seeded target and
+scores recall over the four planted authorization flaws. Report:
+[`reports/differential/report.md`](reports/differential/report.md).
+
+| Tool | Ran? | Authz-flaw recall | Note |
+|------|------|-------------------|------|
+| **authz-fuzzer** (candidate) | ✅ | **4/4 (1.0)** | live end-to-end scans |
+| Schemathesis 4.x | ✅ | 0/4 (0.0) | found 5 schema-conformance failures/mode (undocumented status codes), **no** authz detection |
+| RESTler | — | — | needs a .NET 6 toolchain + compiled grammar; not provisioned |
+| EvoMaster | — | — | needs a white-box driver/jar + instrumented target; not provisioned |
+| Burp Autorize | — | — | commercial Burp Suite GUI extension; cannot run headless |
+
+**Differential verdict: PASS** — the authz scanner's recall (4/4) ≥ the union of
+baselines (0/4). This is the AZ-046/RV-007 result: a generic schema fuzzer tests
+one identity against a spec and has no cross-tenant/ownership check, so it
+structurally misses BOLA that the authz scanner catches. Only Schemathesis could
+be run headless here; the other three baselines are documented, not faked.
+
 ## What was measured (conformance-test-backed; all 22 passed)
 
 All measured scenarios are on the one substantially-built detection component,

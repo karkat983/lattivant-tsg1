@@ -25,7 +25,9 @@ RV_BACKING: dict[str, tuple[list[str], str]] = {
 }
 
 RV_UNAVAILABLE: dict[str, str] = {
-    "RV-007": "requires external baseline Schemathesis (not installed; offline)",
+    "RV-007": "demonstrated live via lab/differential.py (Schemathesis 4.x): "
+              "0/4 planted authz flaws vs authz-fuzzer 4/4 — see "
+              "reports/differential/report.md",
     "RV-008": "requires external baseline RESTler (not installed; offline)",
     "RV-009": "requires external baseline EvoMaster (not installed; offline)",
     "RV-010": "requires external baseline Burp Autorize (not installed; offline)",

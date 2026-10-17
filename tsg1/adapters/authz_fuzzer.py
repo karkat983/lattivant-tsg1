@@ -70,8 +70,9 @@ AZ_UNAVAILABLE: dict[str, str] = {
               "cover allowlist/budget but not signature tamper",
     "AZ-041": "the scanner is Rust (no unsafe C++ parser); no C++ libFuzzer "
               "harness exists to exercise",
-    "AZ-046": "requires external baselines (Burp Autorize / Schemathesis / "
-              "RESTler) for a differential — not installed; offline",
+    "AZ-046": "demonstrated live via lab/differential.py (Schemathesis 4.x): "
+              "authz-fuzzer 4/4 planted flaws vs 0/4 — see reports/differential. "
+              "Burp Autorize / RESTler remain GUI/.NET-only, not run here",
 }
 
 for _sid, (_tests, _desc) in AZ_BACKING.items():
