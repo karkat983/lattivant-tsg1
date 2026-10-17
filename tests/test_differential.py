@@ -19,6 +19,10 @@ class ClassifyTests(unittest.TestCase):
         self.assertTrue(_classify_authz({"Authorization bypass": "1"}))
         self.assertTrue(_classify_authz({"Cross-tenant access": "1"}))
 
+    def test_evomaster_fault_codes_are_not_authz(self):
+        # Fault301 (XSS) and Fault109 (HTTP violation) are robustness, not authz
+        self.assertFalse(_classify_authz({"Fault301": 1, "Fault109": 1}))
+
 
 class DifferentialOracleTests(unittest.TestCase):
     def _score(self, candidate, baseline_found):

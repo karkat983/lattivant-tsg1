@@ -8,11 +8,11 @@ Each tool run against the same seeded `authz-target`. Ground truth is the four p
 |------|------|-------------------|-------|------|
 | **authz-fuzzer** (candidate) | ✅ | **1.0** (4/4) | missing-auth, shared-write, xtenant-read, xtenant-write | live end-to-end scans |
 | schemathesis | ✅ | 0.0 (0/4) | — | generic schema fuzzer: finds conformance issues, no authz check |
-| restler | — | 0.0 (0/4) | — | RESTler needs a .NET 6 toolchain + compiled grammar; not provisioned (and has no authz/BOLA check) |
-| evomaster | — | 0.0 (0/4) | — | EvoMaster needs a white-box driver / jar + instrumented target; not provisioned |
+| evomaster | ✅ | 0.0 (0/4) | — | black-box (white-box cannot instrument a Rust target): finds robustness/protocol faults (XSS, HTTP violations), no authz check |
+| restler | — | 0.0 (0/4) | — | RESTler needs Docker (daemon not running here) or a .NET toolchain (absent); and has no authz/BOLA check |
 | burp_autorize | — | 0.0 (0/4) | — | Burp Suite + Autorize is a commercial GUI extension; cannot run headless here |
 
-### Schemathesis per-mode (what it *did* find)
+### schemathesis per-mode (what it *did* find)
 
 | Mode | Non-authz failures | Categories | Authz detection |
 |------|--------------------|------------|-----------------|
@@ -21,5 +21,14 @@ Each tool run against the same seeded `authz-target`. Ground truth is the four p
 | missing-auth | 5 | Undocumented HTTP status code×5 | no |
 | shared-write | 5 | Undocumented HTTP status code×5 | no |
 
-_Schemathesis flags schema-conformance issues (e.g. undocumented status codes) but detects none of the planted authorization flaws — the authz scanner's value-add._
+### evomaster per-mode (what it *did* find)
+
+| Mode | Non-authz failures | Categories | Authz detection |
+|------|--------------------|------------|-----------------|
+| bola-read | 2 | Fault301×1, Fault109×1 | no |
+| bola-write | 1 | Fault109×1 | no |
+| missing-auth | 1 | Fault109×1 | no |
+| shared-write | 2 | Fault301×1, Fault109×1 | no |
+
+_The generic fuzzers flag schema-conformance and robustness faults (undocumented status codes, XSS, HTTP violations) but detect none of the planted authorization flaws — the authz scanner's value-add._
 

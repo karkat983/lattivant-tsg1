@@ -106,6 +106,52 @@ def _run_schemathesis(bin_path: str) -> dict:
     return {"authz_found": found, "per_mode": per_mode}
 
 
+def _evomaster_bin() -> str | None:
+    return os.environ.get("TSG1_EVOMASTER")
+
+
+def _run_evomaster(jar: str) -> dict:
+    """Run EvoMaster in black-box mode against each vuln mode.
+
+    EvoMaster white-box instruments JVM/Node/.NET bytecode and cannot
+    instrument a Rust binary, so only black-box applies to this target. Like
+    other generic fuzzers it reports robustness/protocol faults (500s, XSS,
+    HTTP violations), not authorization flaws.
+    """
+    found: set[str] = set()
+    per_mode = {}
+    for flaw, mode in GROUND_TRUTH.items():
+        proc, base_url = live_lab._start_target(mode)
+        with tempfile.TemporaryDirectory() as evo_out:
+            try:
+                live_lab._wait_ready(base_url)
+                cmd = ["java", "-jar", jar, "--blackBox", "true",
+                       "--bbSwaggerUrl", base_url + "/openapi.json",
+                       "--bbTargetUrl", base_url,
+                       "--header0", "Authorization: Bearer tok-bravo-admin",
+                       "--maxTimeInSeconds", "20", "--outputFolder", evo_out,
+                       "--outputFormat", "PYTHON_UNITTEST", "--ratePerMinute", "120"]
+                subprocess.run(cmd, capture_output=True, text=True, timeout=180)
+                faults_file = os.path.join(evo_out, "EvoMaster_faults_Test.py")
+                descs, n = [], 0
+                if os.path.exists(faults_file):
+                    text = open(faults_file, encoding="utf-8", errors="replace").read()
+                    n = len(re.findall(r"potential fault of type-code", text))
+                    descs = re.findall(r"#\s*(Fault\d+\..*)", text)
+            finally:
+                proc.terminate()
+                try:
+                    proc.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    proc.kill()
+        authz_hit = any(any(k in d.lower() for k in AUTHZ_KEYWORDS) for d in descs)
+        if authz_hit:
+            found.add(flaw)
+        per_mode[mode] = {"categories": {d.split(".")[0]: 1 for d in descs},
+                          "failures_seen": n, "authz_detection": authz_hit}
+    return {"authz_found": found, "per_mode": per_mode}
+
+
 def run(out_dir: str) -> dict:
     os.makedirs(out_dir, exist_ok=True)
     candidate = _candidate_found()
@@ -123,14 +169,26 @@ def run(out_dir: str) -> dict:
             "available": False, "authz_found": [],
             "note": "schemathesis not on PATH; `pip install schemathesis` to run"}
 
-    # tools that cannot run headless/offline here — honest NOT_RUN
+    evo = _evomaster_bin()
+    if evo and os.path.exists(evo):
+        res = _run_evomaster(evo)
+        baselines["evomaster"] = {
+            "available": True, "authz_found": sorted(res["authz_found"]),
+            "per_mode": res["per_mode"],
+            "note": "black-box (white-box cannot instrument a Rust target): finds "
+                    "robustness/protocol faults (XSS, HTTP violations), no authz "
+                    "check"}
+    else:
+        baselines["evomaster"] = {
+            "available": False, "authz_found": [],
+            "note": "evomaster.jar not found; set $TSG1_EVOMASTER to the jar path "
+                    "to run (black-box; white-box N/A for a Rust target)"}
+
+    # RESTler cannot run here — honest NOT_RUN
     baselines["restler"] = {"available": False, "authz_found": [],
-                            "note": "RESTler needs a .NET 6 toolchain + compiled "
-                                    "grammar; not provisioned (and has no authz/"
-                                    "BOLA check)"}
-    baselines["evomaster"] = {"available": False, "authz_found": [],
-                             "note": "EvoMaster needs a white-box driver / jar + "
-                                     "instrumented target; not provisioned"}
+                            "note": "RESTler needs Docker (daemon not running here) "
+                                    "or a .NET toolchain (absent); and has no "
+                                    "authz/BOLA check"}
     baselines["burp_autorize"] = {"available": False, "authz_found": [],
                                   "note": "Burp Suite + Autorize is a commercial "
                                           "GUI extension; cannot run headless here"}
@@ -183,21 +241,24 @@ def _write_md(rep: dict, out_dir: str) -> None:
                      f"({len(b['authz_found'])}/4) | "
                      f"{', '.join(b['authz_found']) or '—'} | {b['note']} |")
     lines.append("")
-    sm = rep["baselines"].get("schemathesis", {})
-    if sm.get("per_mode"):
-        lines.append("### Schemathesis per-mode (what it *did* find)")
+    for name, b in rep["baselines"].items():
+        pm_all = b.get("per_mode")
+        if not pm_all:
+            continue
+        lines.append(f"### {name} per-mode (what it *did* find)")
         lines.append("")
         lines.append("| Mode | Non-authz failures | Categories | Authz detection |")
         lines.append("|------|--------------------|------------|-----------------|")
-        for mode, pm in sm["per_mode"].items():
+        for mode, pm in pm_all.items():
             cats = ", ".join(f"{k.strip()}×{v}" for k, v in pm["categories"].items())
             lines.append(f"| {mode} | {pm['failures_seen']} | {cats or '—'} | "
                          f"{'yes' if pm['authz_detection'] else 'no'} |")
         lines.append("")
-        lines.append("_Schemathesis flags schema-conformance issues (e.g. "
-                     "undocumented status codes) but detects none of the planted "
-                     "authorization flaws — the authz scanner's value-add._")
-        lines.append("")
+    lines.append("_The generic fuzzers flag schema-conformance and robustness "
+                 "faults (undocumented status codes, XSS, HTTP violations) but "
+                 "detect none of the planted authorization flaws — the authz "
+                 "scanner's value-add._")
+    lines.append("")
     with open(os.path.join(out_dir, "report.md"), "w") as fh:
         fh.write("\n".join(lines) + "\n")
 

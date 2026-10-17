@@ -3,26 +3,26 @@
   "method": "GET",
   "path_template": "/orders/{id}",
   "fingerprint": "ca8365c5",
-  "case_id": "ukgEMP",
-  "code_sample": "curl -X GET http://127.0.0.1:53762/orders/0",
+  "case_id": "nIFC80",
+  "code_sample": "curl -X GET http://127.0.0.1:54334/orders/0",
   "sequence": [
     {
       "method": "GET",
-      "url": "http://127.0.0.1:53762/orders/0",
-      "url_template": "http://127.0.0.1:53762/orders/{id}",
+      "url": "http://127.0.0.1:54334/orders/0",
+      "url_template": "http://127.0.0.1:54334/orders/{id}",
       "headers": {
         "User-Agent": "schemathesis/4.31.1",
         "Accept-Encoding": "gzip, deflate, zstd",
         "Accept": "*/*",
         "Connection": "keep-alive",
-        "X-Schemathesis-TestCaseId": "ukgEMP"
+        "X-Schemathesis-TestCaseId": "nIFC80"
       },
       "response": {
         "status_code": 404,
         "headers": {
           "content-type": "application/json",
           "content-length": "21",
-          "date": "Sat, 17 Oct 2026 08:14:33 GMT"
+          "date": "Sat, 17 Oct 2026 08:53:13 GMT"
         },
         "body": "{\"error\":\"not found\"}"
       },

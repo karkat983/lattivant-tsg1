@@ -3,20 +3,20 @@
   "method": "POST",
   "path_template": "/orders",
   "fingerprint": "e576f048",
-  "case_id": "8lREkX",
-  "code_sample": "curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{}' http://127.0.0.1:53762/orders",
+  "case_id": "YWAeaZ",
+  "code_sample": "curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{}' http://127.0.0.1:54334/orders",
   "sequence": [
     {
       "method": "POST",
-      "url": "http://127.0.0.1:53762/orders",
-      "url_template": "http://127.0.0.1:53762/orders",
+      "url": "http://127.0.0.1:54334/orders",
+      "url_template": "http://127.0.0.1:54334/orders",
       "headers": {
         "User-Agent": "schemathesis/4.31.1",
         "Accept-Encoding": "gzip, deflate, zstd",
         "Accept": "*/*",
         "Connection": "keep-alive",
         "Authorization": "[Filtered]",
-        "X-Schemathesis-TestCaseId": "8lREkX",
+        "X-Schemathesis-TestCaseId": "YWAeaZ",
         "Content-Type": "application/json",
         "Content-Length": "2"
       },
@@ -25,7 +25,7 @@
         "headers": {
           "content-type": "application/json",
           "content-length": "58",
-          "date": "Sat, 17 Oct 2026 08:14:33 GMT"
+          "date": "Sat, 17 Oct 2026 08:53:13 GMT"
         },
         "body": "{\"id\":\"order-2\",\"note\":\"\",\"owner\":\"bravo\",\"status\":\"open\"}"
       },
@@ -39,7 +39,7 @@
       ],
       "meta": {
         "generation": {
-          "time": 0.031836708018090576,
+          "time": 0.03212175000226125,
           "mode": "positive"
         },
         "components": {

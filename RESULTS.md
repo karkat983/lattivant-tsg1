@@ -59,15 +59,18 @@ scores recall over the four planted authorization flaws. Report:
 |------|------|-------------------|------|
 | **authz-fuzzer** (candidate) | ✅ | **4/4 (1.0)** | live end-to-end scans |
 | Schemathesis 4.x | ✅ | 0/4 (0.0) | found 5 schema-conformance failures/mode (undocumented status codes), **no** authz detection |
-| RESTler | — | — | needs a .NET 6 toolchain + compiled grammar; not provisioned |
-| EvoMaster | — | — | needs a white-box driver/jar + instrumented target; not provisioned |
+| EvoMaster 6.2.0 (black-box) | ✅ | 0/4 (0.0) | found XSS (Fault301) + HTTP-violation (Fault109) faults, **no** authz detection |
+| RESTler | — | — | needs Docker (daemon down here) or a .NET toolchain (absent); no authz check either |
 | Burp Autorize | — | — | commercial Burp Suite GUI extension; cannot run headless |
 
 **Differential verdict: PASS** — the authz scanner's recall (4/4) ≥ the union of
-baselines (0/4). This is the AZ-046/RV-007 result: a generic schema fuzzer tests
-one identity against a spec and has no cross-tenant/ownership check, so it
-structurally misses BOLA that the authz scanner catches. Only Schemathesis could
-be run headless here; the other three baselines are documented, not faked.
+baselines (0/4). This is the AZ-046/RV-007/RV-009 result: generic API fuzzers
+test one identity against a spec and have no cross-tenant/ownership check, so
+they structurally miss BOLA that the authz scanner catches. Two baselines
+(Schemathesis, EvoMaster black-box) ran live and each scored 0/4; RESTler (RV-008)
+and Burp Autorize (RV-010) could not be provisioned here and are documented, not
+faked. EvoMaster *white-box* is N/A — it instruments JVM/Node/.NET bytecode, not
+a Rust binary.
 
 ## What was measured (conformance-test-backed; all 22 passed)
 

@@ -3,19 +3,19 @@
   "method": "DELETE",
   "path_template": "/orders/{id}",
   "fingerprint": "3be4def0",
-  "case_id": "VB6OHl",
-  "code_sample": "curl -X DELETE http://127.0.0.1:53762/orders/0",
+  "case_id": "dZ1lgP",
+  "code_sample": "curl -X DELETE http://127.0.0.1:54334/orders/0",
   "sequence": [
     {
       "method": "DELETE",
-      "url": "http://127.0.0.1:53762/orders/0",
-      "url_template": "http://127.0.0.1:53762/orders/{id}",
+      "url": "http://127.0.0.1:54334/orders/0",
+      "url_template": "http://127.0.0.1:54334/orders/{id}",
       "headers": {
         "User-Agent": "schemathesis/4.31.1",
         "Accept-Encoding": "gzip, deflate, zstd",
         "Accept": "*/*",
         "Connection": "keep-alive",
-        "X-Schemathesis-TestCaseId": "VB6OHl",
+        "X-Schemathesis-TestCaseId": "dZ1lgP",
         "Content-Length": "0"
       },
       "response": {
@@ -23,7 +23,7 @@
         "headers": {
           "content-type": "application/json",
           "content-length": "21",
-          "date": "Sat, 17 Oct 2026 08:14:33 GMT"
+          "date": "Sat, 17 Oct 2026 08:53:13 GMT"
         },
         "body": "{\"error\":\"not found\"}"
       },
@@ -37,7 +37,7 @@
       ],
       "meta": {
         "generation": {
-          "time": 9.457988198846579e-06,
+          "time": 9.207986295223236e-06,
           "mode": "negative"
         },
         "components": {

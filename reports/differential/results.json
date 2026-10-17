@@ -52,17 +52,49 @@
         }
       }
     },
+    "evomaster": {
+      "available": true,
+      "authz_found": [],
+      "recall": 0.0,
+      "note": "black-box (white-box cannot instrument a Rust target): finds robustness/protocol faults (XSS, HTTP violations), no authz check",
+      "per_mode": {
+        "bola-read": {
+          "categories": {
+            "Fault301": 1,
+            "Fault109": 1
+          },
+          "failures_seen": 2,
+          "authz_detection": false
+        },
+        "bola-write": {
+          "categories": {
+            "Fault109": 1
+          },
+          "failures_seen": 1,
+          "authz_detection": false
+        },
+        "missing-auth": {
+          "categories": {
+            "Fault109": 1
+          },
+          "failures_seen": 1,
+          "authz_detection": false
+        },
+        "shared-write": {
+          "categories": {
+            "Fault301": 1,
+            "Fault109": 1
+          },
+          "failures_seen": 2,
+          "authz_detection": false
+        }
+      }
+    },
     "restler": {
       "available": false,
       "authz_found": [],
       "recall": 0.0,
-      "note": "RESTler needs a .NET 6 toolchain + compiled grammar; not provisioned (and has no authz/BOLA check)"
-    },
-    "evomaster": {
-      "available": false,
-      "authz_found": [],
-      "recall": 0.0,
-      "note": "EvoMaster needs a white-box driver / jar + instrumented target; not provisioned"
+      "note": "RESTler needs Docker (daemon not running here) or a .NET toolchain (absent); and has no authz/BOLA check"
     },
     "burp_autorize": {
       "available": false,
