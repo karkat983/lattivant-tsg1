@@ -1,0 +1,9 @@
+{
+  "manifest": "AZ-047",
+  "expected_rule": "BOLA",
+  "label": "benign",
+  "tenant_id": "t_lab_01",
+  "negative_controls": ["hardened twin must yield zero verified findings"],
+  "fp_weight": 1.0,
+  "fn_weight": 2.0
+}

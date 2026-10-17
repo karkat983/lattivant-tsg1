@@ -1,0 +1,7 @@
+{
+  "manifest": "AZ-006",
+  "expected_rule": "BOLA",
+  "label": "benign",
+  "tenant_id": "t_lab_01",
+  "negative_controls": ["a plain 404 must not be scored as a leak"]
+}

@@ -1,0 +1,10 @@
+{
+  "manifest": "AZ-002",
+  "expected_rule": "BOLA",
+  "label": "achieved",
+  "tenant_id": "t_lab_01",
+  "supporting_event_ids": ["<ulid-cross-tenant-read>"],
+  "negative_controls": ["same-tenant read must not fire"],
+  "fp_weight": 1.0,
+  "fn_weight": 2.0
+}
