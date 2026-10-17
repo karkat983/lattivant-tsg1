@@ -35,13 +35,6 @@ RV_UNAVAILABLE: dict[str, str] = {
               "black-box): 0/4 planted authz flaws — generic fuzzer finds XSS / "
               "HTTP-violation faults, no authz check; see reports/differential",
     "RV-010": "requires external baseline Burp Autorize (not installed; offline)",
-    "RV-018": "requires a >=20-seed multi-trial experiment over built detectors; "
-              "the detector stack (R1-R4 / EvidenceGraph) is not built",
-    "RV-020": "the lab distinguishes attempted/achieved labels, but RV-020 as "
-              "specified needs a >=20-seed statistical comparison over detector "
-              "outputs (statistical oracle; not a conformance-test result)",
-    "RV-021": "requires LM-edge detector outputs to measure dedup inflation "
-              "(EastWest LM scoring not wired to a labeled set)",
     "RV-022": "requires dual-policy labeled corpus over detector outputs",
 }
 

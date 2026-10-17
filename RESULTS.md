@@ -9,11 +9,11 @@ output: [`reports/full/results.json`](reports/full/results.json); rendered:
 | Metric | Value |
 |--------|-------|
 | Catalog scenarios | **326** |
-| Actually **measured** (PASS/FAIL on real evidence) | **79** |
-| **PASS** | **79** |
+| Actually **measured** (PASS/FAIL on real evidence) | **82** |
+| **PASS** | **82** |
 | **FAIL** | **0** |
 | SKIPPED (component genuinely not built) | 6 |
-| NOT_RUN (no adapter / needs external harness) | 241 |
+| NOT_RUN (no adapter / needs external harness) | 238 |
 | ERROR | 0 |
 | **S0 isolation/safety release gate** | **CLEAN** (0 S0 failures) |
 
@@ -41,6 +41,24 @@ post-checker + tenant isolation + 3-tool allowlist (Investigator) — so their
 scenarios are measured here, not skipped. Only genuinely-absent pieces remain
 SKIPPED: long-horizon memory poisoning (AT-007/030/031, GC-008), the gRPC
 adapter (AZ-011) and the WebSocket adapter (AZ-012).
+
+## Statistical experiments (RV-018 / RV-020 / RV-021)
+
+`python3 lab/stat_experiments.py` runs a real **40-seed** experiment — each
+trial is a live `authz` scan of a randomly configured target — and the harness
+statistical oracle (Mann-Whitney U, ≥20 seeds, Wilson 95% CIs) scores three
+comparisons. Report: [`reports/stat/report.md`](reports/stat/report.md).
+
+| Scenario | Comparison | mean A vs B | p (2-sided) | Significant |
+|----------|-----------|-------------|-------------|-------------|
+| RV-018 | scanner correctness vs status-only baseline | 1.00 vs 0.68 | 9.3e-05 | yes ✅ |
+| RV-020 | corrected vs naive (attempted=achieved) labeling | 1.00 vs 0.70 | 0.00020 | yes ✅ |
+| RV-021 | deduped vs raw (×reproductions) finding count | 0.85 vs 2.65 | 0.0245 | yes ✅ |
+
+All three pass the ≥20-seed statistical gate on real scan data: the scanner
+catches write-only BOLA a read-based baseline misses; naive labeling that counts
+an attempted-but-scope-blocked attack as a required detection lowers measured
+accuracy; and counting each reproduction instead of deduping inflates the metric.
 
 ## Integrated live lab (end-to-end, not unit tests)
 

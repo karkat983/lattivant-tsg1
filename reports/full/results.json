@@ -1,15 +1,15 @@
 {
   "summary": {
-    "generated_utc": "2026-10-17T09:36:12.545048+00:00",
+    "generated_utc": "2026-10-17T09:56:57.495036+00:00",
     "total_scenarios": 326,
     "results_count": 326,
     "outcome_counts": {
-      "pass": 79,
-      "not_run": 241,
+      "pass": 82,
+      "not_run": 238,
       "skipped": 6
     },
-    "measured": 79,
-    "pass": 79,
+    "measured": 82,
+    "pass": 82,
     "fail": 0,
     "pass_rate_of_measured": 1.0,
     "s0_failures": [],
@@ -22,7 +22,7 @@
       "investigator": 13,
       "lattivant-platform": 14,
       "scale-chaos": 1,
-      "research-validity": 5
+      "research-validity": 8
     },
     "catalog_by_build": {
       "built": 142,
@@ -1044,7 +1044,7 @@
       "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/agenttrace.log  ::  tests=cross_tenant_claim_is_detected,cross_tenant_read_with_body_and_trace_link_is_verified,cross_tenant_write_with_confirmed_state_change_is_verified",
       "exit_status": 0,
       "replay_ref": "sha256:76e2ad996271e7b761e00f4a1c2e1d0255e273a7e0d14417cf9910c0a7f22a4d",
-      "duration_s": 0.0
+      "duration_s": 0.0022
     },
     {
       "id": "AT-013",
@@ -1362,7 +1362,7 @@
       "command": "(parsed captured log) /private/tmp/claude-501/-Users-karthikkt-Documents-SOP-Projects-Lattivant/c5c3207e-20e1-4753-8b65-b07fbf1bed94/scratchpad/comptests/agenttrace.log  ::  tests=admin_access_is_not_a_violation,approved_change_does_not_realert",
       "exit_status": 0,
       "replay_ref": "sha256:a32fa28ee29a0b77f97ab8ce138179ae9c3f4d6f32bb89f0410381f8be12e4c2",
-      "duration_s": 0.0025
+      "duration_s": 0.0
     },
     {
       "id": "AT-035",
@@ -4560,16 +4560,33 @@
     },
     {
       "id": "RV-018",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "requires a >=20-seed multi-trial experiment over built detectors; the detector stack (R1-R4 / EvidenceGraph) is not built",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
+      "reason": "significant difference (p=9.3e-05, effect=-0.325)",
+      "metrics": {
+        "p_two_sided": 9.3e-05,
+        "effect_size": -0.325,
+        "seeds": 40,
+        "arm_a_mean": 1.0,
+        "arm_b_mean": 0.675
+      },
+      "evidence": {
+        "mann_whitney": {
+          "u": 540.0,
+          "n1": 40,
+          "n2": 40,
+          "z": -3.9076,
+          "p_two_sided": 9.3e-05,
+          "effect_size_rank_biserial": -0.325,
+          "note": ""
+        },
+        "stdout_tail": "stat gate: scanner vs status-only baseline correctness | n=40 per arm"
+      },
+      "command": "python3 lab/stat_experiments.py  (reports/stat/results.json)",
       "exit_status": null,
-      "replay_ref": "",
-      "duration_s": 0.0
+      "replay_ref": "sha256:1f1418f72faf3bb3da93fbf88ab2055b96155423cb189fb584244c4fb5b2ae70",
+      "duration_s": 0.0255
     },
     {
       "id": "RV-019",
@@ -4604,29 +4621,63 @@
     },
     {
       "id": "RV-020",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "the lab distinguishes attempted/achieved labels, but RV-020 as specified needs a >=20-seed statistical comparison over detector outputs (statistical oracle; not a conformance-test result)",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
+      "reason": "significant difference (p=0.000195, effect=-0.3)",
+      "metrics": {
+        "p_two_sided": 0.000195,
+        "effect_size": -0.3,
+        "seeds": 40,
+        "arm_a_mean": 1.0,
+        "arm_b_mean": 0.7
+      },
+      "evidence": {
+        "mann_whitney": {
+          "u": 560.0,
+          "n1": 40,
+          "n2": 40,
+          "z": -3.726,
+          "p_two_sided": 0.000195,
+          "effect_size_rank_biserial": -0.3,
+          "note": ""
+        },
+        "stdout_tail": "label-error: corrected vs naive labeling accuracy | n=40 per arm"
+      },
+      "command": "python3 lab/stat_experiments.py  (reports/stat/results.json)",
       "exit_status": null,
-      "replay_ref": "",
-      "duration_s": 0.0
+      "replay_ref": "sha256:656c82e92fe5ee7473534231bc6f7d9bce87087144730b39be8b7f0c915b35f8",
+      "duration_s": 0.0001
     },
     {
       "id": "RV-021",
-      "outcome": "not_run",
+      "outcome": "pass",
       "severity": "S1",
       "oracle": "statistical",
-      "reason": "requires LM-edge detector outputs to measure dedup inflation (EastWest LM scoring not wired to a labeled set)",
-      "metrics": {},
-      "evidence": {},
-      "command": "",
+      "reason": "significant difference (p=0.024517, effect=0.2756)",
+      "metrics": {
+        "p_two_sided": 0.024517,
+        "effect_size": 0.2756,
+        "seeds": 40,
+        "arm_a_mean": 0.85,
+        "arm_b_mean": 2.65
+      },
+      "evidence": {
+        "mann_whitney": {
+          "u": 579.5,
+          "n1": 40,
+          "n2": 40,
+          "z": -2.2489,
+          "p_two_sided": 0.024517,
+          "effect_size_rank_biserial": 0.2756,
+          "note": ""
+        },
+        "stdout_tail": "eval-inflation: deduped vs raw finding count | n=40 per arm"
+      },
+      "command": "python3 lab/stat_experiments.py  (reports/stat/results.json)",
       "exit_status": null,
-      "replay_ref": "",
-      "duration_s": 0.0
+      "replay_ref": "sha256:ce5a00b6db57e5385019c2e1a04c41cc267c96a7cbe8be0622abaeb586d915be",
+      "duration_s": 0.0001
     },
     {
       "id": "RV-022",

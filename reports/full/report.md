@@ -1,18 +1,18 @@
 # TSG-1 Run Report (selected scenarios)
 
-_Generated 2026-10-17T09:36:12.552656+00:00_
+_Generated 2026-10-17T09:56:57.502812+00:00_
 
 ## Honesty header
 
 - Catalog scenarios: **326** (built/partial/spec = 142/11/173)
-- Scenarios actually **measured** (PASS or FAIL on real evidence): **79**
-- PASS **79** / FAIL **0** (pass-rate of measured: 1.0)
-- SKIPPED (spec-blocked) 6 · NOT_RUN (no adapter) 241 · ERROR 0
+- Scenarios actually **measured** (PASS or FAIL on real evidence): **82**
+- PASS **82** / FAIL **0** (pass-rate of measured: 1.0)
+- SKIPPED (spec-blocked) 6 · NOT_RUN (no adapter) 238 · ERROR 0
 - S0 isolation/safety release gate: **CLEAN ✅**
 
 > A green suite means 'survived everything we actually ran', never 'secure' or 'all 326 scenarios executed'. Per TSG-1, no fixed corpus certifies robustness.
 
-## Measured results (79)
+## Measured results (82)
 
 | ID | Sev | Oracle | Outcome | Metrics | Reason |
 |----|-----|--------|---------|---------|--------|
@@ -91,7 +91,10 @@ _Generated 2026-10-17T09:36:12.552656+00:00_
 | PL-040 | S1 | invariant | ✅ pass | invariant_violations=0; component=lattivant-platform; backing_tests_total=2; backing_tests_passed=2 | invariant held |
 | RV-005 | S2 | metamorphic | ✅ pass | verdict_changes=0; component=authz-fuzzer; backing_tests_total=1; backing_tests_passed=1 | verdict invariant across all transforms |
 | RV-006 | S1 | metamorphic | ✅ pass | verdict_changes=0; component=authz-fuzzer; backing_tests_total=1; backing_tests_passed=1 | verdict invariant across all transforms |
+| RV-018 | S1 | statistical | ✅ pass | p_two_sided=9.3e-05; effect_size=-0.325; seeds=40; arm_a_mean=1.0; arm_b_mean=0.675 | significant difference (p=9.3e-05, effect=-0.325) |
 | RV-019 | S2 | metamorphic | ✅ pass | verdict_changes=0; component=authz-fuzzer; backing_tests_total=2; backing_tests_passed=2 | verdict invariant across all transforms |
+| RV-020 | S1 | statistical | ✅ pass | p_two_sided=0.000195; effect_size=-0.3; seeds=40; arm_a_mean=1.0; arm_b_mean=0.7 | significant difference (p=0.000195, effect=-0.3) |
+| RV-021 | S1 | statistical | ✅ pass | p_two_sided=0.024517; effect_size=0.2756; seeds=40; arm_a_mean=0.85; arm_b_mean=2.65 | significant difference (p=0.024517, effect=0.2756) |
 | RV-024 | S1 | metamorphic | ✅ pass | verdict_changes=0; component=lattivant-lab; backing_tests_total=1; backing_tests_passed=1 | verdict invariant across all transforms |
 | RV-025 | S1 | metamorphic | ✅ pass | verdict_changes=0; component=authz-fuzzer; backing_tests_total=2; backing_tests_passed=2 | verdict invariant across all transforms |
 | SC-029 | S1 | invariant | ✅ pass | invariant_violations=0; component=lattivant-platform; backing_tests_total=1; backing_tests_passed=1 | invariant held |
@@ -103,7 +106,7 @@ Top blocking capabilities:
 - `grpc_adapter` blocks 1 scenario(s)
 - `ws_adapter` blocks 1 scenario(s)
 
-## Not run — honest reasons (241)
+## Not run — honest reasons (238)
 
 | ID | Sev | Reason |
 |----|-----|--------|
@@ -314,9 +317,6 @@ Top blocking capabilities:
 | RV-015 | S1 | runnable but no adapter wired yet |
 | RV-016 | S1 | runnable but no adapter wired yet |
 | RV-017 | S1 | runnable but no adapter wired yet |
-| RV-018 | S1 | requires a >=20-seed multi-trial experiment over built detectors; the detector stack (R1-R4 / EvidenceGraph) is not built |
-| RV-020 | S1 | the lab distinguishes attempted/achieved labels, but RV-020 as specified needs a >=20-seed statistical comparison over detector outputs (statistical oracle; not a conformance-test result) |
-| RV-021 | S1 | requires LM-edge detector outputs to measure dedup inflation (EastWest LM scoring not wired to a labeled set) |
 | RV-022 | S1 | requires dual-policy labeled corpus over detector outputs |
 | RV-023 | S1 | runnable but no adapter wired yet |
 | SC-001 | S2 | requires running ingest stack + load generator to measure >=2000 events/sec (docker-compose not provisioned offline) |

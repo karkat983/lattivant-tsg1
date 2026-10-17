@@ -134,7 +134,7 @@ def _wait_ready(base_url: str, timeout_s: float = 5.0) -> dict:
 
 
 def _write_manifest(workdir: str, base_url: str, mutation: str,
-                    resources: list[dict]) -> str:
+                    resources: list[dict], read_repeats: int = 2) -> str:
     manifest = {
         "target": {"name": "orders", "base_url": base_url},
         "spec": "openapi.json",
@@ -143,7 +143,7 @@ def _write_manifest(workdir: str, base_url: str, mutation: str,
         "permitted_methods": ["PATCH", "DELETE"],
         "limits": {"max_requests": 1000, "time_budget_secs": 60,
                    "max_concurrency": 2, "rate_limit_rps": 1000},
-        "reproductions": {"read_repeats": 2, "required": 2},
+        "reproductions": {"read_repeats": read_repeats, "required": 2},
         "request_timeout_ms": 5000,
         "identities": [
             {"id": "alpha-admin", "tenant": "alpha", "role": "admin",
