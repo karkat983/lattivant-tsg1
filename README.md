@@ -11,6 +11,12 @@ the Lattivant detection platform actually is today.
 
 Dependency-free: pure Python stdlib (3.12+), offline, deterministic.
 
+> The harness runs each component's `cargo test` as evidence, so it expects the
+> Lattivant component repos (`authz-fuzzer`, `agenttrace`, `eastwest`,
+> `evidence-graph`, `investigator`, `lattivant-platform`, `lattivant-lab`) as
+> sibling directories next to `test-suite/`. The committed `reports/` capture a
+> full run so results are readable without re-running.
+
 ## Layout
 
 ```
