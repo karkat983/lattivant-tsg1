@@ -39,7 +39,8 @@ cd test-suite
 python3 -m tsg1 list --run-first                 # the TSG-1 Section H run-first 40
 python3 -m tsg1 run  --run-first --out runs/x    # run them, write a report
 python3 -m tsg1 run  --all       --out reports/full
-python3 -m unittest discover -s tests            # harness self-tests (14)
+python3 lab/live_lab.py                          # integrated live lab (end-to-end scans)
+python3 -m unittest discover -s tests            # harness self-tests (22)
 python3 catalog/build_catalog.py                 # regenerate the registry
 ```
 

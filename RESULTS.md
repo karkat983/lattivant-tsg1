@@ -22,7 +22,30 @@ Evidence source for every PASS: the Rust scanner's own `cargo test` suite
 `authz-fuzzer/scanner`). Each scenario cites the named conformance tests that
 back it.
 
-## What was measured (all 22 passed)
+## Integrated live lab (end-to-end, not unit tests)
+
+`python3 lab/live_lab.py` runs the `authz-target` reference API over a real
+socket in each vulnerability mode, scans it with the built Rust `authz` binary,
+and scores the live SARIF/JSON findings against per-mode ground truth with the
+TSG-1 oracles. Report: [`reports/live-lab/report.md`](reports/live-lab/report.md).
+
+**5/5 modes scored as expected:**
+
+| Mode | Server | Scope | Verified findings | Violation | Result |
+|------|--------|-------|-------------------|-----------|--------|
+| none (hardened) | none | test_owned_only | 0 | — | ✅ zero findings (FP budget) |
+| bola-read | bola-read | read_only | 1 read | `cross_tenant_access` | ✅ caught |
+| bola-write | bola-write | test_owned_only | 2 write | `cross_tenant_access` | ✅ caught |
+| missing-auth | missing-auth | read_only | 2 read | `missing_authentication` (+`cross_tenant_access`) | ✅ caught |
+| read-only scope vs write-vuln | bola-write | read_only | 0 | — | ✅ scope emitted no write |
+
+This upgrades **AZ-002** (cross-tenant BOLA), **AZ-047** (hardened twin → zero
+findings), **AZ-003** (missing-auth), and **AZ-030** (scope safety) from
+conformance-test-backed to **live end-to-end** evidence. The seeded order is
+shared with no tenant, so the `shared-write` vuln is not exercised (omitted, not
+faked).
+
+## What was measured (conformance-test-backed; all 22 passed)
 
 All measured scenarios are on the one substantially-built detection component,
 the **AuthZ-Fuzzer** (plus two platform controls it implements and four

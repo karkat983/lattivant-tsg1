@@ -1,0 +1,65 @@
+{
+  "total": 2,
+  "by_severity": {
+    "critical": 0,
+    "high": 2,
+    "medium": 0,
+    "low": 0,
+    "info": 0
+  },
+  "by_confidence": {
+    "verified": 2,
+    "probable": 0,
+    "speculative": 0
+  },
+  "by_violation": {
+    "cross_tenant_access": 1,
+    "missing_authentication": 1
+  },
+  "findings": [
+    {
+      "id": "fnd-7876ff085c4bab48",
+      "tenant": "alpha",
+      "operation": {
+        "method": "GET",
+        "normalized_path": "/orders/{}",
+        "spec_version": "1.0.0"
+      },
+      "resource_class": "order",
+      "violation": "missing_authentication",
+      "relation": "unauthenticated",
+      "is_write": false,
+      "confidence": "verified",
+      "severity": "high",
+      "oracle": "read_oracle",
+      "summary": "violation observed in 2/2 replays (required 2 for verified)",
+      "replay_count": 2,
+      "evidence": [
+        "evidence://sha256/4f4a887a2f0523ec42b4b94d46296238a3ef4f0d406a19ccc8f9ae476c49c4f8",
+        "evidence://sha256/914300cc463ca0f923a9aef203a9fbed99d60c32fdeb7019b43289d05268b643"
+      ]
+    },
+    {
+      "id": "fnd-bb608e5dda841787",
+      "tenant": "alpha",
+      "operation": {
+        "method": "GET",
+        "normalized_path": "/orders/{}",
+        "spec_version": "1.0.0"
+      },
+      "resource_class": "order",
+      "violation": "cross_tenant_access",
+      "relation": "cross_tenant",
+      "is_write": false,
+      "confidence": "verified",
+      "severity": "high",
+      "oracle": "read_oracle",
+      "summary": "violation observed in 2/2 replays (required 2 for verified)",
+      "replay_count": 2,
+      "evidence": [
+        "evidence://sha256/8c532ca237d7d732294e4857bd29336d8edc1b0a2406f94faa2ae45f3034a963",
+        "evidence://sha256/914300cc463ca0f923a9aef203a9fbed99d60c32fdeb7019b43289d05268b643"
+      ]
+    }
+  ]
+}

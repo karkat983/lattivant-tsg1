@@ -1,0 +1,114 @@
+[
+  {
+    "mode": "none",
+    "server_vuln": "none",
+    "mutation": "test_owned_only",
+    "scenario": "AZ-047",
+    "oracle": "manifest",
+    "expect": "zero verified findings",
+    "passed": true,
+    "reason": "correctly silent on benign case",
+    "metrics": {
+      "findings_total": 0,
+      "verified": 0,
+      "verified_reads": 0,
+      "verified_writes": 0,
+      "violations": []
+    },
+    "gate_exit": 0,
+    "command": "authz scan --manifest manifest.json --sarif out.sarif --json out.json",
+    "stdout_tail": "no findings\nwrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/none/out.sarif\nwrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/none/out.json\ngate: pass (0 of 0 finding(s) above threshold)",
+    "replay_ref": "sha256:42d2ca4af0d4c31ef81eae64646525d9e6baa3430b5f6075af08ab53c30dece8"
+  },
+  {
+    "mode": "bola-read",
+    "server_vuln": "bola-read",
+    "mutation": "read_only",
+    "scenario": "AZ-002",
+    "oracle": "isolation",
+    "expect": "verified cross-tenant read leak",
+    "passed": true,
+    "reason": "no cross-tenant disclosure",
+    "metrics": {
+      "findings_total": 1,
+      "verified": 1,
+      "verified_reads": 1,
+      "verified_writes": 0,
+      "violations": [
+        "cross_tenant_access"
+      ]
+    },
+    "gate_exit": 2,
+    "command": "authz scan --manifest manifest.json --sarif out.sarif --json out.json",
+    "stdout_tail": "); 1 verified\n  [High/Verified] GET /orders/{} \u2014 violation observed in 2/2 replays (required 2 for verified)\nwrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/bola-read/out.sarif\nwrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/bola-read/out.json\ngate: FAIL (1 of 1 finding(s) above threshold)",
+    "replay_ref": "sha256:ed808e753d76dcaa39510ba1701ba62860c427b8c23e1e0c152f12aa21614f9c"
+  },
+  {
+    "mode": "bola-write",
+    "server_vuln": "bola-write",
+    "mutation": "test_owned_only",
+    "scenario": "AZ-002",
+    "oracle": "isolation",
+    "expect": "verified cross-tenant write",
+    "passed": true,
+    "reason": "no cross-tenant disclosure",
+    "metrics": {
+      "findings_total": 2,
+      "verified": 2,
+      "verified_reads": 0,
+      "verified_writes": 2,
+      "violations": [
+        "cross_tenant_access"
+      ]
+    },
+    "gate_exit": 2,
+    "command": "authz scan --manifest manifest.json --sarif out.sarif --json out.json",
+    "stdout_tail": "isible state changed after a write that policy forbids\nnotes:\n  - owner reference not readable for order-1\nwrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/bola-write/out.sarif\nwrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/bola-write/out.json\ngate: FAIL (2 of 2 finding(s) above threshold)",
+    "replay_ref": "sha256:b9764378d3ff38adb35bdb89858ab636965e80add67b9a6cf9a6878d4ee11ec1"
+  },
+  {
+    "mode": "missing-auth",
+    "server_vuln": "missing-auth",
+    "mutation": "read_only",
+    "scenario": "AZ-003",
+    "oracle": "manifest",
+    "expect": "verified missing-authentication read",
+    "passed": true,
+    "reason": "correct finding with correct label",
+    "metrics": {
+      "findings_total": 2,
+      "verified": 2,
+      "verified_reads": 2,
+      "verified_writes": 0,
+      "violations": [
+        "cross_tenant_access",
+        "missing_authentication"
+      ]
+    },
+    "gate_exit": 2,
+    "command": "authz scan --manifest manifest.json --sarif out.sarif --json out.json",
+    "stdout_tail": "rified)\n  [High/Verified] GET /orders/{} \u2014 violation observed in 2/2 replays (required 2 for verified)\nwrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/missing-auth/out.sarif\nwrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/missing-auth/out.json\ngate: FAIL (2 of 2 finding(s) above threshold)",
+    "replay_ref": "sha256:8fe190b43723b2434a4e49eeb446eec85c4d2b4e2cefd8d2ddc8c970b306538b"
+  },
+  {
+    "mode": "readonly-scope-vs-write-vuln",
+    "server_vuln": "bola-write",
+    "mutation": "read_only",
+    "scenario": "AZ-030",
+    "oracle": "invariant",
+    "expect": "read-only scope emits NO write finding",
+    "passed": true,
+    "reason": "invariant held",
+    "metrics": {
+      "findings_total": 0,
+      "verified": 0,
+      "verified_reads": 0,
+      "verified_writes": 0,
+      "violations": []
+    },
+    "gate_exit": 0,
+    "command": "authz scan --manifest manifest.json --sarif out.sarif --json out.json",
+    "stdout_tail": "no findings\nwrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/readonly-scope-vs-write-vuln/out.sarif\nwrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/lab/../reports/live-lab/readonly-scope-vs-write-vuln/out.json\ngate: pass (0 of 0 finding(s) above threshold)",
+    "replay_ref": "sha256:42d2ca4af0d4c31ef81eae64646525d9e6baa3430b5f6075af08ab53c30dece8"
+  }
+]
