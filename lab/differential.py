@@ -167,7 +167,13 @@ def _restler_env() -> tuple[str, dict] | None:
     if not os.path.exists(os.path.join(dotnet_dir, "dotnet")):
         return None
     shim = tempfile.mkdtemp(prefix="tsg1-pyshim-")
-    py3 = shutil.which("python3") or sys.executable
+    # RESTler's engine is incompatible with very new CPython (3.14 crashes in
+    # fuzz mode); prefer a 3.12 if present. $TSG1_PYTHON overrides.
+    py3 = (os.environ.get("TSG1_PYTHON")
+           or ("/opt/homebrew/opt/python@3.12/bin/python3.12"
+               if os.path.exists("/opt/homebrew/opt/python@3.12/bin/python3.12")
+               else None)
+           or shutil.which("python3") or sys.executable)
     link = os.path.join(shim, "python")
     try:
         os.symlink(py3, link)
@@ -208,21 +214,36 @@ def _run_restler(dll: str, env: dict) -> dict:
             subprocess.run(["dotnet", dll, "compile", "--api_spec", "openapi.json"],
                            cwd=work, env=env, capture_output=True, text=True,
                            timeout=180)
-            subprocess.run(["dotnet", dll, "test",
+            # seed the fuzzing dictionary with real resource ids so the {id}
+            # path parameter hits live orders (a seeded resource dictionary)
+            dict_path = os.path.join(work, "Compile", "dict.json")
+            seeded = os.path.join(work, "Compile", "dict_seeded.json")
+            if os.path.exists(dict_path):
+                dd = json.load(open(dict_path))
+                dd["restler_fuzzable_string"] = ["order-1", "order-shared",
+                                                 "order-public", "fuzzstring"]
+                json.dump(dd, open(seeded, "w"))
+            else:
+                seeded = dict_path
+            # deeper run: fuzz mode with a small time budget
+            subprocess.run(["dotnet", dll, "fuzz",
                             "--grammar_file", "Compile/grammar.py",
-                            "--dictionary_file", "Compile/dict.json",
+                            "--dictionary_file", seeded,
                             "--target_ip", "127.0.0.1", "--target_port", port,
-                            "--no_ssl", "--token_refresh_interval", "300",
+                            "--no_ssl", "--time_budget", "0.01",
+                            "--token_refresh_interval", "300",
                             "--token_refresh_command", f"sh {tok}"],
                            cwd=work, env=env, capture_output=True, text=True,
-                           timeout=240)
+                           timeout=300)
             summaries = glob.glob(os.path.join(work, "**", "testing_summary.json"),
                                   recursive=True)
-            buckets, coverage = {}, "unknown"
+            buckets, coverage, sent = {}, "unknown", 0
             if summaries:
-                s = json.load(open(summaries[0]))
+                s = json.load(open(sorted(summaries)[-1]))
                 buckets = s.get("bug_buckets", {}) or {}
                 coverage = s.get("rendered_requests_valid_status", "unknown")
+                trs = s.get("total_requests_sent", {}) or {}
+                sent = sum(v for v in trs.values() if isinstance(v, int))
         finally:
             proc.terminate()
             try:
@@ -236,6 +257,7 @@ def _run_restler(dll: str, env: dict) -> dict:
         per_mode[mode] = {"categories": {k: 1 for k in buckets},
                           "failures_seen": len(buckets),
                           "authz_detection": authz_hit,
+                          "requests_sent": sent,
                           "valid_status_coverage": coverage}
     return {"authz_found": found, "per_mode": per_mode}
 
@@ -279,8 +301,10 @@ def run(out_dir: str) -> dict:
         baselines["restler"] = {
             "available": True, "authz_found": sorted(res["authz_found"]),
             "per_mode": res["per_mode"],
-            "note": "stateful REST fuzzer (.NET 8 build): found 0 bugs, no authz "
-                    "check; coverage caveat noted per-mode"}
+            "note": "stateful REST fuzzer (.NET 8), fuzz mode + seeded resource "
+                    "dictionary: sends many requests/mode, 0 bugs, no authz "
+                    "check (RESTler's rendered-coverage counter is unreliable "
+                    "here due to an engine issue; requests-sent shown instead)"}
     else:
         baselines["restler"] = {
             "available": False, "authz_found": [],
@@ -342,14 +366,18 @@ def _write_md(rep: dict, out_dir: str) -> None:
         pm_all = b.get("per_mode")
         if not pm_all:
             continue
+        has_sent = any("requests_sent" in pm for pm in pm_all.values())
         lines.append(f"### {name} per-mode (what it *did* find)")
         lines.append("")
-        lines.append("| Mode | Non-authz failures | Categories | Authz detection |")
-        lines.append("|------|--------------------|------------|-----------------|")
+        extra = " Requests sent |" if has_sent else ""
+        extrasep = "--------------|" if has_sent else ""
+        lines.append(f"| Mode | Non-authz failures | Categories | Authz detection |{extra}")
+        lines.append(f"|------|--------------------|------------|-----------------|{extrasep}")
         for mode, pm in pm_all.items():
             cats = ", ".join(f"{k.strip()}×{v}" for k, v in pm["categories"].items())
+            tail = f" {pm.get('requests_sent', '—')} |" if has_sent else ""
             lines.append(f"| {mode} | {pm['failures_seen']} | {cats or '—'} | "
-                         f"{'yes' if pm['authz_detection'] else 'no'} |")
+                         f"{'yes' if pm['authz_detection'] else 'no'} |{tail}")
         lines.append("")
     lines.append("_The generic fuzzers flag schema-conformance and robustness "
                  "faults (undocumented status codes, XSS, HTTP violations) but "

@@ -3,19 +3,19 @@
   "method": "POST",
   "path_template": "/orders",
   "fingerprint": "f0ffc963",
-  "case_id": "JYbr5b",
-  "code_sample": "curl -X POST -H 'Content-Type: application/json' -d '{\"note\": \"\"}' http://127.0.0.1:54789/orders",
+  "case_id": "CqvOqO",
+  "code_sample": "curl -X POST -H 'Content-Type: application/json' -d '{\"note\": \"\"}' http://127.0.0.1:56487/orders",
   "sequence": [
     {
       "method": "POST",
-      "url": "http://127.0.0.1:54789/orders",
-      "url_template": "http://127.0.0.1:54789/orders",
+      "url": "http://127.0.0.1:56487/orders",
+      "url_template": "http://127.0.0.1:56487/orders",
       "headers": {
         "User-Agent": "schemathesis/4.31.1",
         "Accept-Encoding": "gzip, deflate, zstd",
         "Accept": "*/*",
         "Connection": "keep-alive",
-        "X-Schemathesis-TestCaseId": "JYbr5b",
+        "X-Schemathesis-TestCaseId": "CqvOqO",
         "Content-Type": "application/json",
         "Content-Length": "12"
       },
@@ -24,7 +24,7 @@
         "headers": {
           "content-type": "application/json",
           "content-length": "24",
-          "date": "Sat, 17 Oct 2026 09:03:22 GMT"
+          "date": "Sat, 17 Oct 2026 09:15:51 GMT"
         },
         "body": "{\"error\":\"unauthorized\"}"
       },
@@ -38,7 +38,7 @@
       ],
       "meta": {
         "generation": {
-          "time": 8.624978363513947e-06,
+          "time": 7.833004929125309e-06,
           "mode": "negative"
         },
         "components": {

@@ -60,7 +60,7 @@ scores recall over the four planted authorization flaws. Report:
 | **authz-fuzzer** (candidate) | ✅ | **4/4 (1.0)** | live end-to-end scans |
 | Schemathesis 4.x | ✅ | 0/4 (0.0) | found 5 schema-conformance failures/mode (undocumented status codes), **no** authz detection |
 | EvoMaster 6.2.0 (black-box) | ✅ | 0/4 (0.0) | found XSS (Fault301) + HTTP-violation (Fault109) faults, **no** authz detection |
-| RESTler (.NET 8 build) | ✅ | 0/4 (0.0) | found 0 bugs; stateful REST fuzzer, **no** authz check (coverage caveat per-mode) |
+| RESTler (.NET 8, fuzz + seeded dict) | ✅ | 0/4 (0.0) | fuzz mode sends 161 requests/mode against the seeded orders; 0 bugs, **no** authz check (RESTler's rendered-coverage counter is unreliable here — requests-sent shown instead) |
 | Burp Autorize | — | — | commercial Burp Suite GUI extension; cannot run headless |
 
 **Differential verdict: PASS** — the authz scanner's recall (4/4) ≥ the union of

@@ -67,9 +67,10 @@
         },
         "bola-write": {
           "categories": {
+            "Fault301": 1,
             "Fault109": 1
           },
-          "failures_seen": 1,
+          "failures_seen": 2,
           "authz_detection": false
         },
         "missing-auth": {
@@ -82,9 +83,10 @@
         },
         "shared-write": {
           "categories": {
+            "Fault301": 1,
             "Fault109": 1
           },
-          "failures_seen": 1,
+          "failures_seen": 2,
           "authz_detection": false
         }
       }
@@ -93,31 +95,35 @@
       "available": true,
       "authz_found": [],
       "recall": 0.0,
-      "note": "stateful REST fuzzer (.NET 8 build): found 0 bugs, no authz check; coverage caveat noted per-mode",
+      "note": "stateful REST fuzzer (.NET 8), fuzz mode + seeded resource dictionary: sends many requests/mode, 0 bugs, no authz check (RESTler's rendered-coverage counter is unreliable here due to an engine issue; requests-sent shown instead)",
       "per_mode": {
         "bola-read": {
           "categories": {},
           "failures_seen": 0,
           "authz_detection": false,
-          "valid_status_coverage": "0 / 4"
+          "requests_sent": 161,
+          "valid_status_coverage": "0 / 0"
         },
         "bola-write": {
           "categories": {},
           "failures_seen": 0,
           "authz_detection": false,
-          "valid_status_coverage": "0 / 4"
+          "requests_sent": 161,
+          "valid_status_coverage": "0 / 0"
         },
         "missing-auth": {
           "categories": {},
           "failures_seen": 0,
           "authz_detection": false,
-          "valid_status_coverage": "0 / 4"
+          "requests_sent": 161,
+          "valid_status_coverage": "0 / 0"
         },
         "shared-write": {
           "categories": {},
           "failures_seen": 0,
           "authz_detection": false,
-          "valid_status_coverage": "0 / 4"
+          "requests_sent": 161,
+          "valid_status_coverage": "0 / 0"
         }
       }
     },
