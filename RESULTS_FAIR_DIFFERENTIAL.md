@@ -131,6 +131,10 @@ findings, it would score 3/4. Both are reported.
   that target; it does not measure performance on real APIs.
 - **Same-author risk.** The scoring rules were fixed before the runs, but one person wrote the
   target, the candidate and the scoring. Independent review is still needed.
+- **Schemathesis cache.** Schemathesis ran from `test-suite/`, where an earlier session had
+  committed a `.schemathesis/` cache holding one cached failure (`GET` `status_code_conformance`,
+  not an authorization check). The scored runs started with that cache present. The cache changes
+  they wrote were reverted afterwards, so the committed cache is unchanged.
 - **Burp Autorize** was not run (commercial GUI). EvoMaster white-box does not apply to a Rust
   binary.
 
