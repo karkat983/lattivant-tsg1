@@ -1,0 +1,119 @@
+{
+  "schemathesis_version": "4.32.0",
+  "command": "st --config-file /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/schemathesis/shared-write/schemathesis.toml run http://127.0.0.1:56459/openapi.json --url http://127.0.0.1:56459 --checks all --max-examples 50 --seed 42 --report json,ndjson --report-dir /var/folders/ds/t1y2kqjn30b0ck6_q75ddh_80000gn/T/st-report-2e2n10c0",
+  "seed": 42,
+  "started_at": "2026-10-18T15:49:49.612231+00:00",
+  "running_time": 1.4773852090002038,
+  "stop_reason": "completed",
+  "complete": true,
+  "exit_code": 1,
+  "operations": {
+    "total": 4,
+    "selected": 4,
+    "tested": 4,
+    "errored": 0,
+    "skipped": 0,
+    "skip_reasons": []
+  },
+  "phases": {
+    "examples": {
+      "status": "skip",
+      "skip_reason": null
+    },
+    "coverage": {
+      "status": "failure",
+      "skip_reason": null
+    },
+    "fuzzing": {
+      "status": "failure",
+      "skip_reason": null
+    },
+    "stateful": {
+      "status": "failure",
+      "skip_reason": null
+    }
+  },
+  "test_cases": {
+    "generated": 452,
+    "with_failures": 3,
+    "unique_failures": 3,
+    "without_checks": 31,
+    "errored": 0
+  },
+  "failures": [
+    {
+      "type": "IgnoredAuth",
+      "code": "ST401",
+      "title": "Unexpected response to a request without authentication",
+      "severity": "critical",
+      "count": 1,
+      "operations": [
+        "DELETE /orders/{id}"
+      ]
+    },
+    {
+      "type": "AcceptedNegativeData",
+      "code": "ST201",
+      "title": "Schema-violating request accepted",
+      "severity": "medium",
+      "count": 2,
+      "operations": [
+        "PATCH /orders/{id}",
+        "POST /orders"
+      ]
+    }
+  ],
+  "errors": [],
+  "baseline": null,
+  "filtered": 0,
+  "warnings": {
+    "missing_auth": [],
+    "base_url_mismatch": [],
+    "missing_test_data": [],
+    "validation_mismatch": [],
+    "missing_deserializer": [],
+    "unused_openapi_auth": [],
+    "unsupported_regex": [],
+    "method_not_allowed": [],
+    "constants_extraction": [],
+    "unmatched_filter": [],
+    "unresolvable_reference": [],
+    "low_valid_rate": [],
+    "rate_limited": [],
+    "dictionary_mismatch": []
+  },
+  "valid_rates": {
+    "GET /orders/{id}": {
+      "coverage": {
+        "accepted": 1,
+        "unreachable": 0,
+        "conflicts": 0,
+        "rejected": 0
+      },
+      "fuzzing": {
+        "accepted": 15,
+        "unreachable": 0,
+        "conflicts": 0,
+        "rejected": 0
+      }
+    },
+    "DELETE /orders/{id}": {
+      "coverage": {
+        "accepted": 1,
+        "unreachable": 1,
+        "conflicts": 0,
+        "rejected": 0
+      },
+      "fuzzing": {
+        "accepted": 1,
+        "unreachable": 1,
+        "conflicts": 0,
+        "rejected": 0
+      }
+    }
+  },
+  "auth": {
+    "reauth_count": 0,
+    "reauth_broke": false
+  }
+}

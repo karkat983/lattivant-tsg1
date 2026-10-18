@@ -1,0 +1,20 @@
+[
+  {
+    "category": "missing_authentication",
+    "cls": "unauth",
+    "operation": "GET /orders/{id}",
+    "title": "violation observed in 2/2 replays (required 2 for verified)",
+    "confidence": "verified",
+    "is_write": false,
+    "source": "fnd-7876ff085c4bab48"
+  },
+  {
+    "category": "cross_tenant_access",
+    "cls": "cross",
+    "operation": "GET /orders/{id}",
+    "title": "violation observed in 2/2 replays (required 2 for verified)",
+    "confidence": "verified",
+    "is_write": false,
+    "source": "fnd-bb608e5dda841787"
+  }
+]

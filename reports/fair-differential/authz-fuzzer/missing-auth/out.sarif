@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "level": "error",
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "GET /orders/{}",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "message": {
+            "text": "violation observed in 2/2 replays (required 2 for verified) (relation: Unauthenticated)"
+          },
+          "partialFingerprints": {
+            "authzFindingId/v1": "fnd-7876ff085c4bab48"
+          },
+          "properties": {
+            "confidence": "verified",
+            "evidence": [
+              "evidence://sha256/b2d74996796300d74f5d8e3e949dd0e1860818e042a444818e0b6ce53bc7865a",
+              "evidence://sha256/8cf3c72bf141954c42e8052adedb8177bfc73ec09f2e2d7c4c5ca9c40e971ece"
+            ],
+            "isWrite": false,
+            "oracle": "read_oracle",
+            "replayCount": 2,
+            "severity": "high",
+            "tenant": "alpha"
+          },
+          "rank": 100,
+          "ruleId": "missing_authentication",
+          "ruleIndex": 0
+        },
+        {
+          "level": "error",
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "GET /orders/{}",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "message": {
+            "text": "violation observed in 2/2 replays (required 2 for verified) (relation: CrossTenant)"
+          },
+          "partialFingerprints": {
+            "authzFindingId/v1": "fnd-bb608e5dda841787"
+          },
+          "properties": {
+            "confidence": "verified",
+            "evidence": [
+              "evidence://sha256/d8739a6965aa1615fedaf97a98423be1038631b45517ff0d971176955e96c919",
+              "evidence://sha256/8cf3c72bf141954c42e8052adedb8177bfc73ec09f2e2d7c4c5ca9c40e971ece"
+            ],
+            "isWrite": false,
+            "oracle": "read_oracle",
+            "replayCount": 2,
+            "severity": "high",
+            "tenant": "alpha"
+          },
+          "rank": 100,
+          "ruleId": "cross_tenant_access",
+          "ruleIndex": 1
+        }
+      ],
+      "tool": {
+        "driver": {
+          "informationUri": "https://github.com/karkat983/authz-fuzzer",
+          "name": "authz-fuzzer",
+          "rules": [
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/",
+              "id": "missing_authentication",
+              "name": "MissingAuthentication",
+              "shortDescription": {
+                "text": "A protected resource was reachable without authentication."
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/",
+              "id": "cross_tenant_access",
+              "name": "CrossTenantAccess",
+              "shortDescription": {
+                "text": "A caller accessed another tenant's resource."
+              }
+            }
+          ],
+          "version": "0.1.0"
+        }
+      }
+    }
+  ],
+  "version": "2.1.0"
+}

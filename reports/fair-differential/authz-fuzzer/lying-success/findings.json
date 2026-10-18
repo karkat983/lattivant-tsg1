@@ -1,0 +1,20 @@
+[
+  {
+    "category": "cross_tenant_access",
+    "cls": "cross",
+    "operation": "DELETE /orders/{id}",
+    "title": "write returned 2xx but no owner-visible state change was observed (possibly asynchronous or a no-op); needs follow-up",
+    "confidence": "probable",
+    "is_write": true,
+    "source": "fnd-0ebbbd736b33fe96"
+  },
+  {
+    "category": "cross_tenant_access",
+    "cls": "cross",
+    "operation": "PATCH /orders/{id}",
+    "title": "write returned 2xx but no owner-visible state change was observed (possibly asynchronous or a no-op); needs follow-up",
+    "confidence": "probable",
+    "is_write": true,
+    "source": "fnd-7923472ea4bfbed8"
+  }
+]

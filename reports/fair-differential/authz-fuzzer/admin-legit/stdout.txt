@@ -1,0 +1,6 @@
+no findings
+notes:
+  - owner reference not readable for order-1
+wrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/authz-fuzzer/admin-legit/out.sarif
+wrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/authz-fuzzer/admin-legit/out.json
+gate: pass (0 of 0 finding(s) above threshold)

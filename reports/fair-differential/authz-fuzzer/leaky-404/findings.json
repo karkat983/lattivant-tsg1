@@ -1,0 +1,11 @@
+[
+  {
+    "category": "information_disclosure",
+    "cls": "cross",
+    "operation": "GET /orders/{id}",
+    "title": "violation observed in 2/2 replays (required 2 for verified)",
+    "confidence": "verified",
+    "is_write": false,
+    "source": "fnd-b5a3dd478df9459e"
+  }
+]

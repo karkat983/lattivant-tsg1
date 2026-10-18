@@ -1,0 +1,4 @@
+no findings
+wrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/authz-fuzzer/delegated-read/out.sarif
+wrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/authz-fuzzer/delegated-read/out.json
+gate: pass (0 of 0 finding(s) above threshold)

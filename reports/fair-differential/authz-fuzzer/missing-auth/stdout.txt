@@ -1,0 +1,6 @@
+2 findings (2 high); 2 verified
+  [High/Verified] GET /orders/{} — violation observed in 2/2 replays (required 2 for verified)
+  [High/Verified] GET /orders/{} — violation observed in 2/2 replays (required 2 for verified)
+wrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/authz-fuzzer/missing-auth/out.sarif
+wrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/authz-fuzzer/missing-auth/out.json
+gate: FAIL (2 of 2 finding(s) above threshold)

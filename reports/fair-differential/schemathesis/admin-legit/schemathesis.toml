@@ -1,0 +1,3 @@
+[auth.wfc]
+path = "/Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/auth/wfc_viewer-admin.yaml"
+peers = ["alpha-viewer", "alpha-admin"]

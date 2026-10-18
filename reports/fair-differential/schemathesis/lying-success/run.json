@@ -1,0 +1,20 @@
+{
+  "tool": "schemathesis",
+  "mode": "lying-success",
+  "server": "lying-success",
+  "pair": "alpha-bravo",
+  "status": "OK",
+  "error": "",
+  "command": "~/tools/fair-differential/schemathesis-venv/bin/schemathesis --config-file ~/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/schemathesis/lying-success/schemathesis.toml run http://127.0.0.1:56586/openapi.json --url http://127.0.0.1:56586 --checks all --max-examples 50 --seed 42 --report json,ndjson --report-dir /var/folders/ds/t1y2kqjn30b0ck6_q75ddh_80000gn/T/st-report-duj2v3vu",
+  "finished_at": "2026-10-18T21:19:56",
+  "exit": 1,
+  "version": "4.32.0",
+  "test_cases": {
+    "generated": 502,
+    "with_failures": 3,
+    "unique_failures": 3,
+    "without_checks": 60,
+    "errored": 0
+  },
+  "wall_s": 2.2
+}

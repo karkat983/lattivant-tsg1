@@ -1,0 +1,20 @@
+[
+  {
+    "category": "cross_tenant_access",
+    "cls": "cross",
+    "operation": "DELETE /orders/{id}",
+    "title": "owner-visible state changed after a write that policy forbids",
+    "confidence": "verified",
+    "is_write": true,
+    "source": "fnd-0ebbbd736b33fe96"
+  },
+  {
+    "category": "cross_tenant_access",
+    "cls": "cross",
+    "operation": "PATCH /orders/{id}",
+    "title": "owner-visible state changed after a write that policy forbids",
+    "confidence": "verified",
+    "is_write": true,
+    "source": "fnd-7923472ea4bfbed8"
+  }
+]

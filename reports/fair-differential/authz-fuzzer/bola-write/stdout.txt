@@ -1,0 +1,8 @@
+2 findings (2 critical); 2 verified
+  [Critical/Verified] DELETE /orders/{} — owner-visible state changed after a write that policy forbids
+  [Critical/Verified] PATCH /orders/{} — owner-visible state changed after a write that policy forbids
+notes:
+  - owner reference not readable for order-1
+wrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/authz-fuzzer/bola-write/out.sarif
+wrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/authz-fuzzer/bola-write/out.json
+gate: FAIL (2 of 2 finding(s) above threshold)

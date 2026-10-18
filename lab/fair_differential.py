@@ -240,10 +240,12 @@ def run_schemathesis(mode: str, run_dir: str) -> dict:
                                                 "test_cases": report.get("test_cases")})
 
 
-def run_evomaster(mode: str, run_dir: str) -> dict:
+def run_evomaster(mode: str, run_dir: str, tool: str = "evomaster", extra_phase: str | None = None) -> dict:
+    """extra_phase: None = pre-registered config; "1.0" = sensitivity run (evomaster-sec) giving the
+    post-search SECURITY phase up to 100% of the search budget instead of the default 10%."""
     jar = os.environ.get("TSG1_EVOMASTER", os.path.join(TOOLS_HOME, "evomaster-6.2.0/evomaster.jar"))
     if not os.path.exists(jar):
-        return _record(run_dir, "evomaster", mode, "NOT_RUN", "", [], error=f"not found: {jar}")
+        return _record(run_dir, tool, mode, "NOT_RUN", "", [], error=f"not found: {jar}")
     cfg = os.path.join(run_dir, "em.yaml")
     with open(cfg, "w") as fh:
         with open(os.path.join(AUTH, f"wfc_{MODES[mode]['pair']}.yaml"), encoding="utf-8") as src:
@@ -254,6 +256,8 @@ def run_evomaster(mode: str, run_dir: str) -> dict:
     cmd = ["java", "-jar", jar, "--blackBox", "true", "--schema", base + "/openapi.json", "--base", base,
            "--configPath", cfg, "--maxTime", "120s", "--seed", "42", "--ratePerMinute", "1800",
            "--outputFolder", out, "--outputFormat", "PYTHON_UNITTEST", "--writeWFCReport", "true"]
+    if extra_phase:
+        cmd += ["--extraPhaseBudgetPercentage", extra_phase]
     try:
         live_lab._wait_ready(base)
         res = subprocess.run(cmd, capture_output=True, text=True, timeout=1800)
@@ -269,10 +273,10 @@ def run_evomaster(mode: str, run_dir: str) -> dict:
     rep_path = os.path.join(run_dir, "report.json")
     if res.returncode != 0 or not os.path.exists(rep_path):
         tail = [ln for ln in stdout.splitlines() if "Exception" in ln or "ERROR" in ln][:2]
-        return _record(run_dir, "evomaster", mode, "NOT_RUN", [_redact(c) for c in cmd], [],
+        return _record(run_dir, tool, mode, "NOT_RUN", [_redact(c) for c in cmd], [],
                        error=f"exit {res.returncode}: {' | '.join(tail)[:300]}")
     security = [ln.strip() for ln in stdout.splitlines() if "Phase 'SECURITY'" in ln or "Phase SECURITY" in ln]
-    return _record(run_dir, "evomaster", mode, "OK", [_redact(c) for c in cmd],
+    return _record(run_dir, tool, mode, "OK", [_redact(c) for c in cmd],
                    parse_evomaster(_json(rep_path)), {"exit": res.returncode,
                                                                 "security_phase": security})
 
@@ -415,7 +419,10 @@ def run_scanner(mode: str, run_dir: str) -> dict:
 
 
 RUNNERS = {"restler": run_restler, "evomaster": run_evomaster, "schemathesis": run_schemathesis,
-           "authz-fuzzer": run_scanner}
+           "authz-fuzzer": run_scanner,
+           # sensitivity run, added after the pre-registered EvoMaster runs showed the SECURITY
+           # phase timing out at 12 s in every mode (see RESULTS_FAIR_DIFFERENTIAL.md)
+           "evomaster-sec": lambda mode, d: run_evomaster(mode, d, "evomaster-sec", "1.0")}
 SCANNER_MODES = list(live_lab.MODES) + list(SCANNER_EXTRA)
 
 

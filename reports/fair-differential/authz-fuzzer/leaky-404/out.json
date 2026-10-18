@@ -1,0 +1,42 @@
+{
+  "total": 1,
+  "by_severity": {
+    "critical": 0,
+    "high": 0,
+    "medium": 1,
+    "low": 0,
+    "info": 0
+  },
+  "by_confidence": {
+    "verified": 1,
+    "probable": 0,
+    "speculative": 0
+  },
+  "by_violation": {
+    "information_disclosure": 1
+  },
+  "findings": [
+    {
+      "id": "fnd-b5a3dd478df9459e",
+      "tenant": "alpha",
+      "operation": {
+        "method": "GET",
+        "normalized_path": "/orders/{}",
+        "spec_version": "1.0.0"
+      },
+      "resource_class": "order",
+      "violation": "information_disclosure",
+      "relation": "cross_tenant",
+      "is_write": false,
+      "confidence": "verified",
+      "severity": "medium",
+      "oracle": "read_oracle",
+      "summary": "violation observed in 2/2 replays (required 2 for verified)",
+      "replay_count": 2,
+      "evidence": [
+        "evidence://sha256/340248cd5384e87b455291132e50fcefd9e6a08b682df3c9a19d6d051af7889a",
+        "evidence://sha256/ff3eebaece3a8522433c26881e69ae984caad7a32be50bf7bc4a28168a24902d"
+      ]
+    }
+  ]
+}

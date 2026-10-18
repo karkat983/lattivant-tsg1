@@ -1,0 +1,5 @@
+1 finding (1 high); 1 verified
+  [High/Verified] GET /orders/{} — violation observed in 2/2 replays (required 2 for verified)
+wrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/authz-fuzzer/bola-read/out.sarif
+wrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/authz-fuzzer/bola-read/out.json
+gate: FAIL (1 of 1 finding(s) above threshold)

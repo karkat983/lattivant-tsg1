@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "level": "error",
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DELETE /orders/{}",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "message": {
+            "text": "owner-visible state changed after a write that policy forbids (relation: CrossTenant)"
+          },
+          "partialFingerprints": {
+            "authzFindingId/v1": "fnd-0ebbbd736b33fe96"
+          },
+          "properties": {
+            "confidence": "verified",
+            "evidence": [
+              "evidence://sha256/e435ad98a9ebbbf5861dcaee7da0acab59da26f5323d9f3a463869fda0124493",
+              "evidence://sha256/d7b059df9aa1ba1ff6d8c3f37916e4d9fd1d1d019f51c25221f149181b6e7938"
+            ],
+            "isWrite": true,
+            "oracle": "write_oracle",
+            "replayCount": 1,
+            "severity": "critical",
+            "tenant": "alpha"
+          },
+          "rank": 100,
+          "ruleId": "cross_tenant_access",
+          "ruleIndex": 0
+        },
+        {
+          "level": "error",
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "PATCH /orders/{}",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "message": {
+            "text": "owner-visible state changed after a write that policy forbids (relation: CrossTenant)"
+          },
+          "partialFingerprints": {
+            "authzFindingId/v1": "fnd-7923472ea4bfbed8"
+          },
+          "properties": {
+            "confidence": "verified",
+            "evidence": [
+              "evidence://sha256/a8c990695d5879c1b2c5e1a1fe40fbc02d53e049a6020ac0f84aefe71d337b61",
+              "evidence://sha256/a6f9886a25ec1d53b0eb1579677513271b9b5ee6190ae96293d3c25b17fc0461"
+            ],
+            "isWrite": true,
+            "oracle": "write_oracle",
+            "replayCount": 1,
+            "severity": "critical",
+            "tenant": "alpha"
+          },
+          "rank": 100,
+          "ruleId": "cross_tenant_access",
+          "ruleIndex": 0
+        }
+      ],
+      "tool": {
+        "driver": {
+          "informationUri": "https://github.com/karkat983/authz-fuzzer",
+          "name": "authz-fuzzer",
+          "rules": [
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/",
+              "id": "cross_tenant_access",
+              "name": "CrossTenantAccess",
+              "shortDescription": {
+                "text": "A caller accessed another tenant's resource."
+              }
+            }
+          ],
+          "version": "0.1.0"
+        }
+      }
+    }
+  ],
+  "version": "2.1.0"
+}

@@ -1,0 +1,154 @@
+Schemathesis v4.32.0
+━━━━━━━━━━━━━━━━━━━━
+
+ ✅  Loaded specification from http://127.0.0.1:56342/openapi.json (in 0.14s)
+
+     Base URL:         http://127.0.0.1:56342
+     Specification:    Open API 3.0.3
+     Operations:       4 selected / 4 total
+     Configuration:    /Users/karthikkt/Documents/SOP_Projects/Lattivant/te
+                       st-suite/reports/fair-differential/schemathesis/miss
+                       ing-auth/schemathesis.toml
+
+ ✅  API capabilities:
+
+     Supports NULL byte in headers:                            ✘
+     Accepts backslash and control characters in URL paths:    ✓
+
+ ⏭   Examples (in 0.00s)
+
+     ⏭  4 skipped
+
+ ❌  Coverage (in 0.06s)
+
+     ❌ 4 failed
+
+ ❌  Fuzzing (in 0.04s)
+
+     ❌ 4 failed
+
+ ❌  Stateful (in 2.02s)
+
+     Scenarios:    97
+     API Links:    9 covered / 9 selected / 9 total (9 inferred)
+
+     ✅ 92 passed  ❌ 5 failed
+
+=================================== FAILURES ===================================
+_____________________________ DELETE /orders/{id} ______________________________
+1. Test Case ID: GtINxP
+
+- ST401 Unexpected response to a request without authentication
+
+    Expected 401 or 403, got `404 Not Found` for `DELETE /orders/{id}`
+
+[404] Not Found:
+
+    `{"error":"not found"}`
+
+Reproduce with:
+
+    curl -X DELETE http://127.0.0.1:56342/orders/order-2
+
+    st replay GtINxP
+
+_______________________________ GET /orders/{id} _______________________________
+1. Test Case ID: P5z5hS
+
+- ST401 API accepts requests without authentication
+
+    Expected 401 or 403, got `200 OK` for `GET /orders/{id}`
+
+- ST201 Schema-violating request accepted
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 405, 406, 409, 415, 422, 428, 429, 5xx
+    Invalid component: Missing `Authorization` at header
+
+- ST203 Missing required header accepted
+
+    Got 200 when missing required 'Authorization' header, expected 401
+
+[200] OK:
+
+    `{"id":"order-2","note":"","owner":"alpha","status":"open"}`
+
+Reproduce with:
+
+    curl -X GET http://127.0.0.1:56342/orders/order-2
+
+    st replay P5z5hS
+
+______________________________ PATCH /orders/{id} ______________________________
+1. Test Case ID: gxTtfv
+
+- ST201 Schema-violating request accepted
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 405, 406, 409, 415, 422, 428, 429, 5xx
+    Invalid component: in body - incorrect type
+
+[200] OK:
+
+    `{"id":"order-2","note":"","owner":"alpha","status":"cancelled"}`
+
+Identity: alpha-admin (reproduce with --auth-wfc-user alpha-admin)
+
+Reproduce with:
+
+    curl -X PATCH -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '[null, null]' http://127.0.0.1:56342/orders/order-2
+
+    st replay gxTtfv
+
+_________________________________ POST /orders _________________________________
+1. Test Case ID: AciqHD
+
+- ST201 Schema-violating request accepted
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 405, 406, 409, 415, 422, 428, 429, 5xx
+    Invalid component: in body - incorrect type
+
+[201] Created:
+
+    `{"id":"order-2","note":"","owner":"alpha","status":"open"}`
+
+Identity: alpha-admin (reproduce with --auth-wfc-user alpha-admin)
+
+Reproduce with:
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '[null, null]' http://127.0.0.1:56342/orders
+
+    st replay AciqHD
+
+=================================== SUMMARY ====================================
+
+API Operations:
+  Selected: 4/4
+  Tested: 4
+
+Test Phases:
+  ⏭  Examples
+  ❌ Coverage
+  ❌ Fuzzing
+  ❌ Stateful
+
+Failures:
+  ❌ ST401 API accepts requests without authentication: 1
+  ❌ ST401 Unexpected response to a request without authentication: 1
+  ❌ ST203 Missing required header accepted: 1
+  ❌ ST201 Schema-violating request accepted: 3
+
+For more information, run `st explain <code>` for ST201, ST203, ST401.
+
+Test cases:
+  665 generated, 4 found 6 unique failures, 103 skipped
+
+Reports:
+  - NDJSON: /var/folders/ds/t1y2kqjn30b0ck6_q75ddh_80000gn/T/st-report-2ys7824e/ndjson-20261018T211946Z.ndjson
+  - JSON: /var/folders/ds/t1y2kqjn30b0ck6_q75ddh_80000gn/T/st-report-2ys7824e/json-20261018T211946Z.json
+
+Seed: 42
+
+============================= 6 failures in 2.16s ==============================
+

@@ -1,0 +1,6 @@
+2 findings (2 critical); 0 verified
+  [Critical/Probable] DELETE /orders/{} — write returned 2xx but no owner-visible state change was observed (possibly asynchronous or a no-op); needs follow-up
+  [Critical/Probable] PATCH /orders/{} — write returned 2xx but no owner-visible state change was observed (possibly asynchronous or a no-op); needs follow-up
+wrote SARIF to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/authz-fuzzer/lying-success/out.sarif
+wrote JSON report to /Users/karthikkt/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/authz-fuzzer/lying-success/out.json
+gate: pass (0 of 2 finding(s) above threshold)

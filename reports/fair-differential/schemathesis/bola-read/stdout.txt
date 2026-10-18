@@ -1,0 +1,147 @@
+Schemathesis v4.32.0
+━━━━━━━━━━━━━━━━━━━━
+
+ ✅  Loaded specification from http://127.0.0.1:56229/openapi.json (in 0.14s)
+
+     Base URL:         http://127.0.0.1:56229
+     Specification:    Open API 3.0.3
+     Operations:       4 selected / 4 total
+     Configuration:    /Users/karthikkt/Documents/SOP_Projects/Lattivant/te
+                       st-suite/reports/fair-differential/schemathesis/bola
+                       -read/schemathesis.toml
+
+ ✅  API capabilities:
+
+     Supports NULL byte in headers:                            ✘
+     Accepts backslash and control characters in URL paths:    ✓
+
+ ⏭   Examples (in 0.00s)
+
+     ⏭  4 skipped
+
+ ❌  Coverage (in 0.07s)
+
+     ❌ 4 failed
+
+ ❌  Fuzzing (in 0.28s)
+
+     ✅ 1 passed  ❌ 3 failed
+
+ ❌  Stateful (in 1.85s)
+
+     Scenarios:    96
+     API Links:    9 covered / 9 selected / 9 total (9 inferred)
+
+     ✅ 94 passed  ❌ 2 failed
+
+=================================== FAILURES ===================================
+_____________________________ DELETE /orders/{id} ______________________________
+1. Test Case ID: MoPCHJ
+
+- ST401 Unexpected response to a request without authentication
+
+    Expected 401 or 403, got `404 Not Found` for `DELETE /orders/{id}`
+
+[404] Not Found:
+
+    `{"error":"not found"}`
+
+Reproduce with:
+
+    curl -X DELETE http://127.0.0.1:56229/orders/order-2
+
+    st replay MoPCHJ
+
+_______________________________ GET /orders/{id} _______________________________
+1. Test Case ID: e6UwyG
+
+- ST402 Object-level authorization bypass
+
+    `bravo-admin` received the `Order` that `alpha-admin` owns
+
+    Owner: GET /orders/order-2 as alpha-admin -> 200
+    Peer:  GET /orders/order-2 as bravo-admin -> 200 (equivalent body)
+
+[200] OK:
+
+    `{"id":"order-2","note":"","owner":"alpha","status":"open"}`
+
+Reproduce with:
+
+    # as bravo-admin (peer)
+    curl -X GET -H 'Authorization: [Filtered]' http://127.0.0.1:56229/orders/order-2
+
+    st replay e6UwyG
+
+______________________________ PATCH /orders/{id} ______________________________
+1. Test Case ID: vYmpfr
+
+- ST201 Schema-violating request accepted
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 405, 406, 409, 415, 422, 428, 429, 5xx
+    Invalid component: in body - incorrect type
+
+[200] OK:
+
+    `{"id":"order-2","note":"","owner":"alpha","status":"cancelled"}`
+
+Identity: alpha-admin (reproduce with --auth-wfc-user alpha-admin)
+
+Reproduce with:
+
+    curl -X PATCH -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '[null, null]' http://127.0.0.1:56229/orders/order-2
+
+    st replay vYmpfr
+
+_________________________________ POST /orders _________________________________
+1. Test Case ID: 2hMU2f
+
+- ST201 Schema-violating request accepted
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 405, 406, 409, 415, 422, 428, 429, 5xx
+    Invalid component: in body - incorrect type
+
+[201] Created:
+
+    `{"id":"order-2","note":"","owner":"alpha","status":"open"}`
+
+Identity: alpha-admin (reproduce with --auth-wfc-user alpha-admin)
+
+Reproduce with:
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '[null, null]' http://127.0.0.1:56229/orders
+
+    st replay 2hMU2f
+
+=================================== SUMMARY ====================================
+
+API Operations:
+  Selected: 4/4
+  Tested: 4
+
+Test Phases:
+  ⏭  Examples
+  ❌ Coverage
+  ❌ Fuzzing
+  ❌ Stateful
+
+Failures:
+  ❌ ST402 Object-level authorization bypass: 1
+  ❌ ST401 Unexpected response to a request without authentication: 1
+  ❌ ST201 Schema-violating request accepted: 2
+
+For more information, run `st explain <code>` for ST201, ST401, ST402.
+
+Test cases:
+  657 generated, 4 found 4 unique failures, 55 skipped
+
+Reports:
+  - NDJSON: /var/folders/ds/t1y2kqjn30b0ck6_q75ddh_80000gn/T/st-report-rp74y1ys/ndjson-20261018T211941Z.ndjson
+  - JSON: /var/folders/ds/t1y2kqjn30b0ck6_q75ddh_80000gn/T/st-report-rp74y1ys/json-20261018T211941Z.json
+
+Seed: 42
+
+============================= 4 failures in 2.23s ==============================
+

@@ -1,0 +1,13 @@
+{
+  "tool": "authz-fuzzer",
+  "mode": "readonly-scope-vs-write-vuln",
+  "server": "bola-write",
+  "pair": "alpha-bravo",
+  "status": "OK",
+  "error": "",
+  "command": "authz scan --manifest manifest.json --sarif out.sarif --json out.json",
+  "finished_at": "2026-10-18T21:19:38",
+  "exit": 0,
+  "mutation": "read_only",
+  "wall_s": 0.0
+}

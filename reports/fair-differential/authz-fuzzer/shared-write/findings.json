@@ -1,0 +1,20 @@
+[
+  {
+    "category": "shared_resource_write",
+    "cls": "cross",
+    "operation": "DELETE /orders/{id}",
+    "title": "owner-visible state changed after a write that policy forbids",
+    "confidence": "verified",
+    "is_write": true,
+    "source": "fnd-be27afe7a6ecfb64"
+  },
+  {
+    "category": "shared_resource_write",
+    "cls": "cross",
+    "operation": "PATCH /orders/{id}",
+    "title": "owner-visible state changed after a write that policy forbids",
+    "confidence": "verified",
+    "is_write": true,
+    "source": "fnd-e9ec2f398110cb8c"
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "tool": "authz-fuzzer",
+  "mode": "bola-read",
+  "server": "bola-read",
+  "pair": "alpha-bravo",
+  "status": "OK",
+  "error": "",
+  "command": "authz scan --manifest manifest.json --sarif out.sarif --json out.json",
+  "finished_at": "2026-10-18T21:19:38",
+  "exit": 2,
+  "mutation": "read_only",
+  "wall_s": 0.0
+}

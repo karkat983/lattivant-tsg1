@@ -1,0 +1,125 @@
+Schemathesis v4.32.0
+━━━━━━━━━━━━━━━━━━━━
+
+ ✅  Loaded specification from http://127.0.0.1:56459/openapi.json (in 0.14s)
+
+     Base URL:         http://127.0.0.1:56459
+     Specification:    Open API 3.0.3
+     Operations:       4 selected / 4 total
+     Configuration:    /Users/karthikkt/Documents/SOP_Projects/Lattivant/te
+                       st-suite/reports/fair-differential/schemathesis/shar
+                       ed-write/schemathesis.toml
+
+ ✅  API capabilities:
+
+     Supports NULL byte in headers:                            ✘
+     Accepts backslash and control characters in URL paths:    ✓
+
+ ⏭   Examples (in 0.00s)
+
+     ⏭  4 skipped
+
+ ❌  Coverage (in 0.07s)
+
+     ✅ 1 passed  ❌ 3 failed
+
+ ❌  Fuzzing (in 0.28s)
+
+     ✅ 1 passed  ❌ 3 failed
+
+ ❌  Stateful (in 1.09s)
+
+     Scenarios:    60
+     API Links:    9 covered / 9 selected / 9 total (9 inferred)
+
+     ✅ 57 passed  ❌ 3 failed
+
+=================================== FAILURES ===================================
+_____________________________ DELETE /orders/{id} ______________________________
+1. Test Case ID: yUmVQN
+
+- ST401 Unexpected response to a request without authentication
+
+    Expected 401 or 403, got `404 Not Found` for `DELETE /orders/{id}`
+
+[404] Not Found:
+
+    `{"error":"not found"}`
+
+Reproduce with:
+
+    curl -X DELETE http://127.0.0.1:56459/orders/order-2
+
+    st replay yUmVQN
+
+______________________________ PATCH /orders/{id} ______________________________
+1. Test Case ID: pmWyd5
+
+- ST201 Schema-violating request accepted
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 405, 406, 409, 415, 422, 428, 429, 5xx
+    Invalid component: in body - incorrect type
+
+[200] OK:
+
+    `{"id":"order-2","note":"","owner":"alpha","status":"cancelled"}`
+
+Identity: alpha-admin (reproduce with --auth-wfc-user alpha-admin)
+
+Reproduce with:
+
+    curl -X PATCH -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '[null, null]' http://127.0.0.1:56459/orders/order-2
+
+    st replay pmWyd5
+
+_________________________________ POST /orders _________________________________
+1. Test Case ID: hfdWhq
+
+- ST201 Schema-violating request accepted
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 405, 406, 409, 415, 422, 428, 429, 5xx
+    Invalid component: in body - incorrect type
+
+[201] Created:
+
+    `{"id":"order-2","note":"","owner":"alpha","status":"open"}`
+
+Identity: alpha-admin (reproduce with --auth-wfc-user alpha-admin)
+
+Reproduce with:
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '[null, null]' http://127.0.0.1:56459/orders
+
+    st replay hfdWhq
+
+=================================== SUMMARY ====================================
+
+API Operations:
+  Selected: 4/4
+  Tested: 4
+
+Test Phases:
+  ⏭  Examples
+  ❌ Coverage
+  ❌ Fuzzing
+  ❌ Stateful
+
+Failures:
+  ❌ ST401 Unexpected response to a request without authentication: 1
+  ❌ ST201 Schema-violating request accepted: 2
+
+For more information, run `st explain <code>` for ST201, ST401.
+
+Test cases:
+  452 generated, 3 found 3 unique failures, 31 skipped
+
+Reports:
+  - NDJSON: /var/folders/ds/t1y2kqjn30b0ck6_q75ddh_80000gn/T/st-report-2e2n10c0/ndjson-20261018T211949Z.ndjson
+  - JSON: /var/folders/ds/t1y2kqjn30b0ck6_q75ddh_80000gn/T/st-report-2e2n10c0/json-20261018T211949Z.json
+
+Seed: 42
+
+============================= 3 failures in 1.48s ==============================
+

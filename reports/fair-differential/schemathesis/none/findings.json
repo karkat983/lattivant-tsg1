@@ -1,0 +1,23 @@
+[
+  {
+    "category": "IgnoredAuth:Unexpected response to a request without authentication",
+    "cls": "unauth",
+    "operation": "DELETE /orders/{id}",
+    "title": "ST401 Unexpected response to a request without authentication",
+    "count": 1
+  },
+  {
+    "category": "AcceptedNegativeData:Schema-violating request accepted",
+    "cls": null,
+    "operation": "PATCH /orders/{id}",
+    "title": "ST201 Schema-violating request accepted",
+    "count": 2
+  },
+  {
+    "category": "AcceptedNegativeData:Schema-violating request accepted",
+    "cls": null,
+    "operation": "POST /orders",
+    "title": "ST201 Schema-violating request accepted",
+    "count": 2
+  }
+]

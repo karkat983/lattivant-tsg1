@@ -1,0 +1,64 @@
+{
+  "total": 2,
+  "by_severity": {
+    "critical": 2,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "info": 0
+  },
+  "by_confidence": {
+    "verified": 2,
+    "probable": 0,
+    "speculative": 0
+  },
+  "by_violation": {
+    "cross_tenant_access": 2
+  },
+  "findings": [
+    {
+      "id": "fnd-0ebbbd736b33fe96",
+      "tenant": "alpha",
+      "operation": {
+        "method": "DELETE",
+        "normalized_path": "/orders/{}",
+        "spec_version": "1.0.0"
+      },
+      "resource_class": "order",
+      "violation": "cross_tenant_access",
+      "relation": "cross_tenant",
+      "is_write": true,
+      "confidence": "verified",
+      "severity": "critical",
+      "oracle": "write_oracle",
+      "summary": "owner-visible state changed after a write that policy forbids",
+      "replay_count": 1,
+      "evidence": [
+        "evidence://sha256/8da119496aa2cb6c590dbeab57592fb5cc0cb4dcc58a22d782dbad145c8b49d3",
+        "evidence://sha256/19509d50ad85f82806599bea485744caa9e58e7418316037690a7d45e695c75e"
+      ]
+    },
+    {
+      "id": "fnd-7923472ea4bfbed8",
+      "tenant": "alpha",
+      "operation": {
+        "method": "PATCH",
+        "normalized_path": "/orders/{}",
+        "spec_version": "1.0.0"
+      },
+      "resource_class": "order",
+      "violation": "cross_tenant_access",
+      "relation": "cross_tenant",
+      "is_write": true,
+      "confidence": "verified",
+      "severity": "critical",
+      "oracle": "write_oracle",
+      "summary": "owner-visible state changed after a write that policy forbids",
+      "replay_count": 1,
+      "evidence": [
+        "evidence://sha256/b7a0692634ede7a29bad408b8b350d79af355fc928c1bac632aea91193255329",
+        "evidence://sha256/63bf4d0d85e9e46b863065ca6d561bd261fdf0312c59df1572ecbc60718ca64a"
+      ]
+    }
+  ]
+}
