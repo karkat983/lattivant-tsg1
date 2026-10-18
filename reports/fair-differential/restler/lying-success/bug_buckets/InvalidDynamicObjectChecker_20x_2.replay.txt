@@ -1,0 +1,26 @@
+################################################################################
+ InvalidDynamicObjectChecker_20x
+
+ Hash: InvalidDynamicObjectChecker_20x_a0267351f5bef9a56d6b7a5ebac5ad662456a07e
+
+ To attempt to reproduce this bug using restler, run restler with the command
+ line option of --replay_log <path_to_this_log>.
+ If an authentication token is required, you must also specify the token_refresh_cmd.
+
+ This log may contain specific values for IDs or names that were generated
+ during fuzzing, using the fuzzing dictionary. Such names will be re-played
+ without modification. You must update the replay log manually with any changes
+ required to execute the requests in your environment (for example, replacing
+ pre-created account, subscription, or other resource IDs, as needed).
+################################################################################
+
+-> POST /orders HTTP/1.1\r\nAccept: application/json\r\nHost: \r\nContent-Type: application/json\r\nAUTHORIZATION TOKEN\r\n\r\n{\n    "note":"order-1"}\r\n
+! producer_timing_delay 0
+! max_async_wait_time 20
+PREVIOUS RESPONSE: 'HTTP/1.1 201 Created\r\ncontent-type: application/json\r\ncontent-length: 66\r\ndate: Sun, 18 Oct 2026 19:00:10 GMT\r\n\r\n{"id":"order-17","note":"order-1","owner":"alpha","status":"open"}'
+
+-> PATCH /orders/order-17?injected_query_string=123 HTTP/1.1\r\nAccept: application/json\r\nHost: \r\nContent-Type: application/json\r\nAUTHORIZATION TOKEN\r\n\r\n{\n    "status":"open?injected_query_string=123"}\r\n
+! producer_timing_delay 0
+! max_async_wait_time 0
+PREVIOUS RESPONSE: 'HTTP/1.1 200 OK\r\ncontent-type: application/json\r\ncontent-length: 92\r\ndate: Sun, 18 Oct 2026 19:00:10 GMT\r\n\r\n{"id":"order-17","note":"order-1","owner":"alpha","status":"open?injected_query_string=123"}'
+

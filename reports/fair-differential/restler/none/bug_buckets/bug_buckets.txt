@@ -1,0 +1,19 @@
+NameSpaceRuleChecker_20x: 1
+InvalidDynamicObjectChecker_20x: 2
+Total Buckets: 3
+-------------
+NameSpaceRuleChecker_20x - Unable to reproduce bug - NameSpaceRuleChecker_20x_1.replay.txt
+Attempted to reproduce 0 time(s); Reproduced 0 time(s)
+Hash: NameSpaceRuleChecker_20x_a1fcdd900439f903e6f75890555fcc69cc2c687d
+POST /orders HTTP/1.1\r\nAccept: application/json\r\nHost: \r\nContent-Type: application/json\r\nauthentication_token_tag\r\n{\n    "note":fuzzstring}\r\n
+--------------------------------------------------------------------------------
+InvalidDynamicObjectChecker_20x - Bug was reproduced - InvalidDynamicObjectChecker_20x_1.replay.txt
+Hash: InvalidDynamicObjectChecker_20x_2fa7acfe8cdc83e531543f1b375750199a630cfe
+POST /orders HTTP/1.1\r\nAccept: application/json\r\nHost: \r\nContent-Type: application/json\r\nauthentication_token_tag\r\n{\n    "note":fuzzstring}\r\n
+GET /orders/_READER_DELIM_orders_post_id_READER_DELIM HTTP/1.1\r\nAccept: application/json\r\nHost: \r\nauthentication_token_tag\r\n
+--------------------------------------------------------------------------------
+InvalidDynamicObjectChecker_20x - Bug was reproduced - InvalidDynamicObjectChecker_20x_2.replay.txt
+Hash: InvalidDynamicObjectChecker_20x_a0267351f5bef9a56d6b7a5ebac5ad662456a07e
+POST /orders HTTP/1.1\r\nAccept: application/json\r\nHost: \r\nContent-Type: application/json\r\nauthentication_token_tag\r\n{\n    "note":fuzzstring}\r\n
+PATCH /orders/_READER_DELIM_orders_post_id_READER_DELIM HTTP/1.1\r\nAccept: application/json\r\nHost: \r\nContent-Type: application/json\r\nauthentication_token_tag\r\n{\n    "status":_READER_DELIM_orders_post_status_READER_DELIM}\r\n
+--------------------------------------------------------------------------------

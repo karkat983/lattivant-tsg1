@@ -1,0 +1,11 @@
+Starting task Fuzz...
+Using python: '/opt/homebrew/opt/python@3.12/bin/python3.12' (Python 3.12.15)
+Request coverage (successful / total): 4 / 4
+Attempted requests: 4 / 4
+Bugs were found!
+Bug buckets:
+
+InvalidDynamicObjectChecker_20x: 2
+NameSpaceRuleChecker_20x: 3
+Task Fuzz succeeded.
+Collecting logs...

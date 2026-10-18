@@ -1,0 +1,22 @@
+{
+    "status_code": "200",
+    "checker_name": "NameSpaceRuleChecker",
+    "reproducible": false,
+    "verb": "PATCH",
+    "endpoint": "/orders/{id}",
+    "status_text": "OK",
+    "request_sequence": [
+        {
+            "producer_timing_delay": 0,
+            "max_async_wait_time": 0,
+            "replay_request": "POST /orders HTTP/1.1\r\nAccept: application/json\r\nHost: \r\nContent-Type: application/json\r\nAUTHORIZATION TOKEN\r\n\r\n{\n    \"note\":\"order-1\"}\r\n",
+            "response": "HTTP/1.1 201 Created\r\ncontent-type: application/json\r\ncontent-length: 66\r\ndate: Sun, 18 Oct 2026 19:00:10 GMT\r\n\r\n{\"id\":\"order-15\",\"note\":\"order-1\",\"owner\":\"alpha\",\"status\":\"open\"}"
+        },
+        {
+            "producer_timing_delay": 0,
+            "max_async_wait_time": 0,
+            "replay_request": "PATCH /orders/order-15 HTTP/1.1\r\nAccept: application/json\r\nHost: \r\nContent-Type: application/json\r\nAUTHORIZATION TOKEN\r\n\r\n{\n    \"status\":\"open\"}\r\n",
+            "response": "HTTP/1.1 200 OK\r\ncontent-type: application/json\r\ncontent-length: 66\r\ndate: Sun, 18 Oct 2026 19:00:10 GMT\r\n\r\n{\"id\":\"order-15\",\"note\":\"order-1\",\"owner\":\"alpha\",\"status\":\"open\"}"
+        }
+    ]
+}

@@ -1,0 +1,131 @@
+Random seed: 12345
+Setting fuzzing schemes: bfs-cheap
+2026-10-18 23:38:46.981: Going to fuzz a set with 4 requests
+2026-10-18 23:38:46.981: Request-0: Value Combinations: 5
+2026-10-18 23:38:46.981: Request-1: Value Combinations: 2
+2026-10-18 23:38:46.981: Request-2: Value Combinations: 2
+2026-10-18 23:38:46.981: Request-3: Value Combinations: 2
+2026-10-18 23:38:46.981: Avg. Value Combinations per Request: 2.75
+2026-10-18 23:38:46.981: Median Value Combinations per Request: 2.0
+2026-10-18 23:38:46.981: Min Value Combinations per Request: 2
+2026-10-18 23:38:46.981: Max Value Combinations per Request: 5
+2026-10-18 23:38:46.981: Total dependencies: 6
+
+2026-10-18 23:38:46.997: Generation: 1 / Sequences Collection Size: 1 
+(After bfs-cheap Extend)
+
+2026-10-18 23:38:47.011: Generation: 1 / Sequences Collection Size: 1 
+(After bfs-cheap Render)
+
+2026-10-18 23:38:47.011: Final Swagger spec coverage: 1 / 4
+2026-10-18 23:38:47.011: Rendered requests: 1 / 4
+2026-10-18 23:38:47.011: Rendered requests with "valid" status codes: 1 / 1
+2026-10-18 23:38:47.011: Num fully valid requests (no resource creation failures): 1
+2026-10-18 23:38:47.011: Num requests not rendered due to invalid sequence re-renders: 0
+2026-10-18 23:38:47.011: Num invalid requests caused by failed resource creations: 0
+2026-10-18 23:38:47.011: Total Creations of Dyn Objects: 4
+2026-10-18 23:38:47.011: Total Requests Sent: {'gc': 0, 'main_driver': 1, 'LeakageRuleChecker': 0, 'ResourceHierarchyChecker': 0, 'UseAfterFreeChecker': 0, 'NameSpaceRuleChecker': 1, 'InvalidDynamicObjectChecker': 0}
+2026-10-18 23:38:47.011: Bug Buckets: {'NameSpaceRuleChecker_20x': 1}
+2026-10-18 23:38:47.013: Generation: 2 / Sequences Collection Size: 4 
+(After bfs-cheap Extend)
+
+2026-10-18 23:38:47.062: Generation: 2 / Sequences Collection Size: 4 
+(After bfs-cheap Render)
+
+2026-10-18 23:38:47.062: Final Swagger spec coverage: 4 / 4
+2026-10-18 23:38:47.062: Rendered requests: 4 / 4
+2026-10-18 23:38:47.062: Rendered requests with "valid" status codes: 4 / 4
+2026-10-18 23:38:47.062: Num fully valid requests (no resource creation failures): 4
+2026-10-18 23:38:47.062: Num requests not rendered due to invalid sequence re-renders: 0
+2026-10-18 23:38:47.062: Num invalid requests caused by failed resource creations: 0
+2026-10-18 23:38:47.062: Total Creations of Dyn Objects: 38
+2026-10-18 23:38:47.062: Total Requests Sent: {'gc': 0, 'main_driver': 9, 'LeakageRuleChecker': 0, 'ResourceHierarchyChecker': 0, 'UseAfterFreeChecker': 2, 'NameSpaceRuleChecker': 9, 'InvalidDynamicObjectChecker': 28}
+2026-10-18 23:38:47.062: Bug Buckets: {'InvalidDynamicObjectChecker_20x': 2, 'NameSpaceRuleChecker_20x': 1}
+2026-10-18 23:38:47.062: Generation: 3 / Sequences Collection Size: 16 
+(After bfs-cheap Extend)
+
+2026-10-18 23:38:47.182: Generation: 3 / Sequences Collection Size: 13 
+(After bfs-cheap Render)
+
+2026-10-18 23:38:47.182: Final Swagger spec coverage: 4 / 4
+2026-10-18 23:38:47.182: Rendered requests: 4 / 4
+2026-10-18 23:38:47.182: Rendered requests with "valid" status codes: 4 / 4
+2026-10-18 23:38:47.182: Num fully valid requests (no resource creation failures): 4
+2026-10-18 23:38:47.182: Num requests not rendered due to invalid sequence re-renders: 0
+2026-10-18 23:38:47.182: Num invalid requests caused by failed resource creations: 0
+2026-10-18 23:38:47.182: Total Creations of Dyn Objects: 159
+2026-10-18 23:38:47.182: Total Requests Sent: {'gc': 0, 'main_driver': 64, 'LeakageRuleChecker': 0, 'ResourceHierarchyChecker': 1, 'UseAfterFreeChecker': 8, 'NameSpaceRuleChecker': 48, 'InvalidDynamicObjectChecker': 59}
+2026-10-18 23:38:47.182: Bug Buckets: {'InvalidDynamicObjectChecker_20x': 2, 'NameSpaceRuleChecker_20x': 1}
+2026-10-18 23:38:47.183: Generation: 4 / Sequences Collection Size: 52 
+(After bfs-cheap Extend)
+
+2026-10-18 23:38:47.501: Generation: 4 / Sequences Collection Size: 43 
+(After bfs-cheap Render)
+
+2026-10-18 23:38:47.501: Final Swagger spec coverage: 4 / 4
+2026-10-18 23:38:47.501: Rendered requests: 4 / 4
+2026-10-18 23:38:47.501: Rendered requests with "valid" status codes: 4 / 4
+2026-10-18 23:38:47.501: Num fully valid requests (no resource creation failures): 4
+2026-10-18 23:38:47.501: Num requests not rendered due to invalid sequence re-renders: 0
+2026-10-18 23:38:47.501: Num invalid requests caused by failed resource creations: 0
+2026-10-18 23:38:47.501: Total Creations of Dyn Objects: 594
+2026-10-18 23:38:47.501: Total Requests Sent: {'gc': 0, 'main_driver': 272, 'LeakageRuleChecker': 0, 'ResourceHierarchyChecker': 4, 'UseAfterFreeChecker': 28, 'NameSpaceRuleChecker': 220, 'InvalidDynamicObjectChecker': 93}
+2026-10-18 23:38:47.501: Bug Buckets: {'InvalidDynamicObjectChecker_20x': 2, 'NameSpaceRuleChecker_20x': 1}
+2026-10-18 23:38:47.502: Generation: 5 / Sequences Collection Size: 172 
+(After bfs-cheap Extend)
+
+2026-10-18 23:38:48.715: Generation: 5 / Sequences Collection Size: 142 
+(After bfs-cheap Render)
+
+2026-10-18 23:38:48.715: Final Swagger spec coverage: 4 / 4
+2026-10-18 23:38:48.715: Rendered requests: 4 / 4
+2026-10-18 23:38:48.715: Rendered requests with "valid" status codes: 4 / 4
+2026-10-18 23:38:48.715: Num fully valid requests (no resource creation failures): 4
+2026-10-18 23:38:48.715: Num requests not rendered due to invalid sequence re-renders: 0
+2026-10-18 23:38:48.715: Num invalid requests caused by failed resource creations: 0
+2026-10-18 23:38:48.715: Total Creations of Dyn Objects: 2297
+2026-10-18 23:38:48.715: Total Requests Sent: {'gc': 0, 'main_driver': 1242, 'LeakageRuleChecker': 0, 'ResourceHierarchyChecker': 11, 'UseAfterFreeChecker': 94, 'NameSpaceRuleChecker': 930, 'InvalidDynamicObjectChecker': 130}
+2026-10-18 23:38:48.715: Bug Buckets: {'InvalidDynamicObjectChecker_20x': 2, 'NameSpaceRuleChecker_20x': 1}
+2026-10-18 23:38:48.717: Generation: 6 / Sequences Collection Size: 568 
+(After bfs-cheap Extend)
+
+2026-10-18 23:38:54.576: Generation: 6 / Sequences Collection Size: 469 
+(After bfs-cheap Render)
+
+2026-10-18 23:38:54.576: Final Swagger spec coverage: 4 / 4
+2026-10-18 23:38:54.576: Rendered requests: 4 / 4
+2026-10-18 23:38:54.576: Rendered requests with "valid" status codes: 4 / 4
+2026-10-18 23:38:54.576: Num fully valid requests (no resource creation failures): 4
+2026-10-18 23:38:54.576: Num requests not rendered due to invalid sequence re-renders: 0
+2026-10-18 23:38:54.576: Num invalid requests caused by failed resource creations: 0
+2026-10-18 23:38:54.576: Total Creations of Dyn Objects: 8410
+2026-10-18 23:38:54.576: Total Requests Sent: {'gc': 0, 'main_driver': 4650, 'LeakageRuleChecker': 0, 'ResourceHierarchyChecker': 26, 'UseAfterFreeChecker': 312, 'NameSpaceRuleChecker': 3744, 'InvalidDynamicObjectChecker': 170}
+2026-10-18 23:38:54.576: Bug Buckets: {'InvalidDynamicObjectChecker_20x': 2, 'NameSpaceRuleChecker_20x': 1}
+2026-10-18 23:38:54.610: Generation: 7 / Sequences Collection Size: 1876 
+(After bfs-cheap Extend)
+
+Timed out...
+2026-10-18 23:56:29.659: Generation: 7 / Sequences Collection Size: 2534 
+(After bfs-cheap Render)
+
+2026-10-18 23:56:29.660: Final Swagger spec coverage: 4 / 4
+2026-10-18 23:56:29.660: Rendered requests: 4 / 4
+2026-10-18 23:56:29.660: Rendered requests with "valid" status codes: 4 / 4
+2026-10-18 23:56:29.660: Num fully valid requests (no resource creation failures): 4
+2026-10-18 23:56:29.660: Num requests not rendered due to invalid sequence re-renders: 0
+2026-10-18 23:56:29.660: Num invalid requests caused by failed resource creations: 0
+2026-10-18 23:56:29.660: Total Creations of Dyn Objects: 19195
+2026-10-18 23:56:29.660: Total Requests Sent: {'gc': 0, 'main_driver': 10782, 'LeakageRuleChecker': 0, 'ResourceHierarchyChecker': 26, 'UseAfterFreeChecker': 690, 'NameSpaceRuleChecker': 8350, 'InvalidDynamicObjectChecker': 181}
+2026-10-18 23:56:29.660: Bug Buckets: {'InvalidDynamicObjectChecker_20x': 2, 'NameSpaceRuleChecker_20x': 1}
+
+Testing completed -- below are the final stats:
+
+2026-10-19 00:12:56.300: Final Swagger spec coverage: 4 / 4
+2026-10-19 00:12:56.300: Rendered requests: 4 / 4
+2026-10-19 00:12:56.300: Rendered requests with "valid" status codes: 4 / 4
+2026-10-19 00:12:56.300: Num fully valid requests (no resource creation failures): 4
+2026-10-19 00:12:56.300: Num requests not rendered due to invalid sequence re-renders: 0
+2026-10-19 00:12:56.300: Num invalid requests caused by failed resource creations: 0
+2026-10-19 00:12:56.300: Total Creations of Dyn Objects: 19195
+2026-10-19 00:12:56.300: Total Requests Sent: {'gc': 9864, 'main_driver': 10782, 'LeakageRuleChecker': 0, 'ResourceHierarchyChecker': 26, 'UseAfterFreeChecker': 690, 'NameSpaceRuleChecker': 8350, 'InvalidDynamicObjectChecker': 181}
+2026-10-19 00:12:56.300: Bug Buckets: {'InvalidDynamicObjectChecker_20x': 2, 'NameSpaceRuleChecker_20x': 1}

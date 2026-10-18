@@ -1,0 +1,12 @@
+{
+  "checkers": {
+    "namespacerule": {
+      "trigger_on_dynamic_objects": true,
+      "trigger_objects": [
+        "order-1",
+        "order-shared",
+        "order-public"
+      ]
+    }
+  }
+}

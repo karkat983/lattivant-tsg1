@@ -1,0 +1,17 @@
+{"bugs":[{
+    "filepath": "NameSpaceRuleChecker_20x_1.json",
+    "reproducible": false,
+    "checker_name": "NameSpaceRuleChecker",
+    "error_code": "20x"},{
+    "filepath": "NameSpaceRuleChecker_20x_2.json",
+    "reproducible": false,
+    "checker_name": "NameSpaceRuleChecker",
+    "error_code": "20x"},{
+    "filepath": "InvalidDynamicObjectChecker_20x_1.json",
+    "reproducible": true,
+    "checker_name": "InvalidDynamicObjectChecker",
+    "error_code": "20x"},{
+    "filepath": "InvalidDynamicObjectChecker_20x_2.json",
+    "reproducible": true,
+    "checker_name": "InvalidDynamicObjectChecker",
+    "error_code": "20x"}]}

@@ -1,0 +1,29 @@
+{
+    "final_spec_coverage": "4 / 4",
+    "rendered_requests": "4 / 4",
+    "rendered_requests_valid_status": "4 / 4",
+    "num_fully_valid": 4,
+    "num_sequence_failures": 0,
+    "num_invalid_by_failed_resource_creations": 0,
+    "total_object_creations": 12410,
+    "total_requests_sent": {
+        "gc": 6241,
+        "main_driver": 6421,
+        "LeakageRuleChecker": 0,
+        "ResourceHierarchyChecker": 26,
+        "UseAfterFreeChecker": 312,
+        "NameSpaceRuleChecker": 5515,
+        "InvalidDynamicObjectChecker": 170
+    },
+    "bug_buckets": {
+        "InvalidDynamicObjectChecker_20x": 2,
+        "NameSpaceRuleChecker_20x": 3
+    },
+    "reproducible_bug_buckets": {
+        "InvalidDynamicObjectChecker_20x": 2,
+        "NameSpaceRuleChecker_20x": 0
+    },
+    "settings": {
+        "random_seed": 12345
+    }
+}

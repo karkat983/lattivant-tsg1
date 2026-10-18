@@ -1,0 +1,34 @@
+[
+  {
+    "category": "NameSpaceRuleChecker_20x",
+    "cls": "cross",
+    "operation": "POST /orders",
+    "title": "NameSpaceRuleChecker 201 Created",
+    "reproducible": false,
+    "source": "NameSpaceRuleChecker_20x_1.json"
+  },
+  {
+    "category": "NameSpaceRuleChecker_20x",
+    "cls": "cross",
+    "operation": "GET /orders/{id}",
+    "title": "NameSpaceRuleChecker 200 OK",
+    "reproducible": false,
+    "source": "NameSpaceRuleChecker_20x_2.json"
+  },
+  {
+    "category": "InvalidDynamicObjectChecker_20x",
+    "cls": null,
+    "operation": "GET /orders/{id}",
+    "title": "InvalidDynamicObjectChecker 200 OK",
+    "reproducible": true,
+    "source": "InvalidDynamicObjectChecker_20x_1.json"
+  },
+  {
+    "category": "InvalidDynamicObjectChecker_20x",
+    "cls": null,
+    "operation": "PATCH /orders/{id}",
+    "title": "InvalidDynamicObjectChecker 200 OK",
+    "reproducible": true,
+    "source": "InvalidDynamicObjectChecker_20x_2.json"
+  }
+]

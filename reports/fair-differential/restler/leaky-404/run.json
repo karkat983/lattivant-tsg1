@@ -1,0 +1,22 @@
+{
+  "tool": "restler",
+  "mode": "leaky-404",
+  "server": "leaky-404",
+  "pair": "alpha-bravo",
+  "status": "OK",
+  "error": "",
+  "command": "dotnet ~/tools/fair-differential/restler_bin/restler/Restler.dll --python_path /opt/homebrew/opt/python@3.12/bin/python3.12 fuzz --grammar_file Compile/grammar.py --dictionary_file ~/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/restler/leaky-404/dict_seeded.json --settings ~/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/restler/leaky-404/settings.json --target_ip 127.0.0.1 --target_port 52631 --no_ssl --time_budget 0.05 --token_refresh_interval 300 --token_refresh_command sh ~/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/auth/restler_tokens_alpha-bravo.sh --enable_checkers namespacerule,useafterfree,resourcehierarchy,leakagerule,invaliddynamicobject",
+  "finished_at": "2026-10-19T01:30:54",
+  "exit": 0,
+  "rendered_valid": "4 / 4",
+  "requests_sent": {
+    "gc": 29703,
+    "main_driver": 30033,
+    "LeakageRuleChecker": 0,
+    "ResourceHierarchyChecker": 57,
+    "UseAfterFreeChecker": 1032,
+    "NameSpaceRuleChecker": 25203,
+    "InvalidDynamicObjectChecker": 213
+  },
+  "wall_s": 499.5
+}

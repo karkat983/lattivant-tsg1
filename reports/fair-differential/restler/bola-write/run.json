@@ -1,0 +1,22 @@
+{
+  "tool": "restler",
+  "mode": "bola-write",
+  "server": "bola-write",
+  "pair": "alpha-bravo",
+  "status": "OK",
+  "error": "",
+  "command": "dotnet ~/tools/fair-differential/restler_bin/restler/Restler.dll --python_path /opt/homebrew/opt/python@3.12/bin/python3.12 fuzz --grammar_file Compile/grammar.py --dictionary_file ~/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/restler/bola-write/dict_seeded.json --settings ~/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/restler/bola-write/settings.json --target_ip 127.0.0.1 --target_port 52594 --no_ssl --time_budget 0.05 --token_refresh_interval 300 --token_refresh_command sh ~/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/auth/restler_tokens_alpha-bravo.sh --enable_checkers namespacerule,useafterfree,resourcehierarchy,leakagerule,invaliddynamicobject",
+  "finished_at": "2026-10-19T01:25:46",
+  "exit": 0,
+  "rendered_valid": "4 / 4",
+  "requests_sent": {
+    "gc": 3996,
+    "main_driver": 4344,
+    "LeakageRuleChecker": 0,
+    "ResourceHierarchyChecker": 23,
+    "UseAfterFreeChecker": 312,
+    "NameSpaceRuleChecker": 3438,
+    "InvalidDynamicObjectChecker": 170
+  },
+  "wall_s": 1762.0
+}
