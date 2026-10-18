@@ -1,0 +1,388 @@
+{
+  "task3": {
+    "authz-fuzzer": {
+      "recall": {
+        "xtenant-read": true,
+        "xtenant-write": true,
+        "missing-auth": true,
+        "shared-write": true
+      },
+      "k": 4,
+      "n": 4,
+      "false_findings": 0,
+      "trap_signatures": {
+        "none": [],
+        "delegated-read": [],
+        "public-read": [],
+        "admin-legit": []
+      },
+      "traps_run": [
+        "admin-legit",
+        "delegated-read",
+        "none",
+        "public-read"
+      ],
+      "not_run": []
+    },
+    "evomaster": {
+      "recall": {
+        "xtenant-read": false,
+        "xtenant-write": false,
+        "missing-auth": false,
+        "shared-write": false
+      },
+      "k": 0,
+      "n": 4,
+      "false_findings": 0,
+      "trap_signatures": {
+        "none": [],
+        "admin-legit": []
+      },
+      "traps_run": [
+        "admin-legit",
+        "none"
+      ],
+      "not_run": []
+    },
+    "evomaster-sec": {
+      "recall": {
+        "xtenant-read": false,
+        "xtenant-write": false,
+        "missing-auth": false,
+        "shared-write": false
+      },
+      "k": 0,
+      "n": 4,
+      "false_findings": 0,
+      "trap_signatures": {
+        "none": [],
+        "admin-legit": []
+      },
+      "traps_run": [
+        "admin-legit",
+        "none"
+      ],
+      "not_run": []
+    },
+    "restler": {
+      "recall": {
+        "xtenant-read": true,
+        "xtenant-write": true,
+        "missing-auth": false,
+        "shared-write": false
+      },
+      "k": 2,
+      "n": 4,
+      "false_findings": 3,
+      "trap_signatures": {
+        "none": [
+          [
+            "NameSpaceRuleChecker_20x",
+            "POST /orders"
+          ]
+        ],
+        "admin-legit": [
+          [
+            "NameSpaceRuleChecker_20x",
+            "GET /orders/{id}"
+          ],
+          [
+            "NameSpaceRuleChecker_20x",
+            "POST /orders"
+          ]
+        ]
+      },
+      "traps_run": [
+        "admin-legit",
+        "none"
+      ],
+      "not_run": []
+    },
+    "schemathesis": {
+      "recall": {
+        "xtenant-read": true,
+        "xtenant-write": false,
+        "missing-auth": true,
+        "shared-write": false
+      },
+      "k": 2,
+      "n": 4,
+      "false_findings": 3,
+      "trap_signatures": {
+        "none": [
+          [
+            "IgnoredAuth:Unexpected response to a request without authentication",
+            "DELETE /orders/{id}"
+          ]
+        ],
+        "admin-legit": [
+          [
+            "IgnoredAuth:Unexpected response to a request without authentication",
+            "DELETE /orders/{id}"
+          ],
+          [
+            "ObjectLevelAuthorizationViolation:Object-level authorization bypass",
+            "GET /orders/{id}"
+          ]
+        ]
+      },
+      "traps_run": [
+        "admin-legit",
+        "none"
+      ],
+      "not_run": []
+    }
+  },
+  "task4": {
+    "authz-fuzzer": {
+      "silent-write": {
+        "verified": {
+          "flagged": true,
+          "correct": true,
+          "findings": [
+            [
+              "cross_tenant_access",
+              "DELETE /orders/{id}"
+            ],
+            [
+              "cross_tenant_access",
+              "PATCH /orders/{id}"
+            ]
+          ],
+          "also_in_control": []
+        },
+        "probable": {
+          "flagged": true,
+          "correct": true,
+          "findings": [
+            [
+              "cross_tenant_access",
+              "DELETE /orders/{id}"
+            ],
+            [
+              "cross_tenant_access",
+              "PATCH /orders/{id}"
+            ]
+          ],
+          "also_in_control": []
+        }
+      },
+      "lying-success": {
+        "verified": {
+          "flagged": false,
+          "correct": true,
+          "findings": [],
+          "also_in_control": []
+        },
+        "probable": {
+          "flagged": true,
+          "correct": false,
+          "findings": [
+            [
+              "cross_tenant_access",
+              "DELETE /orders/{id}"
+            ],
+            [
+              "cross_tenant_access",
+              "PATCH /orders/{id}"
+            ]
+          ],
+          "also_in_control": []
+        }
+      },
+      "admin-legit": {
+        "verified": {
+          "flagged": false,
+          "correct": true,
+          "findings": [],
+          "also_in_control": []
+        },
+        "probable": {
+          "flagged": false,
+          "correct": true,
+          "findings": [],
+          "also_in_control": []
+        }
+      },
+      "leaky-404": {
+        "verified": {
+          "flagged": true,
+          "correct": true,
+          "findings": [
+            [
+              "information_disclosure",
+              "GET /orders/{id}"
+            ]
+          ],
+          "also_in_control": []
+        },
+        "probable": {
+          "flagged": true,
+          "correct": true,
+          "findings": [
+            [
+              "information_disclosure",
+              "GET /orders/{id}"
+            ]
+          ],
+          "also_in_control": []
+        }
+      }
+    },
+    "evomaster": {
+      "silent-write": {
+        "verified": {
+          "flagged": false,
+          "correct": false,
+          "findings": [],
+          "also_in_control": []
+        }
+      },
+      "lying-success": {
+        "verified": {
+          "flagged": false,
+          "correct": true,
+          "findings": [],
+          "also_in_control": []
+        }
+      },
+      "admin-legit": {
+        "verified": {
+          "flagged": false,
+          "correct": true,
+          "findings": [],
+          "also_in_control": []
+        }
+      },
+      "leaky-404": {
+        "verified": {
+          "flagged": false,
+          "correct": false,
+          "findings": [],
+          "also_in_control": []
+        }
+      }
+    },
+    "evomaster-sec": {
+      "silent-write": {
+        "verified": {
+          "flagged": false,
+          "correct": false,
+          "findings": [],
+          "also_in_control": []
+        }
+      },
+      "lying-success": {
+        "verified": {
+          "flagged": false,
+          "correct": true,
+          "findings": [],
+          "also_in_control": []
+        }
+      },
+      "admin-legit": {
+        "verified": {
+          "flagged": false,
+          "correct": true,
+          "findings": [],
+          "also_in_control": []
+        }
+      },
+      "leaky-404": {
+        "verified": {
+          "flagged": false,
+          "correct": false,
+          "findings": [],
+          "also_in_control": []
+        }
+      }
+    },
+    "restler": {
+      "silent-write": {
+        "verified": {
+          "flagged": false,
+          "correct": false,
+          "findings": [],
+          "also_in_control": []
+        }
+      },
+      "lying-success": {
+        "verified": {
+          "flagged": true,
+          "correct": false,
+          "findings": [
+            [
+              "NameSpaceRuleChecker_20x",
+              "DELETE /orders/{id}"
+            ],
+            [
+              "NameSpaceRuleChecker_20x",
+              "PATCH /orders/{id}"
+            ]
+          ],
+          "also_in_control": []
+        }
+      },
+      "admin-legit": {
+        "verified": {
+          "flagged": true,
+          "correct": false,
+          "findings": [
+            [
+              "NameSpaceRuleChecker_20x",
+              "GET /orders/{id}"
+            ]
+          ],
+          "also_in_control": []
+        }
+      },
+      "leaky-404": {
+        "verified": {
+          "flagged": false,
+          "correct": false,
+          "findings": [],
+          "also_in_control": []
+        }
+      }
+    },
+    "schemathesis": {
+      "silent-write": {
+        "verified": {
+          "flagged": false,
+          "correct": false,
+          "findings": [],
+          "also_in_control": []
+        }
+      },
+      "lying-success": {
+        "verified": {
+          "flagged": false,
+          "correct": true,
+          "findings": [],
+          "also_in_control": []
+        }
+      },
+      "admin-legit": {
+        "verified": {
+          "flagged": true,
+          "correct": false,
+          "findings": [
+            [
+              "ObjectLevelAuthorizationViolation:Object-level authorization bypass",
+              "GET /orders/{id}"
+            ]
+          ],
+          "also_in_control": []
+        }
+      },
+      "leaky-404": {
+        "verified": {
+          "flagged": false,
+          "correct": false,
+          "findings": [],
+          "also_in_control": []
+        }
+      }
+    }
+  }
+}

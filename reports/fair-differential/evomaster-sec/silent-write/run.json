@@ -1,0 +1,15 @@
+{
+  "tool": "evomaster-sec",
+  "mode": "silent-write",
+  "server": "silent-write",
+  "pair": "alpha-bravo",
+  "status": "OK",
+  "error": "",
+  "command": "java -jar ~/tools/fair-differential/evomaster-6.2.0/evomaster.jar --blackBox true --schema http://127.0.0.1:59967/openapi.json --base http://127.0.0.1:59967 --configPath ~/Documents/SOP_Projects/Lattivant/test-suite/reports/fair-differential/evomaster-sec/silent-write/em.yaml --maxTime 120s --seed 42 --ratePerMinute 1800 --outputFolder /var/folders/ds/t1y2kqjn30b0ck6_q75ddh_80000gn/T/evo-out-r8n7we4p --outputFormat PYTHON_UNITTEST --writeWFCReport true --extraPhaseBudgetPercentage 1.0",
+  "finished_at": "2026-10-19T01:47:35",
+  "exit": 0,
+  "security_phase": [
+    "* Phase SECURITY lasted: 0h 0m 16s"
+  ],
+  "wall_s": 141.8
+}

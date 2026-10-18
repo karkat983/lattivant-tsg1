@@ -1,0 +1,12 @@
+configs: {}
+# Web Fuzzing Commons auth document: two users, read by EvoMaster (--configPath) and
+# Schemathesis (--auth-wfc / [auth.wfc]). User 1 = owner, user 2 = the other identity.
+auth:
+  - name: alpha-admin
+    fixedHeaders:
+      - name: Authorization
+        value: "Bearer tok-alpha-admin"
+  - name: bravo-admin
+    fixedHeaders:
+      - name: Authorization
+        value: "Bearer tok-bravo-admin"

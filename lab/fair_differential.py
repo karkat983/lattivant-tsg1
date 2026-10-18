@@ -594,7 +594,11 @@ def write_reports(runs: dict, result: dict) -> None:
                 txt += f" [probable tier: {'✅' if p['correct'] else '❌'} {'flagged' if p['flagged'] else 'not flagged'}]"
             cells.append(txt)
         sv.append(f"| `{row}` | {verdict} | " + " | ".join(cells) + " |")
-    sv += ["", "Correct per tool (Verified tier for authz-fuzzer):", ""]
+    sv += ["", "Reading the table: a baseline's *not flagged* on `lying-success` or `admin-legit` is correct "
+           "only in outcome. Schemathesis's `object_level_authorization` replays reads only, and EvoMaster's "
+           "security phase reported no cross-identity write fault in any mode, so neither tool judged these "
+           "writes either way. RESTler's NamespaceRule did test them, and judged them by the attacker's "
+           "status code alone.", "", "Correct per tool (Verified tier for authz-fuzzer):", ""]
     for tool in _tools(runs):
         cells = [t4[tool][r]["verified"] for r in ROWS]
         run_cells = [c for c in cells if c.get("verdict") != "NOT_RUN"]
@@ -603,8 +607,9 @@ def write_reports(runs: dict, result: dict) -> None:
     for tool in _tools(runs):
         for row in ROWS:
             for tier, c in t4[tool][row].items():
+                label = f" ({tier} tier)" if tool == "authz-fuzzer" else ""
                 for cat, op in c.get("findings", []):
-                    sv.append(f"- {tool} / `{row}` ({tier}): `{cat}` on `{op}`")
+                    sv.append(f"- {tool} / `{row}`{label}: `{cat}` on `{op}`")
     _write(os.path.join(OUT, "status-vs-effect.md"), "\n".join(sv) + "\n")
 
 

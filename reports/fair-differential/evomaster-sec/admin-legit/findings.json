@@ -1,0 +1,37 @@
+[
+  {
+    "category": "301:SECURITY_XSS",
+    "cls": null,
+    "operation": "POST /orders",
+    "title": "SECURITY_XSS",
+    "source": "EvoMaster_faults_Test.py#test_0_post_on_orders_vulnerableToXSS"
+  },
+  {
+    "category": "109:other",
+    "cls": null,
+    "operation": "POST /orders",
+    "title": "fault 109",
+    "source": "EvoMaster_faults_Test.py#test_1_post_on_orders_401MissingWwwAuthenticate"
+  },
+  {
+    "category": "301:SECURITY_XSS",
+    "cls": null,
+    "operation": "PATCH /orders/{id}",
+    "title": "SECURITY_XSS",
+    "source": "EvoMaster_faults_Test.py#test_2_get_on_order_vulnerableToXSS"
+  },
+  {
+    "category": "119:other",
+    "cls": null,
+    "operation": "PATCH /orders/{id}",
+    "title": "fault 119",
+    "source": "EvoMaster_faults_Test.py#test_3_get_on_order_invalidMergePatch"
+  },
+  {
+    "category": "109:other",
+    "cls": null,
+    "operation": "PATCH /orders/{id}",
+    "title": "fault 109",
+    "source": "EvoMaster_faults_Test.py#test_4_patch_on_order_401MissingWwwAuthenticate"
+  }
+]
