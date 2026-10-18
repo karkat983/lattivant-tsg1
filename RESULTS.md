@@ -10,17 +10,21 @@ output: [`reports/full/results.json`](reports/full/results.json); rendered:
 |--------|-------|
 | Catalog scenarios | **326** |
 | Actually **measured** (PASS/FAIL on real evidence) | **82** |
-| **PASS** | **82** |
+| **PASS** | **82**: 79 scenarios conformance-tested (component tests authored in-repo) + 3 live statistical experiments (RV-018/020/021) |
 | **FAIL** | **0** |
 | SKIPPED (component genuinely not built) | 6 |
 | NOT_RUN (no adapter / needs external harness) | 238 |
 | ERROR | 0 |
 | **S0 isolation/safety release gate** | **CLEAN** (0 S0 failures) |
 
-Every PASS is backed by a built component's own `cargo test` conformance cases;
-each result records the component, the exact command, and the named tests. The
-evaluation exercises **all seven components** (477 passing component tests in
-total):
+79 of the 82 PASSes are backed by a built component's own `cargo test`
+conformance cases, written in this project; each records the component, the
+exact command and the named tests. A conformance PASS shows the control has
+passing tests for the scenario's property. It is not a measurement of
+effectiveness against a target. The other 3 PASSes are the 40-seed statistical
+experiments below. "Measured effectiveness" in this repo means only the live
+lab, the 40-seed experiment and the fair differential. The conformance-tested
+scenarios span **all seven components** (477 passing component tests in total):
 
 | Component | Measured scenarios | Component tests |
 |-----------|--------------------|-----------------|
@@ -31,6 +35,7 @@ total):
 | agenttrace | 9 | 91 |
 | eastwest | 7 | 36 |
 | lattivant-lab | 2 | 12 |
+| (statistical experiments, no single component) | 3 | — |
 
 **Build-status reconciliation (important):** the TSG-1 guide labelled most
 AgentTrace / Evidence Graph / Investigator scenarios "SPEC-only". In this repo
@@ -87,28 +92,17 @@ conformance-test-backed to **live end-to-end** evidence. The seed now carries an
 alpha-private order, an order shared read-only with bravo, a public order, and a
 bravo-private order, so the FP traps and the shared-write vuln are all exercised.
 
-## Differential vs baseline (AZ-046 / RV-007)
+## Differential vs baseline (AZ-046 / RV-007…009)
 
-`python3 lab/differential.py` runs each tool against the same seeded target and
-scores recall over the four planted authorization flaws. Report:
-[`reports/differential/report.md`](reports/differential/report.md).
-
-| Tool | Ran? | Authz-flaw recall | Note |
-|------|------|-------------------|------|
-| **authz-fuzzer** (candidate) | ✅ | **4/4 (1.0)** | live end-to-end scans |
-| Schemathesis 4.x | ✅ | 0/4 (0.0) | found 5 schema-conformance failures/mode (undocumented status codes), **no** authz detection |
-| EvoMaster 6.2.0 (black-box) | ✅ | 0/4 (0.0) | found XSS (Fault301) + HTTP-violation (Fault109) faults, **no** authz detection |
-| RESTler (.NET 8, fuzz + seeded dict) | ✅ | 0/4 (0.0) | fuzz mode sends 161 requests/mode against the seeded orders; 0 bugs, **no** authz check (RESTler's rendered-coverage counter is unreliable here — requests-sent shown instead) |
-| Burp Autorize | — | — | commercial Burp Suite GUI extension; cannot run headless |
-
-**Differential verdict: PASS** — the authz scanner's recall (4/4) ≥ the union of
-baselines (0/4). This is the AZ-046 / RV-007 / RV-008 / RV-009 result: generic
-API fuzzers test one identity against a spec and have no cross-tenant/ownership
-check, so they structurally miss BOLA that the authz scanner catches. Three
-baselines ran live — Schemathesis, EvoMaster (black-box) and RESTler (.NET 8) —
-and each scored 0/4. Only Burp Autorize (RV-010) could not be provisioned
-(commercial GUI); it is documented, not faked. EvoMaster *white-box* is N/A — it
-instruments JVM/Node/.NET bytecode, not a Rust binary.
+**Superseded.** The earlier differential (`lab/differential.py`,
+`reports/differential/`, worklogs 03–06) gave every baseline a single identity
+(`tok-bravo-admin`) and left their authorization checkers off. Its "each 0/4"
+result reflects that configuration, not the baselines' capability, and is no
+longer claimed. The fair re-run (two identities per tool, each tool's own authz
+checks enabled, pre-registered in `worklogs/09-fair-differential-prereg.md`) is in
+[`RESULTS_FAIR_DIFFERENTIAL.md`](RESULTS_FAIR_DIFFERENTIAL.md) and
+[`reports/fair-differential/`](reports/fair-differential/). The old report stays in
+the repo for history.
 
 ## What was measured on the AuthZ-Fuzzer (conformance-test-backed)
 
@@ -137,22 +131,25 @@ research-validity relations):
 
 ## What was NOT measured, and why (honest)
 
-- **184 SKIPPED** — the detector stack the guide mostly attacks is specified but
-  not built: AgentTrace rules R1–R4 and the span↔side-effect join (most of
-  AT-\*), the Evidence Graph correlator / entity-resolution / content store
-  (most of EG-\*), the AI Investigator + post-checker (all of AI-\*), the MCP
-  scanner, and long-horizon memory. These cannot be tested until built.
-- **120 NOT_RUN** — runnable in principle but a prerequisite is absent, each with
-  a precise reason in the report, e.g.:
-  - **PostgreSQL-RLS CVE family (PL-001…008, S0):** need a live Postgres with RLS
-    policies; the Java reference target runs on H2 in its test profile, so the
-    RLS plan-cache/leaky-operator paths are not exercised.
-  - **Differential-vs-baseline (AZ-046, RV-007…010):** Schemathesis / RESTler /
-    EvoMaster / Burp Autorize are not installed (offline).
-  - **Scale/chaos smoke (SC-001/004/010/011/012):** need a running stack
-    (Postgres / NATS / MinIO via docker-compose), not provisioned here.
-  - **PII-redaction & statistical gates (PL-020/021/023, RV-018/020/021):** need
-    labeled corpora and built-detector outputs.
+Counts are from `reports/full/results.json` (`outcome_counts`: pass 82,
+not_run 238, skipped 6).
+
+- **6 SKIPPED**: the scenario needs a piece that is specified but not built.
+  These are long-horizon memory poisoning (AT-007, AT-030, AT-031, GC-008), the
+  gRPC adapter (AZ-011) and the WebSocket adapter (AZ-012).
+- **238 NOT_RUN**: runnable in principle, but something is missing. Each carries
+  a precise reason in the report:
+  - **212 have no adapter wired yet** (141 marked "runnable but no adapter wired
+    yet", 71 "no adapter wired yet").
+  - **PostgreSQL-RLS family (PL-001…008, S0):** need a live Postgres with RLS
+    policies; the Java reference target runs on H2 in its test profile.
+  - **Scale/chaos (SC-*):** need a running stack (Postgres / NATS / MinIO via
+    docker-compose), not provisioned here.
+  - **PII redaction (PL-020/021/023):** need the redaction pipeline and labeled
+    corpora.
+  - **Differential scenarios (AZ-046, RV-007…010):** recorded as NOT_RUN in the
+    catalog. Their reason strings still quote the superseded single-identity
+    "0/4" result; see the fair differential above.
 
 ## Honest limits
 
@@ -161,10 +158,10 @@ research-validity relations):
   Bhagwatkar et al. 2510.05244), no fixed corpus certifies robustness; the
   adaptive twins and the co-evolving red-team exist precisely because a static
   pass is provisional.
-- Every PASS here is a **conformance-test-backed** result: it shows the built
-  control has passing tests for the scenario's property. It is **not** a live
-  end-to-end scan of a seeded target (that integrated lab is the next step,
-  TSG-1 C.3). The claim is exactly that, no more.
+- The 79 conformance-test-backed PASSes show that the built control has passing
+  tests for the scenario's property, and no more. Live end-to-end evidence is
+  separate: the integrated live lab (8 modes), the 40-seed statistical
+  experiments and the fair differential. Each is reported in its own section.
 - The guide's prose says "286 scenarios" but enumerates **326**; the registry
   keeps all 326 (per-component counts match the guide's G.1 matrix).
 
