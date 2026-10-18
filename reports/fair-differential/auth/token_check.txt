@@ -1,0 +1,9 @@
+# Task 2 token check against authz-target --vuln none on http://127.0.0.1:18091 (2026-10-18T15:36:32Z)
+tok-alpha-admin GET /orders/order-1 -> 200
+tok-alpha-admin GET /orders/order-bravo -> 403
+tok-bravo-admin GET /orders/order-1 -> 403
+tok-bravo-admin GET /orders/order-bravo -> 200
+tok-alpha-viewer GET /orders/order-1 -> 200
+tok-alpha-viewer GET /orders/order-bravo -> 403
+no token GET /orders/order-1 -> 401
+tok-bravo-admin POST /orders -> {"id":"order-2","note":"x","owner":"bravo","status":"open"} 201
