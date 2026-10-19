@@ -1,6 +1,6 @@
 # TSG-1 Run Report (selected scenarios)
 
-_Generated 2026-10-17T09:56:57.502812+00:00_
+_Generated 2026-10-19T08:40:05.916785+00:00_
 
 ## Honesty header
 
@@ -200,7 +200,7 @@ Top blocking capabilities:
 | AZ-040 | S2 | no adapter wired yet |
 | AZ-041 | S1 | the scanner is Rust (no unsafe C++ parser); no C++ libFuzzer harness exists to exercise |
 | AZ-042 | S2 | no adapter wired yet |
-| AZ-046 | S1 | demonstrated live via lab/differential.py (Schemathesis 4.x): authz-fuzzer 4/4 planted flaws vs 0/4 — see reports/differential. Burp Autorize / RESTler remain GUI/.NET-only, not run here |
+| AZ-046 | S1 | measured outside the catalog: with two identities and each tool's authz checks on, authz-fuzzer found 4/4 planted flaws vs RESTler 2/4, Schemathesis 2/4, EvoMaster 0/4; see RESULTS_FAIR_DIFFERENTIAL.md (fair two-identity differential, lab/fair_differential.py). The earlier single-identity 0/4 differential is superseded |
 | EG-002 | S1 | runnable but no adapter wired yet |
 | EG-003 | S1 | runnable but no adapter wired yet |
 | EG-005 | S1 | runnable but no adapter wired yet |
@@ -306,9 +306,9 @@ Top blocking capabilities:
 | RV-002 | S1 | runnable but no adapter wired yet |
 | RV-003 | S1 | runnable but no adapter wired yet |
 | RV-004 | S1 | runnable but no adapter wired yet |
-| RV-007 | S1 | demonstrated live via lab/differential.py (Schemathesis 4.x): 0/4 planted authz flaws vs authz-fuzzer 4/4 — see reports/differential/report.md |
-| RV-008 | S2 | demonstrated live via lab/differential.py (RESTler, .NET 8 build): 0 bugs / 0 of 4 planted authz flaws — stateful REST fuzzer with no authz check; see reports/differential |
-| RV-009 | S2 | demonstrated live via lab/differential.py (EvoMaster 6.2.0 black-box): 0/4 planted authz flaws — generic fuzzer finds XSS / HTTP-violation faults, no authz check; see reports/differential |
+| RV-007 | S1 | measured outside the catalog: Schemathesis 4.32.0 with two identities and --checks all found 2/4 planted authz flaws (3 trap false findings) vs authz-fuzzer 4/4; see RESULTS_FAIR_DIFFERENTIAL.md (fair two-identity differential, lab/fair_differential.py) |
+| RV-008 | S2 | measured outside the catalog: RESTler (two users, namespacerule on) found 2/4 planted authz flaws (3 trap false findings) vs authz-fuzzer 4/4; see RESULTS_FAIR_DIFFERENTIAL.md (fair two-identity differential, lab/fair_differential.py) |
+| RV-009 | S2 | measured outside the catalog: EvoMaster 6.2.0 black-box with its security phase and two users found 0/4 planted authz flaws vs authz-fuzzer 4/4; see RESULTS_FAIR_DIFFERENTIAL.md (fair two-identity differential, lab/fair_differential.py) |
 | RV-010 | S2 | requires external baseline Burp Autorize (not installed; offline) |
 | RV-011 | S1 | runnable but no adapter wired yet |
 | RV-012 | S1 | runnable but no adapter wired yet |

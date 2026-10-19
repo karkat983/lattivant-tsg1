@@ -25,15 +25,15 @@ RV_BACKING: dict[str, tuple[list[str], str]] = {
 }
 
 RV_UNAVAILABLE: dict[str, str] = {
-    "RV-007": "demonstrated live via lab/differential.py (Schemathesis 4.x): "
-              "0/4 planted authz flaws vs authz-fuzzer 4/4 — see "
-              "reports/differential/report.md",
-    "RV-008": "demonstrated live via lab/differential.py (RESTler, .NET 8 build): "
-              "0 bugs / 0 of 4 planted authz flaws — stateful REST fuzzer with no "
-              "authz check; see reports/differential",
-    "RV-009": "demonstrated live via lab/differential.py (EvoMaster 6.2.0 "
-              "black-box): 0/4 planted authz flaws — generic fuzzer finds XSS / "
-              "HTTP-violation faults, no authz check; see reports/differential",
+    "RV-007": "measured outside the catalog: Schemathesis 4.32.0 with two identities "
+              "and --checks all found 2/4 planted authz flaws (3 trap false findings) "
+              "vs authz-fuzzer 4/4; " + "see RESULTS_FAIR_DIFFERENTIAL.md (fair two-identity differential, lab/fair_differential.py)",
+    "RV-008": "measured outside the catalog: RESTler (two users, namespacerule on) "
+              "found 2/4 planted authz flaws (3 trap false findings) vs "
+              "authz-fuzzer 4/4; " + "see RESULTS_FAIR_DIFFERENTIAL.md (fair two-identity differential, lab/fair_differential.py)",
+    "RV-009": "measured outside the catalog: EvoMaster 6.2.0 black-box with its "
+              "security phase and two users found 0/4 planted authz flaws vs "
+              "authz-fuzzer 4/4; " + "see RESULTS_FAIR_DIFFERENTIAL.md (fair two-identity differential, lab/fair_differential.py)",
     "RV-010": "requires external baseline Burp Autorize (not installed; offline)",
     "RV-022": "requires dual-policy labeled corpus over detector outputs",
 }

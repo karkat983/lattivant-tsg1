@@ -3,7 +3,7 @@
 Date: 2026-10-17
 
 ## Scope delivered
-Built an executable test suite from the pasted Vigilattice TSG-1 research
+Built an executable test suite from the pasted Lattivant TSG-1 research
 package and ran it against the Lattivant product to measure current
 effectiveness. Deliverables: the `tsg1` harness (model, stats, oracles, catalog,
 runner, report, CLI), the full 326-scenario registry, component adapters backing

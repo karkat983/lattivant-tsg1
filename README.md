@@ -1,13 +1,13 @@
 # TSG-1 Harness — executable adversarial test suite for Lattivant
 
-An executable implementation of the **Vigilattice Adversarial Test-Suite Guide
+An executable implementation of the **Lattivant Adversarial Test-Suite Guide
 (TSG-1)**: a scenario catalog, a scenario DSL + ground-truth manifests, the six
 oracle types, a runner, and a report generator — used to measure how effective
 the Lattivant detection platform actually is today.
 
-> **Vigilattice** is the research codename; **Lattivant** is the product in this
-> repo (`authz-fuzzer`, `agenttrace`, `eastwest`, `evidence-graph`,
-> `investigator`, `lattivant-platform`, `lattivant-lab`).
+> **Lattivant** is made of seven component repos (`authz-fuzzer`, `agenttrace`,
+> `eastwest`, `evidence-graph`, `investigator`, `lattivant-platform`,
+> `lattivant-lab`); this harness tests all of them.
 
 Dependency-free: pure Python stdlib (3.12+), offline, deterministic.
 

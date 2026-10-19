@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the TSG-1 scenario registry (all 286 scenarios) into scenarios.jsonl.
 
-Data transcribed from the Vigilattice Adversarial Test-Suite Guide (TSG-1),
+Data transcribed from the Lattivant Adversarial Test-Suite Guide (TSG-1),
 Section B. Each tuple is:
     (id, title, classes, build, oracle, metric, severity, reference, blockers)
   classes : roman-numeral class tag(s) from A.2, space/comma separated
@@ -206,7 +206,7 @@ add([
 ("EG-003", "Upgrade attack: forge inferred_stat->inferred_rule", "iii", "S", "invariant", "accepted-forgery=0", "S1", "PROV provenance", "evidence_graph"),
 ("EG-004", "CORRELATED_WITH shown as causal in UI/export", "i,v", "S", "invariant", "mislabel count=0", "S1", "correlation!=causation", "evidence_graph"),
 ("EG-005", "Provenance forgery: fabricate collector attestation", "iii", "S", "invariant", "accepted-forgery=0", "S1", "PROV", "evidence_graph"),
-("EG-006", "Causal edge without observed parent / cited rule", "v", "S", "invariant", "orphan-causal=0", "S1", "Vigilattice causal rule", "evidence_graph"),
+("EG-006", "Causal edge without observed parent / cited rule", "v", "S", "invariant", "orphan-causal=0", "S1", "Lattivant causal rule", "evidence_graph"),
 ("EG-007", "Entity-resolution collision: two entities merged", "iii", "S", "invariant", "wrong-merge=0", "S0", "ER design", "evidence_graph"),
 ("EG-008", "Entity-resolution split: entity fragmented", "iii", "S", "manifest", "split-rate", "S1", "ER design", "evidence_graph"),
 ("EG-009", "Cross-tenant entity merge (tenant leak via alias)", "iii", "S", "invariant", "cross-tenant merge=0", "S0", "RLS + ER", "evidence_graph"),
@@ -316,7 +316,7 @@ add([
 ("PL-024", "Content store hash collision accepted (poisoning)", "iii", "B", "invariant", "collision-accept=0", "S0", "content-addressing", ""),
 ("PL-025", "Content store GC abuse deletes referenced evidence", "iii", "B", "invariant", "dangling=0", "S1", "store GC", ""),
 ("PL-026", "Content store path traversal in evidence:// scheme", "iii", "B", "invariant", "traversal=0", "S1", "MinIO/S3 hardening", ""),
-("PL-027", "Dogfood BOLA: Vigilattice's OWN API by its fuzzer", "ii,iii", "B", "isolation", "escapes=0", "S0", "AuthProbe self-test", ""),
+("PL-027", "Dogfood BOLA: Lattivant's OWN API by its fuzzer", "ii,iii", "B", "isolation", "escapes=0", "S0", "AuthProbe self-test", ""),
 ("PL-028", "Scan-credential exfiltration (scope file/creds)", "iii", "B", "invariant", "leak=0", "S0", "secrets mgmt", ""),
 ("PL-029", "Secrets in logs / telemetry (self-obs leak)", "iii", "B", "invariant", "leak=0", "S1", "OTel self-obs", ""),
 ("PL-030", "Supply chain: malicious dependency (SBOM diff)", "iii", "B", "invariant", "unverified-dep=0", "S1", "SBOM / SLSA", ""),
@@ -336,10 +336,10 @@ add([
 # B.7 Scale / Performance / Chaos (SC-001 .. SC-030)
 # ---------------------------------------------------------------------------
 add([
-("SC-001", "NFR: sustained >=2000 events/sec single node", "iv", "B", "invariant", "events/sec", "S2", "Vigilattice NFR (not a standard)", ""),
-("SC-002", "NFR: p95 alert latency <10s under nominal load", "iv", "P", "invariant", "p95", "S2", "Vigilattice NFR", "detectors"),
-("SC-003", "NFR: 3-hop graph query p95 <2s", "iv", "S", "invariant", "p95", "S2", "Vigilattice NFR", "evidence_graph"),
-("SC-004", "NFR: docker compose up <30 min cold", "iv", "B", "invariant", "wall-time", "S3", "Vigilattice NFR", ""),
+("SC-001", "NFR: sustained >=2000 events/sec single node", "iv", "B", "invariant", "events/sec", "S2", "Lattivant NFR (not a standard)", ""),
+("SC-002", "NFR: p95 alert latency <10s under nominal load", "iv", "P", "invariant", "p95", "S2", "Lattivant NFR", "detectors"),
+("SC-003", "NFR: 3-hop graph query p95 <2s", "iv", "S", "invariant", "p95", "S2", "Lattivant NFR", "evidence_graph"),
+("SC-004", "NFR: docker compose up <30 min cold", "iv", "B", "invariant", "wall-time", "S3", "Lattivant NFR", ""),
 ("SC-005", "Soak/endurance: 72-hour run, memory-leak watch", "iv", "B", "invariant", "leak rate", "S2", "chaos/soak", ""),
 ("SC-006", "Burst/thundering-herd: 50x spike for 60s", "iv", "B", "invariant", "drop rate", "S2", "burst testing", ""),
 ("SC-007", "Backpressure propagation from EG to ingest", "iv", "S", "invariant", "queue depth", "S2", "flow control", "evidence_graph"),
