@@ -77,3 +77,8 @@ scenario is reported **NOT_RUN**, never PASS. A green suite means "survived
 everything we actually ran", never "secure" or "all 326 executed".
 
 See [RESULTS.md](RESULTS.md) for the current measured results.
+
+## Authorized testing only
+
+All tenants, identities, resources and events in this repository are synthetic. Use these tools
+only against systems you own or are explicitly authorized to test.
