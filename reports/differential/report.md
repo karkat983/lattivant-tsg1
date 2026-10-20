@@ -1,5 +1,7 @@
 # TSG-1 Differential — authz-fuzzer vs generic baselines
 
+> **SUPERSEDED** — single-identity run with baselines' authz checks off; see [RESULTS_FAIR_DIFFERENTIAL.md](../../RESULTS_FAIR_DIFFERENTIAL.md).
+
 Each tool run against the same seeded `authz-target`. Ground truth is the four planted authorization flaws; recall is over that set. Generic API fuzzers test one identity against a schema and have no cross-tenant/ownership check, so they structurally miss BOLA.
 
 **Differential (AZ-046/RV-007): PASS** — candidate recall >= union of baselines

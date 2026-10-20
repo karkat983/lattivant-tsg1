@@ -3,9 +3,11 @@
 (TSG-1 AZ-046 / RV-007..010).
 
 The point of the differential is to show the authz scanner finds the *planted
-authorization flaws* that generic API-testing tools structurally miss, because
-those tools test one identity against a schema and have no notion of
-cross-tenant ownership.
+authorization flaws* that generic API-testing tools miss when configured as they
+were here: one identity against a schema, with their own authorization checks off.
+Those tools do have such checks (RESTler's NamespaceRule, Schemathesis's
+object_level_authorization); the fair two-identity comparison with them enabled is
+lab/fair_differential.py. This single-identity differential is superseded.
 
 What actually runs here:
   * candidate = the built `authz` scanner, via the live lab (lab.live_lab).
@@ -344,10 +346,12 @@ def run(out_dir: str) -> dict:
 def _write_md(rep: dict, out_dir: str) -> None:
     c = rep["candidate"]
     lines = ["# TSG-1 Differential — authz-fuzzer vs generic baselines", "",
+             "> **SUPERSEDED** — single-identity run with baselines' authz checks off; see "
+             "[RESULTS_FAIR_DIFFERENTIAL.md](../../RESULTS_FAIR_DIFFERENTIAL.md).", "",
              "Each tool run against the same seeded `authz-target`. Ground truth "
              "is the four planted authorization flaws; recall is over that set. "
-             "Generic API fuzzers test one identity against a schema and have no "
-             "cross-tenant/ownership check, so they structurally miss BOLA.", "",
+             "Here every baseline ran with one identity and its own authorization "
+             "checks off, so it could not detect cross-identity flaws.", "",
              f"**Differential (AZ-046/RV-007): "
              f"{'PASS' if rep['differential_verdict']['passed'] else 'FAIL'}** — "
              f"{rep['differential_verdict']['reason']}", "",
