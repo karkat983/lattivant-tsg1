@@ -1,5 +1,15 @@
 # TSG-1 Harness — executable adversarial test suite for Lattivant
 
+## Status: complete (October 2026)
+Results of record: `RESULTS_FAIR_DIFFERENTIAL.md`, `reports/fair-differential/`, `RESULTS.md` (branch `fair-differential`)
+What was measured: authz-fuzzer vs RESTler, Schemathesis and EvoMaster, each with two identities and its own authz checks, on a local reference API (4 planted flaws, 4 status-vs-effect rows); plus an 8-mode live lab and a 40-seed statistical experiment.
+Known limitations:
+- All targets are local reference APIs written by the same author; no third-party target yet.
+- One run per tool per mode; the baselines are stochastic fuzzers.
+- 79 of the 82 catalog PASSes are conformance tests authored in-repo, not effectiveness measurements; 238 scenarios are NOT_RUN.
+- RESTler never replayed its 16 NamespaceRule findings; EvoMaster's security phase reported no access-control fault in any mode.
+Next step (not done): run the same pre-registered differential against an independent, third-party vulnerable-by-design API.
+
 An executable implementation of the **Lattivant Adversarial Test-Suite Guide
 (TSG-1)**: a scenario catalog, a scenario DSL + ground-truth manifests, the six
 oracle types, a runner, and a report generator — used to measure how effective
